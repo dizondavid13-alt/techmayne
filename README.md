@@ -1,10 +1,10 @@
 # TechMayne
 
-> AI-powered chatbot for photographer websites - Qualify leads, answer questions, and book clients automatically.
+> Automated chatbot for photographer websites - Qualify leads, answer questions, and book clients automatically.
 
 ## Overview
 
-TechMayne is a plug-and-play AI chatbot designed specifically for wedding and event photographers. The chatbot integrates seamlessly into photographer websites to answer common questions, qualify leads, and route visitors to booking—all with minimal setup and ongoing maintenance.
+TechMayne is a plug-and-play chatbot designed specifically for wedding and event photographers. The chatbot integrates seamlessly into photographer websites to answer common questions, qualify leads, and route visitors to booking—all with minimal setup and ongoing maintenance.
 
 ## Purpose
 
@@ -28,7 +28,7 @@ TechMayne is a plug-and-play AI chatbot designed specifically for wedding and ev
 
 - **Website Chat Widget** - Lightweight JavaScript embed via single `<script>` tag
 - **Photographer-Specific Bot Flow** - Pre-built conversation flow for lead qualification
-- **Knowledge Ingestion** - Automatically learns from website content and FAQs
+- **Scripted FAQ Responses** - Button-based navigation and keyword matching for common questions
 - **Lead Qualification** - Captures event date, location, coverage needs, and contact info
 - **Booking Link Routing** - Integrates with Calendly, Acuity, etc.
 - **Email Notifications** - Instant lead delivery to photographers
@@ -39,7 +39,6 @@ TechMayne is a plug-and-play AI chatbot designed specifically for wedding and ev
 **Backend**
 - Node.js / Express API
 - Supabase (Postgres + Storage + Auth)
-- Vector Store (Supabase pgvector)
 - Email Service (Resend / SendGrid)
 
 **Frontend**
@@ -47,10 +46,27 @@ TechMayne is a plug-and-play AI chatbot designed specifically for wedding and ev
 - Mobile and desktop responsive
 - Works across all major website platforms
 
-**Architecture**
+**Bot Architecture**
 - Multi-tenant SaaS
 - Single shared bot script with client-specific configuration
 - Version-controlled bot flows
+
+## Bot Logic Approach: Scripted Flow (Zero AI Costs)
+
+**Cost-Effective MVP Strategy:**
+Instead of using OpenAI API or similar AI services that incur per-usage costs, TechMayne uses a deterministic, scripted bot flow:
+
+- **Predefined conversation paths** - Flowchart-style navigation
+- **Button-based interactions** - Multiple choice options instead of free text
+- **Text input only for contact collection** - Name, email, date, location
+- **Keyword matching for FAQ routing** - Simple pattern matching for common questions
+- **No AI API calls** - Zero variable costs per conversation
+
+This approach ensures:
+- Predictable operating costs
+- Fast, reliable responses
+- Complete control over conversation quality
+- Ability to support 20-50+ clients without scaling costs
 
 ## Installation (For Photographer Clients)
 

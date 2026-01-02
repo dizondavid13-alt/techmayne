@@ -1,0 +1,36 @@
+# Environment variables
+.env
+*.env
+.env.local
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build output
+dist/
+build/
+*.min.js
+
+# Testing
+coverage/
+.nyc_output/
+
+# MCP Configuration (contains secrets)
+.claude/
+claude_desktop_config.json

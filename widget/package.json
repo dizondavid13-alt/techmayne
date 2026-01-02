@@ -1,0 +1,12 @@
+{
+  "name": "techmayne-widget",
+  "version": "1.0.0",
+  "description": "TechMayne chatbot widget for photographer websites",
+  "main": "src/widget.js",
+  "scripts": {
+    "build": "echo 'Build script placeholder - use bundler like webpack/rollup for production'"
+  },
+  "keywords": ["chatbot", "widget", "photographer"],
+  "author": "",
+  "license": "ISC"
+}

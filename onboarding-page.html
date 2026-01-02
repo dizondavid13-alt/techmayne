@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechMayne - Client Onboarding</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-size: 1.3em;
+      color: #667eea;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .required {
+      color: #e53e3e;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    input[type="color"] {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .color-input-wrapper {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    input[type="color"] {
+      width: 80px;
+      height: 50px;
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    .color-preview {
+      flex: 1;
+      height: 50px;
+      border-radius: 8px;
+      border: 2px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+
+    .helper-text {
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .result-card {
+      display: none;
+      background: #f0fdf4;
+      border: 2px solid #86efac;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .result-card.show {
+      display: block;
+    }
+
+    .result-title {
+      color: #166534;
+      font-size: 1.3em;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .embed-code {
+      background: #1e293b;
+      color: #10b981;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      overflow-x: auto;
+      margin: 15px 0;
+      position: relative;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.85em;
+    }
+
+    .copy-btn:hover {
+      background: #059669;
+    }
+
+    .instructions {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    .instructions h4 {
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    .instructions ol {
+      margin-left: 20px;
+    }
+
+    .instructions li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .error-message {
+      background: #fee2e2;
+      color: #991b1b;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 15px;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🎉 Welcome to TechMayne</h1>
+      <p>Let's get your chatbot set up in 2 minutes!</p>
+    </div>
+
+    <form id="onboardingForm" class="card">
+      <h2 class="section-title">📋 Business Information</h2>
+
+      <div class="form-group">
+        <label>Business Name <span class="required">*</span></label>
+        <input type="text" id="businessName" name="businessName" required placeholder="e.g., Sarah Johnson Photography">
+      </div>
+
+      <div class="form-group">
+        <label>Website URL <span class="required">*</span></label>
+        <input type="url" id="websiteUrl" name="websiteUrl" required placeholder="https://yourwebsite.com">
+      </div>
+
+      <div class="form-group">
+        <label>Notification Email <span class="required">*</span></label>
+        <input type="email" id="notificationEmail" name="notificationEmail" required placeholder="you@email.com">
+        <div class="helper-text">You'll receive lead notifications here</div>
+      </div>
+
+      <h2 class="section-title" style="margin-top: 30px;">🎨 Customization (Optional)</h2>
+
+      <div class="form-group">
+        <label>Booking/Calendar Link</label>
+        <input type="url" id="bookingLink" name="bookingLink" placeholder="https://calendly.com/yourusername">
+        <div class="helper-text">Calendly, Acuity, or any scheduling link</div>
+      </div>
+
+      <div class="form-group">
+        <label>Service Area</label>
+        <input type="text" id="serviceArea" name="serviceArea" placeholder="e.g., San Francisco Bay Area">
+      </div>
+
+      <div class="form-group">
+        <label>Starting Price</label>
+        <input type="text" id="startingPrice" name="startingPrice" placeholder="e.g., $2,500">
+      </div>
+
+      <div class="form-group">
+        <label>Gallery Delivery Timeline</label>
+        <input type="text" id="galleryTimeline" name="galleryTimeline" placeholder="e.g., 4-6 weeks" value="4-6 weeks">
+      </div>
+
+      <div class="form-group">
+        <label>Chatbot Accent Color</label>
+        <div class="color-input-wrapper">
+          <input type="color" id="accentColor" name="accentColor" value="#6366f1">
+          <div class="color-preview" id="colorPreview" style="background: #6366f1;">
+            <span style="color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">#6366f1</span>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        🚀 Generate My Chatbot
+      </button>
+
+      <div id="errorMessage" class="error-message"></div>
+    </form>
+
+    <div id="resultCard" class="card result-card">
+      <div class="result-title">✅ Success! Your Chatbot is Ready</div>
+
+      <p><strong>Client Token:</strong> <code id="clientToken"></code></p>
+
+      <div style="margin-top: 20px;">
+        <strong>Your Embed Code:</strong>
+        <div class="embed-code" id="embedCodeContainer">
+          <button class="copy-btn" onclick="copyEmbedCode()">Copy</button>
+          <code id="embedCode"></code>
+        </div>
+      </div>
+
+      <div class="instructions">
+        <h4>📝 Installation Instructions</h4>
+        <p><strong>Choose your platform:</strong></p>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor: pointer; font-weight: 600;">Squarespace</summary>
+          <ol style="margin-top: 10px;">
+            <li>Go to Settings → Advanced → Code Injection</li>
+            <li>Paste the code in the "Footer" section</li>
+            <li>Click Save</li>
+          </ol>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor: pointer; font-weight: 600;">WordPress</summary>
+          <ol style="margin-top: 10px;">
+            <li>Go to Appearance → Theme Editor</li>
+            <li>Open footer.php (or use a plugin like "Insert Headers and Footers")</li>
+            <li>Paste code before &lt;/body&gt; tag</li>
+            <li>Update file</li>
+          </ol>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor: pointer; font-weight: 600;">Wix</summary>
+          <ol style="margin-top: 10px;">
+            <li>Go to Settings → Custom Code</li>
+            <li>Click "+ Add Custom Code"</li>
+            <li>Paste code, select "Body - End"</li>
+            <li>Apply to all pages</li>
+          </ol>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor: pointer; font-weight: 600;">Showit</summary>
+          <ol style="margin-top: 10px;">
+            <li>Go to Site Settings → Advanced → Custom Code</li>
+            <li>Paste in "Footer Code" section</li>
+            <li>Publish your site</li>
+          </ol>
+        </details>
+      </div>
+
+      <div style="margin-top: 20px; padding: 15px; background: #fef3c7; border-radius: 8px;">
+        <strong>💡 Next Step:</strong> Visit your website to see the chat widget in action!
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = 'http://localhost:3000'; // Change to your production URL
+
+    // Color preview
+    document.getElementById('accentColor').addEventListener('input', function(e) {
+      const color = e.target.value;
+      const preview = document.getElementById('colorPreview');
+      preview.style.background = color;
+      preview.querySelector('span').textContent = color;
+    });
+
+    // Form submission
+    document.getElementById('onboardingForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const submitBtn = document.getElementById('submitBtn');
+      const errorMessage = document.getElementById('errorMessage');
+      const resultCard = document.getElementById('resultCard');
+
+      // Disable button
+      submitBtn.disabled = true;
+      submitBtn.textContent = '⏳ Creating your chatbot...';
+      errorMessage.classList.remove('show');
+      resultCard.classList.remove('show');
+
+      // Gather form data
+      const formData = {
+        businessName: document.getElementById('businessName').value,
+        websiteUrl: document.getElementById('websiteUrl').value,
+        notificationEmail: document.getElementById('notificationEmail').value,
+        bookingLink: document.getElementById('bookingLink').value || null,
+        serviceArea: document.getElementById('serviceArea').value || null,
+        startingPrice: document.getElementById('startingPrice').value || null,
+        galleryTimeline: document.getElementById('galleryTimeline').value || '4-6 weeks',
+        accentColor: document.getElementById('accentColor').value
+      };
+
+      try {
+        // Call API
+        const response = await fetch(`${API_URL}/api/onboarding/create`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          // Show success
+          document.getElementById('clientToken').textContent = data.client.clientToken;
+          document.getElementById('embedCode').textContent = data.embedCode;
+          resultCard.classList.add('show');
+
+          // Scroll to result
+          resultCard.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          throw new Error(data.error || 'Something went wrong');
+        }
+      } catch (error) {
+        errorMessage.textContent = `Error: ${error.message}`;
+        errorMessage.classList.add('show');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '🚀 Generate My Chatbot';
+      }
+    });
+
+    function copyEmbedCode() {
+      const code = document.getElementById('embedCode').textContent;
+      navigator.clipboard.writeText(code);
+
+      const btn = event.target;
+      btn.textContent = '✓ Copied!';
+      setTimeout(() => {
+        btn.textContent = 'Copy';
+      }, 2000);
+    }
+  </script>
+</body>
+</html>

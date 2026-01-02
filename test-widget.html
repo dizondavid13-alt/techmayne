@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechMayne Widget Test - Photography Website Demo</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      min-height: 100vh;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+
+    .content {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 30px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3em;
+    }
+
+    .cta {
+      background: white;
+      color: #667eea;
+      padding: 15px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: 600;
+      margin-top: 20px;
+      transition: transform 0.2s;
+    }
+
+    .cta:hover {
+      transform: scale(1.05);
+    }
+
+    .notice {
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border-left: 4px solid #667eea;
+    }
+
+    .notice strong {
+      color: #667eea;
+    }
+  </style>
+</head>
+<body>
+  <div class="notice">
+    <strong>👋 Welcome to the TechMayne Widget Demo!</strong><br>
+    Look for the chat bubble in the bottom-right corner to see the chatbot in action.
+    Try asking questions like "When will I get my photos?" or start the booking flow!
+  </div>
+
+  <div class="hero">
+    <h1>📸 TechMayne Photography</h1>
+    <p class="subtitle">Capturing Your Most Precious Moments</p>
+  </div>
+
+  <div class="content">
+    <h2>About Our Services</h2>
+    <p>We specialize in wedding and event photography throughout the San Francisco Bay Area.
+       Our passion is telling your unique story through stunning, timeless images that you'll
+       treasure for generations.</p>
+
+    <p>Every wedding is different, and we tailor our approach to match your style and vision.
+       From intimate elopements to grand celebrations, we're there to capture every precious moment.</p>
+
+    <div class="gallery">
+      <div class="gallery-item">💍</div>
+      <div class="gallery-item">🎉</div>
+      <div class="gallery-item">💐</div>
+      <div class="gallery-item">🥂</div>
+    </div>
+
+    <center>
+      <a href="#" class="cta">View Portfolio</a>
+    </center>
+  </div>
+
+  <div class="content">
+    <h2>What Our Clients Say</h2>
+    <p><em>"Working with TechMayne Photography was an absolute dream! They captured every special
+       moment of our wedding day perfectly. The photos are stunning!"</em> - Sarah & James</p>
+
+    <p><em>"Professional, creative, and so easy to work with. Our engagement photos turned out
+       better than we ever imagined!"</em> - Maria & Alex</p>
+  </div>
+
+  <!-- TechMayne Chat Widget -->
+  <script src="http://localhost:3000/widget/widget.js" data-client-token="c8082d26-223f-4eee-af1b-001c197fa3d8"></script>
+
+  <!-- Instructions for user -->
+  <div style="position: fixed; bottom: 100px; left: 20px; background: rgba(0,0,0,0.8); padding: 15px; border-radius: 10px; max-width: 300px; font-size: 14px;">
+    <strong>💡 Test the chatbot:</strong><br>
+    1. Click the chat button →<br>
+    2. Try "Check Availability"<br>
+    3. Or ask "When will I get my photos?"<br>
+    4. Complete the flow to see email notification!
+  </div>
+
+</body>
+</html>

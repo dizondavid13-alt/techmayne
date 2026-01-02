@@ -1,0 +1,792 @@
+<!--
+  TechMayne Client Onboarding - WordPress Version
+
+  INSTRUCTIONS:
+  1. In WordPress, create a new page (Pages → Add New)
+  2. Switch to "Code Editor" or use an HTML block
+  3. Paste this entire file content
+  4. Publish the page
+
+  OR for page builders (Elementor, etc):
+  1. Add an HTML widget/block
+  2. Paste this content
+  3. Save and publish
+-->
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* Scoped styles for WordPress */
+  .techmayne-onboarding-wrapper {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #F5F1E8;
+    min-height: 100vh;
+    padding: 40px 20px;
+    margin: -40px -20px; /* Compensate for WordPress container padding */
+  }
+
+  .techmayne-onboarding-wrapper * {
+    box-sizing: border-box;
+  }
+
+  .tm-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .tm-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .tm-logo {
+    font-size: 32px;
+    font-weight: 700;
+    color: #0A2540;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+
+  .tm-header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #0A2540;
+    margin-bottom: 12px;
+    letter-spacing: -0.8px;
+  }
+
+  .tm-header p {
+    font-size: 18px;
+    font-weight: 400;
+    color: #8B8F97;
+  }
+
+  /* Card */
+  .tm-card {
+    background: #FAF8F3;
+    border-radius: 16px;
+    padding: 48px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    margin-bottom: 24px;
+  }
+
+  /* Section Title */
+  .tm-section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #0A2540;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #E8E4DC;
+  }
+
+  /* Form Group */
+  .tm-form-group {
+    margin-bottom: 24px;
+  }
+
+  .tm-form-group label {
+    display: block;
+    font-weight: 500;
+    font-size: 14px;
+    color: #0A2540;
+    margin-bottom: 8px;
+  }
+
+  .tm-form-group input,
+  .tm-form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #E8E4DC;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+    background: #FFFFFF;
+    color: #0B0B0D;
+  }
+
+  .tm-form-group input:focus,
+  .tm-form-group textarea:focus {
+    outline: none;
+    border-color: #1E6FD9;
+    box-shadow: 0 0 0 3px rgba(30, 111, 217, 0.1);
+  }
+
+  .tm-form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  .tm-form-group small {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+    color: #8B8F97;
+  }
+
+  /* Color Picker */
+  .tm-color-picker-wrapper {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .tm-color-picker-wrapper input[type="color"] {
+    width: 60px;
+    height: 48px;
+    border: 1px solid #E8E4DC;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .tm-color-picker-wrapper input[type="text"] {
+    flex: 1;
+  }
+
+  /* Checkbox */
+  .tm-checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    background: #FFFFFF;
+    border: 1px solid #E8E4DC;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .tm-checkbox-group:hover {
+    border-color: #1E6FD9;
+    background: #F7FAFC;
+  }
+
+  .tm-checkbox-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    cursor: pointer;
+    accent-color: #1E6FD9;
+  }
+
+  .tm-checkbox-content {
+    flex: 1;
+  }
+
+  .tm-checkbox-content strong {
+    display: block;
+    color: #0A2540;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .tm-checkbox-content span {
+    color: #8B8F97;
+    font-size: 14px;
+  }
+
+  /* Installation Fields */
+  .tm-installation-fields {
+    display: none;
+    margin-top: 16px;
+    padding: 24px;
+    background: #FFF8E7;
+    border: 1px solid #FFE4A3;
+    border-radius: 8px;
+  }
+
+  .tm-installation-fields.active {
+    display: block;
+  }
+
+  /* Radio Group */
+  .tm-radio-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .tm-radio-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tm-radio-option input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #1E6FD9;
+  }
+
+  .tm-radio-option label {
+    margin: 0;
+    cursor: pointer;
+    font-weight: 400;
+  }
+
+  /* FAQ Builder */
+  .tm-faq-list {
+    margin-top: 16px;
+  }
+
+  .tm-faq-item {
+    background: #FFFFFF;
+    border: 1px solid #E8E4DC;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+
+  .tm-faq-item h4 {
+    color: #0A2540;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .tm-faq-item p {
+    color: #0B0B0D;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .tm-faq-item small {
+    color: #8B8F97;
+    font-size: 13px;
+  }
+
+  .tm-faq-item button {
+    margin-top: 12px;
+  }
+
+  /* Buttons */
+  .tm-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .tm-btn-primary {
+    background: #1E6FD9;
+    color: #FFFFFF;
+  }
+
+  .tm-btn-primary:hover {
+    background: #1557B0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(30, 111, 217, 0.3);
+  }
+
+  .tm-btn-secondary {
+    background: #FFFFFF;
+    color: #1E6FD9;
+    border: 1px solid #1E6FD9;
+  }
+
+  .tm-btn-secondary:hover {
+    background: #F0F7FF;
+  }
+
+  .tm-btn-danger {
+    background: #DC2626;
+    color: #FFFFFF;
+  }
+
+  .tm-btn-danger:hover {
+    background: #B91C1C;
+  }
+
+  /* Success State */
+  .tm-success {
+    display: none;
+    text-align: center;
+    padding: 48px;
+  }
+
+  .tm-success.active {
+    display: block;
+  }
+
+  .tm-success-icon {
+    font-size: 64px;
+    margin-bottom: 24px;
+  }
+
+  .tm-success h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #0A2540;
+    margin-bottom: 12px;
+  }
+
+  .tm-success p {
+    font-size: 18px;
+    color: #8B8F97;
+    margin-bottom: 32px;
+  }
+
+  .tm-embed-code {
+    background: #0B0B0D;
+    color: #10B981;
+    padding: 24px;
+    border-radius: 8px;
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    text-align: left;
+    margin-bottom: 24px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  .tm-next-steps {
+    background: #F0F7FF;
+    padding: 24px;
+    border-radius: 8px;
+    text-align: left;
+    margin-top: 24px;
+  }
+
+  .tm-next-steps h3 {
+    color: #0A2540;
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .tm-next-steps ol {
+    margin-left: 20px;
+    color: #0B0B0D;
+  }
+
+  .tm-next-steps li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  /* Loading State */
+  .tm-loading {
+    display: none;
+    text-align: center;
+    padding: 48px;
+  }
+
+  .tm-loading.active {
+    display: block;
+  }
+
+  .tm-spinner {
+    border: 4px solid #E8E4DC;
+    border-top: 4px solid #1E6FD9;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    animation: tm-spin 1s linear infinite;
+    margin: 0 auto 24px;
+  }
+
+  @keyframes tm-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .tm-card {
+      padding: 32px 24px;
+    }
+
+    .tm-header h1 {
+      font-size: 28px;
+    }
+
+    .techmayne-onboarding-wrapper {
+      padding: 24px 16px;
+    }
+  }
+</style>
+
+<div class="techmayne-onboarding-wrapper">
+  <div class="tm-container">
+    <!-- Header -->
+    <div class="tm-header">
+      <div class="tm-logo">TechMayne</div>
+      <h1>Client Onboarding</h1>
+      <p>Set up your AI-powered chatbot in minutes</p>
+    </div>
+
+    <!-- Form -->
+    <form id="onboardingForm">
+      <!-- Business Information -->
+      <div class="tm-card">
+        <h2 class="tm-section-title">Business Information</h2>
+
+        <div class="tm-form-group">
+          <label for="businessName">Business Name *</label>
+          <input type="text" id="businessName" name="businessName" required placeholder="Your Photography Business">
+        </div>
+
+        <div class="tm-form-group">
+          <label for="websiteUrl">Website URL *</label>
+          <input type="url" id="websiteUrl" name="websiteUrl" required placeholder="https://yoursite.com">
+          <small>The website where you'll install the chatbot</small>
+        </div>
+
+        <div class="tm-form-group">
+          <label for="notificationEmail">Notification Email *</label>
+          <input type="email" id="notificationEmail" name="notificationEmail" required placeholder="you@yoursite.com">
+          <small>Where you'll receive lead notifications</small>
+        </div>
+
+        <div class="tm-form-group">
+          <label for="phoneNumber">Phone Number *</label>
+          <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="+1 (555) 123-4567">
+        </div>
+      </div>
+
+      <!-- Chatbot Customization -->
+      <div class="tm-card">
+        <h2 class="tm-section-title">Chatbot Customization</h2>
+
+        <div class="tm-form-group">
+          <label for="bookingLink">Booking/Calendar Link</label>
+          <input type="url" id="bookingLink" name="bookingLink" placeholder="https://calendly.com/yourname">
+          <small>The bot will share this when leads want to book</small>
+        </div>
+
+        <div class="tm-form-group">
+          <label for="serviceArea">Service Area</label>
+          <input type="text" id="serviceArea" name="serviceArea" placeholder="San Francisco Bay Area">
+          <small>Where you provide services</small>
+        </div>
+
+        <div class="tm-form-group">
+          <label for="startingPrice">Starting Price</label>
+          <input type="text" id="startingPrice" name="startingPrice" placeholder="$2,500">
+          <small>Your typical starting package price</small>
+        </div>
+
+        <div class="tm-form-group">
+          <label for="galleryTimeline">Gallery Delivery Timeline</label>
+          <input type="text" id="galleryTimeline" name="galleryTimeline" placeholder="4-6 weeks">
+          <small>How long until clients receive their photos</small>
+        </div>
+
+        <div class="tm-form-group">
+          <label for="accentColor">Widget Accent Color</label>
+          <div class="tm-color-picker-wrapper">
+            <input type="color" id="accentColor" name="accentColor" value="#1E6FD9">
+            <input type="text" id="accentColorHex" value="#1E6FD9" readonly>
+          </div>
+          <small>Choose a color that matches your brand</small>
+        </div>
+      </div>
+
+      <!-- Custom FAQs -->
+      <div class="tm-card">
+        <h2 class="tm-section-title">Custom FAQs (Optional)</h2>
+        <p style="color: #8B8F97; margin-bottom: 24px;">Add business-specific questions the bot should answer</p>
+
+        <div id="faqList" class="tm-faq-list"></div>
+
+        <div class="tm-form-group">
+          <label for="faqQuestion">Question</label>
+          <input type="text" id="faqQuestion" placeholder="Do you offer videography?">
+        </div>
+
+        <div class="tm-form-group">
+          <label for="faqAnswer">Answer</label>
+          <textarea id="faqAnswer" placeholder="Yes! We offer videography packages starting at $1,500..."></textarea>
+        </div>
+
+        <div class="tm-form-group">
+          <label for="faqKeywords">Keywords (comma-separated)</label>
+          <input type="text" id="faqKeywords" placeholder="video, videography, film">
+          <small>Help the bot know when to use this answer</small>
+        </div>
+
+        <button type="button" class="tm-btn tm-btn-secondary" onclick="addFaq()">Add FAQ</button>
+      </div>
+
+      <!-- Installation Service -->
+      <div class="tm-card">
+        <h2 class="tm-section-title">Installation</h2>
+
+        <label class="tm-checkbox-group" onclick="toggleInstallation()">
+          <input type="checkbox" id="needsInstallation">
+          <div class="tm-checkbox-content">
+            <strong>I need help installing the widget</strong>
+            <span>We'll install it for you within 48 hours (+$50)</span>
+          </div>
+        </label>
+
+        <div id="installationFields" class="tm-installation-fields">
+          <div class="tm-form-group">
+            <label>Website Platform</label>
+            <div class="tm-radio-group">
+              <div class="tm-radio-option">
+                <input type="radio" name="platform" value="WordPress" id="platformWordPress">
+                <label for="platformWordPress">WordPress</label>
+              </div>
+              <div class="tm-radio-option">
+                <input type="radio" name="platform" value="Squarespace" id="platformSquarespace">
+                <label for="platformSquarespace">Squarespace</label>
+              </div>
+              <div class="tm-radio-option">
+                <input type="radio" name="platform" value="Wix" id="platformWix">
+                <label for="platformWix">Wix</label>
+              </div>
+              <div class="tm-radio-option">
+                <input type="radio" name="platform" value="Shopify" id="platformShopify">
+                <label for="platformShopify">Shopify</label>
+              </div>
+              <div class="tm-radio-option">
+                <input type="radio" name="platform" value="Other" id="platformOther">
+                <label for="platformOther">Other</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="tm-form-group">
+            <label for="username">Website Admin Username</label>
+            <input type="text" id="username" name="username" placeholder="admin">
+          </div>
+
+          <div class="tm-form-group">
+            <label for="password">Website Admin Password</label>
+            <input type="password" id="password" name="password" placeholder="••••••••">
+          </div>
+
+          <div class="tm-form-group">
+            <label>Two-Factor Authentication Status</label>
+            <div class="tm-radio-group">
+              <div class="tm-radio-option">
+                <input type="radio" name="twoFactorStatus" value="disabled" id="2faDisabled">
+                <label for="2faDisabled">Disabled</label>
+              </div>
+              <div class="tm-radio-option">
+                <input type="radio" name="twoFactorStatus" value="enabled_will_provide" id="2faEnabled">
+                <label for="2faEnabled">Enabled (I'll provide code)</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="tm-form-group">
+            <label for="instructions">Special Instructions</label>
+            <textarea id="instructions" name="instructions" placeholder="Any special notes about your website setup..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="tm-card" style="text-align: center;">
+        <button type="submit" class="tm-btn tm-btn-primary" style="padding: 16px 48px; font-size: 16px;">
+          Complete Onboarding
+        </button>
+      </div>
+    </form>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="tm-loading">
+      <div class="tm-spinner"></div>
+      <p style="color: #8B8F97; font-size: 18px;">Setting up your chatbot...</p>
+    </div>
+
+    <!-- Success State -->
+    <div id="successState" class="tm-success">
+      <div class="tm-card">
+        <div class="tm-success-icon">🎉</div>
+        <h2>Welcome to TechMayne!</h2>
+        <p>Your chatbot is ready to capture leads</p>
+
+        <h3 style="color: #0A2540; margin-bottom: 16px; font-size: 18px;">Your Embed Code:</h3>
+        <div class="tm-embed-code" id="embedCode"></div>
+
+        <div class="tm-next-steps">
+          <h3>Next Steps:</h3>
+          <ol>
+            <li><strong>Copy the embed code above</strong></li>
+            <li>Go to your website's HTML editor or footer settings</li>
+            <li>Paste the code before the closing <code>&lt;/body&gt;</code> tag</li>
+            <li>Save and publish - the chat widget will appear on all pages!</li>
+          </ol>
+          <p style="margin-top: 16px; color: #8B8F97;">
+            <strong>Need help?</strong> Email support@techmayne.com or check your email for detailed instructions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  const API_URL = 'https://techmayne-production.up.railway.app';
+  const customFaqs = [];
+
+  // Color picker sync
+  const colorPicker = document.getElementById('accentColor');
+  const colorHex = document.getElementById('accentColorHex');
+
+  if (colorPicker && colorHex) {
+    colorPicker.addEventListener('input', function() {
+      colorHex.value = this.value;
+    });
+  }
+
+  // Toggle installation fields
+  window.toggleInstallation = function() {
+    const checkbox = document.getElementById('needsInstallation');
+    const fields = document.getElementById('installationFields');
+
+    // Toggle after checkbox changes (small delay)
+    setTimeout(() => {
+      if (checkbox.checked) {
+        fields.classList.add('active');
+      } else {
+        fields.classList.remove('active');
+      }
+    }, 10);
+  };
+
+  // Add FAQ
+  window.addFaq = function() {
+    const question = document.getElementById('faqQuestion').value.trim();
+    const answer = document.getElementById('faqAnswer').value.trim();
+    const keywords = document.getElementById('faqKeywords').value.trim();
+
+    if (!question || !answer) {
+      alert('Please enter both question and answer');
+      return;
+    }
+
+    const faq = { question, answer, keywords };
+    customFaqs.push(faq);
+
+    // Add to UI
+    const faqList = document.getElementById('faqList');
+    const faqItem = document.createElement('div');
+    faqItem.className = 'tm-faq-item';
+    faqItem.innerHTML = `
+      <h4>Q: ${question}</h4>
+      <p><strong>A:</strong> ${answer}</p>
+      <small><strong>Keywords:</strong> ${keywords || 'none'}</small>
+      <button type="button" class="tm-btn tm-btn-danger" onclick="removeFaq(${customFaqs.length - 1})">Remove</button>
+    `;
+    faqList.appendChild(faqItem);
+
+    // Clear inputs
+    document.getElementById('faqQuestion').value = '';
+    document.getElementById('faqAnswer').value = '';
+    document.getElementById('faqKeywords').value = '';
+  };
+
+  // Remove FAQ
+  window.removeFaq = function(index) {
+    customFaqs.splice(index, 1);
+    renderFaqs();
+  };
+
+  // Render FAQs
+  function renderFaqs() {
+    const faqList = document.getElementById('faqList');
+    faqList.innerHTML = '';
+
+    customFaqs.forEach((faq, index) => {
+      const faqItem = document.createElement('div');
+      faqItem.className = 'tm-faq-item';
+      faqItem.innerHTML = `
+        <h4>Q: ${faq.question}</h4>
+        <p><strong>A:</strong> ${faq.answer}</p>
+        <small><strong>Keywords:</strong> ${faq.keywords || 'none'}</small>
+        <button type="button" class="tm-btn tm-btn-danger" onclick="removeFaq(${index})">Remove</button>
+      `;
+      faqList.appendChild(faqItem);
+    });
+  }
+
+  // Form submission
+  const form = document.getElementById('onboardingForm');
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      // Show loading
+      document.getElementById('onboardingForm').style.display = 'none';
+      document.getElementById('loadingState').classList.add('active');
+
+      // Gather form data
+      const formData = {
+        businessName: document.getElementById('businessName').value,
+        websiteUrl: document.getElementById('websiteUrl').value,
+        notificationEmail: document.getElementById('notificationEmail').value,
+        phoneNumber: document.getElementById('phoneNumber').value,
+        bookingLink: document.getElementById('bookingLink').value || null,
+        serviceArea: document.getElementById('serviceArea').value || null,
+        startingPrice: document.getElementById('startingPrice').value || null,
+        galleryTimeline: document.getElementById('galleryTimeline').value || null,
+        accentColor: document.getElementById('accentColor').value,
+        customFaqs: customFaqs.length > 0 ? customFaqs : null
+      };
+
+      // Add installation data if requested
+      if (document.getElementById('needsInstallation').checked) {
+        const platform = document.querySelector('input[name="platform"]:checked');
+        const twoFactor = document.querySelector('input[name="twoFactorStatus"]:checked');
+
+        formData.installation = {
+          needsInstallation: true,
+          platform: platform ? platform.value : '',
+          username: document.getElementById('username').value,
+          password: document.getElementById('password').value,
+          twoFactorStatus: twoFactor ? twoFactor.value : 'disabled',
+          instructions: document.getElementById('instructions').value || null
+        };
+      }
+
+      try {
+        // Submit to API
+        const response = await fetch(`${API_URL}/api/onboarding/create`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Failed to create client');
+        }
+
+        // Show success
+        document.getElementById('loadingState').classList.remove('active');
+        document.getElementById('successState').classList.add('active');
+        document.getElementById('embedCode').textContent = result.embedCode;
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      } catch (error) {
+        alert('Error: ' + error.message);
+        document.getElementById('loadingState').classList.remove('active');
+        document.getElementById('onboardingForm').style.display = 'block';
+      }
+    });
+  }
+})();
+</script>

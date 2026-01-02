@@ -121,7 +121,7 @@ router.post('/create', async (req, res) => {
 
     // Generate embed code
     const embedCode = `<script
-  src="http://localhost:3000/widget/widget.js"
+  src="https://techmayne-production.up.railway.app/widget/widget.js"
   data-client-token="${clientToken}"
 ></script>`;
 

@@ -22,20 +22,6 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Debug endpoint - shows which env vars are set
-app.get('/debug/env', (req, res) => {
-  res.json({
-    NODE_ENV: process.env.NODE_ENV || 'NOT SET',
-    PORT: process.env.PORT || 'NOT SET',
-    SUPABASE_URL: process.env.SUPABASE_URL ? 'SET (hidden)' : 'NOT SET',
-    SUPABASE_KEY: process.env.SUPABASE_KEY ? 'SET (hidden)' : 'NOT SET',
-    RESEND_API_KEY: process.env.RESEND_API_KEY ? 'SET (hidden)' : 'NOT SET',
-    FROM_EMAIL: process.env.FROM_EMAIL || 'NOT SET',
-    ADMIN_EMAIL: process.env.ADMIN_EMAIL || 'NOT SET',
-    allEnvKeys: Object.keys(process.env).filter(key => !key.includes('KEY') && !key.includes('SECRET'))
-  });
-});
-
 // Error handling
 app.use((err, req, res, next) => {
   console.error(err.stack);

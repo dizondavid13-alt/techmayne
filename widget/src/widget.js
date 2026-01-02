@@ -7,7 +7,7 @@
   'use strict';
 
   // Configuration
-  const API_BASE_URL = 'http://localhost:3000/api'; // Change to production URL when deployed
+  const API_BASE_URL = 'https://techmayne-production.up.railway.app/api';
   const CLIENT_TOKEN = document.currentScript.getAttribute('data-client-token');
 
   if (!CLIENT_TOKEN) {

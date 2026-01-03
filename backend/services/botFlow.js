@@ -30,6 +30,21 @@ class BotFlow {
     return collectedData && collectedData.name && collectedData.email;
   }
 
+  // Helper method to get display name for event type
+  getEventDisplayName(eventKey) {
+    const serviceLabels = {
+      'wedding': 'wedding',
+      'engagement': 'engagement session',
+      'elopement': 'elopement',
+      'portrait': 'portrait session',
+      'corporate': 'corporate event',
+      'family': 'family session',
+      'maternity': 'maternity session',
+      'other': 'event'
+    };
+    return serviceLabels[eventKey.toLowerCase()] || eventKey;
+  }
+
   // Helper method to generate event type buttons based on client's services
   getEventTypeButtons(servicesOffered) {
     // Default to all services if not specified
@@ -151,8 +166,9 @@ class BotFlow {
             };
           } else {
             collectedData.event_type = userMessage;
+            const eventDisplayName = this.getEventDisplayName(userMessage);
             response = {
-              message: `Perfect! When is your ${userMessage}?`,
+              message: `Perfect! When is your ${eventDisplayName}?`,
               nextState: STATES.COLLECT_DATE,
               inputType: 'text',
               placeholder: 'e.g., June 15, 2026'
@@ -171,8 +187,9 @@ class BotFlow {
       case STATES.COLLECT_OTHER_EVENT_TYPE:
         // Store the custom event type and proceed to date collection
         collectedData.event_type = userMessage;
+        // For custom events, use exactly what the user typed
         response = {
-          message: `Perfect! When is your ${userMessage}?`,
+          message: `Perfect! When is your ${userMessage.toLowerCase()}?`,
           nextState: STATES.COLLECT_DATE,
           inputType: 'text',
           placeholder: 'e.g., June 15, 2026'
@@ -293,8 +310,36 @@ class BotFlow {
         const faqResponse = await matchFAQ(this.clientId, userMessage);
 
         if (faqResponse.found) {
+          let faqAnswer = faqResponse.answer;
+
+          // Special handling for services FAQ - make it dynamic based on client's actual services
+          if (faqResponse.question === 'What services do you offer?' && client.services_offered && client.services_offered.length > 0) {
+            const serviceLabels = {
+              'wedding': 'weddings',
+              'engagement': 'engagement sessions',
+              'elopement': 'elopements',
+              'portrait': 'portrait sessions',
+              'corporate': 'corporate events',
+              'family': 'family sessions',
+              'maternity': 'maternity photography',
+              'other': 'other events'
+            };
+
+            const offeredServices = client.services_offered
+              .map(s => serviceLabels[s] || s)
+              .filter(s => s); // Remove any undefined values
+
+            if (offeredServices.length > 0) {
+              const serviceList = offeredServices.length === 1
+                ? offeredServices[0]
+                : offeredServices.slice(0, -1).join(', ') + ', and ' + offeredServices[offeredServices.length - 1];
+
+              faqAnswer = `I offer ${serviceList}. Each service can be customized to fit your specific needs and vision!`;
+            }
+          }
+
           response = {
-            message: faqResponse.answer + "\n\nDid that answer your question?",
+            message: faqAnswer + "\n\nDid that answer your question?",
             buttons: [
               { text: 'Yes, thanks!', action: 'faq_answered' },
               { text: 'Check Availability', action: 'check_availability' },

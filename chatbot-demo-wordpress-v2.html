@@ -313,8 +313,9 @@
     line-height: 1.5;
     animation: fadeIn 0.3s ease-out;
     word-wrap: break-word;
-    word-break: break-word;
+    word-break: normal;
     overflow-wrap: break-word;
+    hyphens: none;
   }
 
   @keyframes fadeIn {
@@ -340,7 +341,9 @@
     margin: 0;
     white-space: pre-wrap;
     word-wrap: break-word;
-    word-break: break-word;
+    word-break: normal;
+    overflow-wrap: break-word;
+    hyphens: none;
   }
 
   .message-time {
@@ -745,10 +748,12 @@
     // Check if conversation is being closed
     if (action === 'complete') {
       conversationClosed = true;
-      // Disable input after closure
-      chatInput.disabled = true;
-      sendBtn.disabled = true;
+      // Keep input ENABLED so user can type to restart
+      chatInput.disabled = false;
+      sendBtn.disabled = false;
       chatInput.placeholder = "Type to start a new conversation...";
+      chatInput.value = '';
+      chatInput.focus();
     }
 
     // Add bot response
@@ -761,14 +766,14 @@
       addQuickReplies(response.buttons);
     }
 
-    // Enable input if text is expected
-    if (response.inputType === 'text' || response.inputType === 'email' || response.inputType === 'tel') {
+    // Enable input if text is expected (but not if conversation just closed)
+    if (!conversationClosed && (response.inputType === 'text' || response.inputType === 'email' || response.inputType === 'tel')) {
       chatInput.disabled = false;
       sendBtn.disabled = false;
       chatInput.placeholder = response.placeholder || 'Type your message...';
       chatInput.focus();
-    } else {
-      // Disable input when buttons are expected
+    } else if (!conversationClosed) {
+      // Disable input when buttons are expected (but not if conversation closed - we want to keep it enabled)
       chatInput.disabled = true;
       sendBtn.disabled = true;
     }

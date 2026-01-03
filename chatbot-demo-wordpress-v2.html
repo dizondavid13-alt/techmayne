@@ -1,0 +1,879 @@
+<!--
+  TechMayne Live Chatbot Demo - WordPress Version v2
+  ✨ FIXES: Text overflow, closure message, session restart
+
+  WORDPRESS INSTRUCTIONS:
+  1. Create new page in WordPress (title: "Demo" or "Try Chatbot")
+  2. Add "Custom HTML" block
+  3. Paste this entire file
+  4. Set template to "Full Width" or "Blank"
+  5. Publish
+-->
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* Reset WordPress styles */
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Scoped wrapper for WordPress */
+  .demo-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #F5F7FA 0%, #E8EDF5 100%);
+    font-family: 'Inter', sans-serif;
+    padding: 60px 20px;
+    margin: 0 !important;
+    width: 100vw;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+  }
+
+  .demo-page * {
+    box-sizing: border-box;
+  }
+
+  /* Container */
+  .demo-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .demo-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .demo-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #1E6FD9, #1557B0);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(30, 111, 217, 0.3);
+  }
+
+  .demo-header h1 {
+    font-size: 48px;
+    font-weight: 800;
+    color: #0A2540;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.5px;
+  }
+
+  .demo-header p {
+    font-size: 18px;
+    color: #8B8F97;
+    margin: 0 0 32px 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  .demo-instruction {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: 1px solid #E1E4E8;
+    font-size: 14px;
+    color: #0A2540;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .demo-instruction svg {
+    width: 20px;
+    height: 20px;
+    color: #1E6FD9;
+  }
+
+  /* Main Layout */
+  .demo-layout {
+    display: grid;
+    grid-template-columns: 1fr 600px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  /* Side Panels */
+  .side-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .side-panel h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0A2540;
+    margin: 0 0 20px 0;
+  }
+
+  .side-panel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .side-panel li {
+    padding: 12px 0;
+    color: #0A2540;
+    font-size: 14px;
+    line-height: 1.6;
+    border-bottom: 1px solid #F3F4F6;
+  }
+
+  .side-panel li:last-child {
+    border-bottom: none;
+  }
+
+  .side-panel li::before {
+    content: "✓";
+    color: #10B981;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+
+  /* Stats Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .stat-card {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #F0F7FF 0%, #E0F2FE 100%);
+    border-radius: 12px;
+    border: 1px solid #BFDBFE;
+  }
+
+  .stat-value {
+    display: block;
+    font-size: 28px;
+    font-weight: 800;
+    color: #1E6FD9;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: #0A2540;
+    font-weight: 600;
+  }
+
+  /* Chatbot Container */
+  .chatbot-container {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 700px;
+  }
+
+  /* Chat Header */
+  .chat-header {
+    background: linear-gradient(135deg, #1E6FD9 0%, #1557B0 100%);
+    padding: 20px 24px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .chat-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shimmer 3s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+  }
+
+  .chat-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .chat-title {
+    flex: 1;
+  }
+
+  .chat-title h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .verified-badge {
+    width: 16px;
+    height: 16px;
+    color: #10B981;
+  }
+
+  .chat-subtitle {
+    margin: 4px 0 0 0;
+    font-size: 13px;
+    opacity: 0.95;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    background: #4ADE80;
+    border-radius: 50%;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.1); }
+  }
+
+  /* Chat Messages */
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    background: #F9FAFB;
+    min-height: 400px;
+    max-height: 500px;
+  }
+
+  .message-group {
+    margin-bottom: 20px;
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .message-wrapper {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .message-wrapper.user {
+    justify-content: flex-end;
+  }
+
+  .bot-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1E6FD9, #1557B0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    color: white;
+  }
+
+  .message-bubble {
+    max-width: 75%;
+    padding: 14px 18px;
+    border-radius: 18px;
+    font-size: 15px;
+    line-height: 1.5;
+    animation: fadeIn 0.3s ease-out;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .message-bubble.bot {
+    background: white;
+    color: #0A2540;
+    border-top-left-radius: 6px;
+    border: 1px solid #E1E4E8;
+  }
+
+  .message-bubble.user {
+    background: linear-gradient(135deg, #1E6FD9, #1557B0);
+    color: white;
+    border-top-right-radius: 6px;
+    margin-left: auto;
+  }
+
+  .message-bubble p {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .message-time {
+    font-size: 11px;
+    color: #8B8F97;
+    margin-top: 4px;
+    padding-left: 48px;
+  }
+
+  .message-wrapper.user .message-time {
+    text-align: right;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Quick Reply Buttons */
+  .quick-replies {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+    padding-left: 48px;
+  }
+
+  .quick-reply-btn {
+    background: white;
+    color: #1E6FD9;
+    border: 2px solid #1E6FD9;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .quick-reply-btn:hover {
+    background: #1E6FD9;
+    color: white;
+    transform: translateX(4px);
+  }
+
+  /* Typing Indicator */
+  .typing-indicator {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+  }
+
+  .typing-dots {
+    background: white;
+    border: 1px solid #E1E4E8;
+    border-radius: 18px;
+    border-top-left-radius: 6px;
+    padding: 14px 18px;
+    display: flex;
+    gap: 6px;
+  }
+
+  .typing-dot {
+    width: 8px;
+    height: 8px;
+    background: #8B8F97;
+    border-radius: 50%;
+    animation: typing 1.4s infinite;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes typing {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.7; }
+    30% { transform: translateY(-10px); opacity: 1; }
+  }
+
+  /* Chat Input */
+  .chat-input {
+    padding: 20px 24px;
+    background: white;
+    border-top: 1px solid #E1E4E8;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .chat-input input {
+    flex: 1;
+    padding: 14px 18px;
+    border: 2px solid #E1E4E8;
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: all 0.2s;
+  }
+
+  .chat-input input:focus {
+    border-color: #1E6FD9;
+    box-shadow: 0 0 0 3px rgba(30, 111, 217, 0.1);
+  }
+
+  .chat-input input:disabled {
+    background: #F3F4F6;
+    cursor: not-allowed;
+  }
+
+  .send-btn {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #1E6FD9, #1557B0);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .send-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30, 111, 217, 0.4);
+  }
+
+  .send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .send-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .demo-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .side-panel {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .demo-header h1 {
+      font-size: 36px;
+    }
+
+    .chatbot-container {
+      height: 600px;
+    }
+
+    .chat-messages {
+      min-height: 400px;
+      max-height: 400px;
+    }
+
+    .message-bubble {
+      max-width: 85%;
+    }
+  }
+</style>
+
+<div class="demo-page">
+  <div class="demo-container">
+    <!-- Header -->
+    <div class="demo-header">
+      <div class="demo-badge">Live Demo</div>
+      <h1>Try PhotoBot AI</h1>
+      <p>Experience how our AI chatbot captures leads 24/7 on your photography website</p>
+      <div class="demo-instruction">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        Start by clicking "Check Availability" below
+      </div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="demo-layout">
+      <!-- Left Panel -->
+      <div class="side-panel">
+        <h3>What This Bot Can Do</h3>
+        <ul>
+          <li>Capture leads 24/7 automatically</li>
+          <li>Answer common photography questions</li>
+          <li>Check event date availability</li>
+          <li>Collect contact information</li>
+          <li>Share pricing and packages</li>
+          <li>Provide booking links instantly</li>
+          <li>Email you every new lead</li>
+        </ul>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-value">4.5x</span>
+            <span class="stat-label">More Leads</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value">24/7</span>
+            <span class="stat-label">Available</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chatbot -->
+      <div class="chatbot-container">
+        <!-- Chat Header -->
+        <div class="chat-header">
+          <div class="chat-avatar">📸</div>
+          <div class="chat-title">
+            <h2>
+              PhotoBot AI
+              <svg class="verified-badge" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+            </h2>
+            <p class="chat-subtitle">
+              <span class="status-dot"></span>
+              Online now
+            </p>
+          </div>
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="chat-messages" id="chatMessages"></div>
+
+        <!-- Chat Input -->
+        <div class="chat-input">
+          <input
+            type="text"
+            id="chatInput"
+            placeholder="Type your message..."
+            disabled
+          >
+          <button class="send-btn" id="sendBtn" disabled>
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Panel -->
+      <div class="side-panel">
+        <h3>Performance Metrics</h3>
+        <ul>
+          <li>Responds in under 1 second</li>
+          <li>Handles unlimited conversations</li>
+          <li>Works on all devices seamlessly</li>
+          <li>Integrates with your calendar</li>
+          <li>Captures every opportunity</li>
+          <li>Never sleeps or takes breaks</li>
+        </ul>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-value">&lt;1s</span>
+            <span class="stat-label">Response</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value">99%</span>
+            <span class="stat-label">Accuracy</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  const API_BASE_URL = 'https://techmayne-production.up.railway.app/api';
+  const CLIENT_TOKEN = 'c8082d26-223f-4eee-af1b-001c197fa3d8';
+
+  let VISITOR_ID = sessionStorage.getItem('tm_visitor_id');
+  if (!VISITOR_ID) {
+    VISITOR_ID = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    sessionStorage.setItem('tm_visitor_id', VISITOR_ID);
+  }
+
+  const chatMessages = document.getElementById('chatMessages');
+  const chatInput = document.getElementById('chatInput');
+  const sendBtn = document.getElementById('sendBtn');
+
+  let conversationClosed = false;
+
+  // Send message to API
+  async function sendToAPI(message) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/chat/message`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          clientToken: CLIENT_TOKEN,
+          visitorId: VISITOR_ID,
+          message: message
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('API request failed');
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error sending message:', error);
+      return {
+        message: "Sorry, I'm having trouble connecting. Please try again in a moment.",
+        buttons: []
+      };
+    }
+  }
+
+  // Add message to chat
+  function addMessage(text, role) {
+    const messageGroup = document.createElement('div');
+    messageGroup.className = 'message-group';
+
+    const wrapperClass = role === 'user' ? 'message-wrapper user' : 'message-wrapper';
+    const avatarHtml = role === 'bot' ? '<div class="bot-avatar">📸</div>' : '';
+
+    messageGroup.innerHTML = `
+      <div class="${wrapperClass}">
+        ${role === 'bot' ? avatarHtml : ''}
+        <div>
+          <div class="message-bubble ${role}">
+            <p>${text}</p>
+          </div>
+          <div class="message-time" style="${role === 'user' ? 'text-align: right;' : ''}">Just now</div>
+        </div>
+      </div>
+    `;
+
+    chatMessages.appendChild(messageGroup);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  // Add quick reply buttons
+  function addQuickReplies(buttons) {
+    const lastMessageGroup = chatMessages.lastElementChild;
+    if (!lastMessageGroup) return;
+
+    const quickRepliesDiv = document.createElement('div');
+    quickRepliesDiv.className = 'quick-replies';
+
+    buttons.forEach(btn => {
+      const button = document.createElement('button');
+      button.className = 'quick-reply-btn';
+      button.textContent = btn.text;
+      button.onclick = () => handleQuickReply(btn.action, btn.text);
+      quickRepliesDiv.appendChild(button);
+    });
+
+    lastMessageGroup.appendChild(quickRepliesDiv);
+  }
+
+  // Handle quick reply click
+  async function handleQuickReply(action, displayText) {
+    // Disable all quick reply buttons
+    const allButtons = document.querySelectorAll('.quick-reply-btn');
+    allButtons.forEach(btn => btn.disabled = true);
+
+    // Add user message
+    addMessage(displayText, 'user');
+
+    // Show typing indicator
+    showTyping();
+
+    // Check if conversation was closed and user clicked a button - this restarts it
+    if (conversationClosed) {
+      conversationClosed = false;
+      // Enable input for potential text messages
+      chatInput.disabled = false;
+      sendBtn.disabled = false;
+    }
+
+    // Send to API
+    const response = await sendToAPI(action);
+
+    // Hide typing indicator
+    hideTyping();
+
+    // Check if conversation is being closed
+    if (action === 'complete') {
+      conversationClosed = true;
+      // Disable input after closure
+      chatInput.disabled = true;
+      sendBtn.disabled = true;
+      chatInput.placeholder = "Type to start a new conversation...";
+    }
+
+    // Add bot response
+    if (response.message) {
+      addMessage(response.message, 'bot');
+    }
+
+    // Add buttons if any
+    if (response.buttons && response.buttons.length > 0) {
+      addQuickReplies(response.buttons);
+    }
+
+    // Enable input if text is expected
+    if (response.inputType === 'text' || response.inputType === 'email' || response.inputType === 'tel') {
+      chatInput.disabled = false;
+      sendBtn.disabled = false;
+      chatInput.placeholder = response.placeholder || 'Type your message...';
+      chatInput.focus();
+    } else {
+      // Disable input when buttons are expected
+      chatInput.disabled = true;
+      sendBtn.disabled = true;
+    }
+  }
+
+  // Show typing indicator
+  function showTyping() {
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'message-group typing-indicator';
+    typingDiv.id = 'typingIndicator';
+    typingDiv.innerHTML = `
+      <div class="bot-avatar">📸</div>
+      <div class="typing-dots">
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      </div>
+    `;
+    chatMessages.appendChild(typingDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  // Hide typing indicator
+  function hideTyping() {
+    const typing = document.getElementById('typingIndicator');
+    if (typing) {
+      typing.remove();
+    }
+  }
+
+  // Handle text input send
+  async function handleTextSend() {
+    const message = chatInput.value.trim();
+    if (!message) return;
+
+    // Clear input
+    chatInput.value = '';
+
+    // Add user message
+    addMessage(message, 'user');
+
+    // Disable input temporarily
+    chatInput.disabled = true;
+    sendBtn.disabled = true;
+
+    // Show typing
+    showTyping();
+
+    // Check if conversation was closed - typing restarts it
+    if (conversationClosed) {
+      conversationClosed = false;
+    }
+
+    // Send to API
+    const response = await sendToAPI(message);
+
+    // Hide typing
+    hideTyping();
+
+    // Add bot response
+    if (response.message) {
+      addMessage(response.message, 'bot');
+    }
+
+    // Add buttons if any
+    if (response.buttons && response.buttons.length > 0) {
+      addQuickReplies(response.buttons);
+    }
+
+    // Re-enable input if text is expected
+    if (response.inputType === 'text' || response.inputType === 'email' || response.inputType === 'tel') {
+      chatInput.disabled = false;
+      sendBtn.disabled = false;
+      chatInput.placeholder = response.placeholder || 'Type your message...';
+      chatInput.focus();
+    } else {
+      chatInput.disabled = true;
+      sendBtn.disabled = true;
+    }
+  }
+
+  // Event listeners
+  sendBtn.addEventListener('click', handleTextSend);
+  chatInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      handleTextSend();
+    }
+  });
+
+  // Initialize conversation
+  async function initChat() {
+    showTyping();
+    const response = await sendToAPI('__START__');
+    hideTyping();
+
+    if (response.message) {
+      addMessage(response.message, 'bot');
+    }
+
+    if (response.buttons && response.buttons.length > 0) {
+      addQuickReplies(response.buttons);
+    }
+  }
+
+  // Start chat on page load
+  window.addEventListener('DOMContentLoaded', initChat);
+})();
+</script>

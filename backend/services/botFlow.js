@@ -7,6 +7,7 @@ const STATES = {
   MAIN_MENU: 'main_menu',
   CHECK_AVAILABILITY: 'check_availability',
   COLLECT_EVENT_TYPE: 'collect_event_type',
+  COLLECT_OTHER_EVENT_TYPE: 'collect_other_event_type',
   COLLECT_DATE: 'collect_date',
   COLLECT_LOCATION: 'collect_location',
   COLLECT_COVERAGE: 'collect_coverage',
@@ -89,8 +90,12 @@ class BotFlow {
             message: "Great! Let me gather some details to check availability. What type of event are you planning?",
             buttons: [
               { text: 'Wedding', action: 'wedding' },
-              { text: 'Engagement Session', action: 'engagement' },
+              { text: 'Engagement', action: 'engagement' },
               { text: 'Elopement', action: 'elopement' },
+              { text: 'Portrait Session', action: 'portrait' },
+              { text: 'Corporate Event', action: 'corporate' },
+              { text: 'Family Session', action: 'family' },
+              { text: 'Maternity', action: 'maternity' },
               { text: 'Other Event', action: 'other' }
             ],
             nextState: STATES.COLLECT_EVENT_TYPE
@@ -119,28 +124,53 @@ class BotFlow {
 
       case STATES.COLLECT_EVENT_TYPE:
         // Check if it's a valid event type selection
-        const validEventTypes = ['wedding', 'engagement', 'elopement', 'other'];
+        const validEventTypes = ['wedding', 'engagement', 'elopement', 'portrait', 'corporate', 'family', 'maternity', 'other'];
         if (validEventTypes.includes(userMessage.toLowerCase())) {
-          collectedData.event_type = userMessage;
-          response = {
-            message: `Perfect! When is your ${userMessage}?`,
-            nextState: STATES.COLLECT_DATE,
-            inputType: 'text',
-            placeholder: 'e.g., June 15, 2026'
-          };
+          // Special handling for "other" - ask what type of event it is
+          if (userMessage.toLowerCase() === 'other') {
+            response = {
+              message: "What type of event is this?",
+              nextState: STATES.COLLECT_OTHER_EVENT_TYPE,
+              inputType: 'text',
+              placeholder: 'e.g., Corporate headshots, Birthday party'
+            };
+          } else {
+            collectedData.event_type = userMessage;
+            response = {
+              message: `Perfect! When is your ${userMessage}?`,
+              nextState: STATES.COLLECT_DATE,
+              inputType: 'text',
+              placeholder: 'e.g., June 15, 2026'
+            };
+          }
         } else {
           // User typed instead of clicking
           response = {
             message: "Please select your event type by clicking one of the buttons above.",
             buttons: [
               { text: 'Wedding', action: 'wedding' },
-              { text: 'Engagement Session', action: 'engagement' },
+              { text: 'Engagement', action: 'engagement' },
               { text: 'Elopement', action: 'elopement' },
+              { text: 'Portrait Session', action: 'portrait' },
+              { text: 'Corporate Event', action: 'corporate' },
+              { text: 'Family Session', action: 'family' },
+              { text: 'Maternity', action: 'maternity' },
               { text: 'Other Event', action: 'other' }
             ],
             nextState: STATES.COLLECT_EVENT_TYPE
           };
         }
+        break;
+
+      case STATES.COLLECT_OTHER_EVENT_TYPE:
+        // Store the custom event type and proceed to date collection
+        collectedData.event_type = userMessage;
+        response = {
+          message: `Perfect! When is your ${userMessage}?`,
+          nextState: STATES.COLLECT_DATE,
+          inputType: 'text',
+          placeholder: 'e.g., June 15, 2026'
+        };
         break;
 
       case STATES.COLLECT_DATE:
@@ -333,8 +363,12 @@ class BotFlow {
             message: "I can help you check another date! What type of event are you interested in?",
             buttons: [
               { text: 'Wedding', action: 'wedding' },
-              { text: 'Engagement Session', action: 'engagement' },
+              { text: 'Engagement', action: 'engagement' },
               { text: 'Elopement', action: 'elopement' },
+              { text: 'Portrait Session', action: 'portrait' },
+              { text: 'Corporate Event', action: 'corporate' },
+              { text: 'Family Session', action: 'family' },
+              { text: 'Maternity', action: 'maternity' },
               { text: 'Other Event', action: 'other' }
             ],
             nextState: STATES.COLLECT_EVENT_TYPE

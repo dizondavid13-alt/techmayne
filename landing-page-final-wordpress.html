@@ -1,0 +1,981 @@
+<!--
+  EXACT CONVERSION FROM UPDATED FIGMA DESIGN
+  Complete Landing Page - All 6 Sections
+  Updated colors, chat preview, shadows, and icons
+
+  WORDPRESS INSTRUCTIONS:
+  1. Create new page in WordPress
+  2. Add "Custom HTML" block
+  3. Paste this entire file
+  4. Set template to "Full Width" or "Blank"
+  5. Publish
+-->
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* Reset WordPress defaults and set full-screen background */
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Page wrapper - full screen background */
+  .landing-page {
+    min-height: 100vh;
+    background: #F5F7FA;
+    padding: 40px 0;
+    font-family: 'Inter', sans-serif;
+    margin: 0 !important;
+  }
+
+  .landing-page * {
+    box-sizing: border-box;
+  }
+
+  /* Section base */
+  .section {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-top: 48px;
+  }
+
+  .section:first-child {
+    margin-top: 32px;
+  }
+
+  .section.final-cta {
+    margin-bottom: 48px;
+  }
+
+  /* Section headers */
+  .section h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #0A2540;
+    margin-bottom: 8px;
+  }
+
+  .section > p.subtitle {
+    font-size: 14px;
+    color: #8B8F97;
+    margin-bottom: 32px;
+  }
+
+  /* White containers */
+  .white-container {
+    background: white;
+    border-radius: 24px;
+    border: 1px solid #E1E4E8;
+    padding: 40px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Hero Section */
+  .hero-container {
+    background: white;
+    border-radius: 24px;
+    border: 1px solid #E1E4E8;
+    padding: 48px;
+    display: flex;
+    gap: 48px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .hero-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+    color: #8B8F97;
+    font-weight: 600;
+    margin-bottom: 32px;
+  }
+
+  .hero-title {
+    font-size: 44px;
+    line-height: 1.2;
+    font-weight: 800;
+    color: #0A2540;
+    margin-bottom: 40px;
+  }
+
+  .hero-description {
+    color: #0A2540;
+    margin-bottom: 32px;
+    font-size: 15px;
+  }
+
+  .hero-button {
+    background: #1E6FD9;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: inline-block;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: fit-content;
+  }
+
+  .hero-button:hover {
+    background: #1557B0;
+  }
+
+  .hero-footnote {
+    font-size: 12px;
+    color: #8B8F97;
+    margin-top: 24px;
+  }
+
+  .hero-right {
+    width: 380px;
+    flex-shrink: 0;
+  }
+
+  /* Chat Preview */
+  .chat-preview {
+    background: white;
+    border: 1px solid #E1E4E8;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .chat-header {
+    background: linear-gradient(to right, #1E6FD9, #1557B0);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .chat-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .chat-title {
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .chat-status {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .chat-messages {
+    padding: 24px;
+    background: #F8FAFC;
+    min-height: 400px;
+  }
+
+  .chat-message {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .chat-message.user {
+    justify-content: flex-end;
+  }
+
+  .chat-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #1E6FD9;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .chat-avatar svg {
+    width: 16px;
+    height: 16px;
+    color: white;
+  }
+
+  .chat-bubble {
+    background: white;
+    border-radius: 16px;
+    padding: 12px 16px;
+    max-width: 80%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .chat-bubble.bot {
+    border-top-left-radius: 4px;
+  }
+
+  .chat-bubble.user {
+    background: #1E6FD9;
+    border-top-right-radius: 4px;
+  }
+
+  .chat-bubble p {
+    font-size: 14px;
+    margin: 0;
+    color: #0A2540;
+    line-height: 1.5;
+  }
+
+  .chat-bubble.user p {
+    color: white;
+  }
+
+  .chat-options {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .chat-option {
+    font-size: 12px;
+    color: #8B8F97;
+    background: #F8FAFC;
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+
+  /* Steps Grid */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .step-card {
+    background: #F8FAFC;
+    border: 1px solid #E1E4E8;
+    border-radius: 18px;
+    padding: 32px;
+  }
+
+  .step-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .step-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #E3F2FD;
+    border: 1px solid #90CAF9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .step-number span {
+    font-size: 12px;
+    font-weight: 800;
+    color: #1E6FD9;
+  }
+
+  .step-content {
+    flex: 1;
+    padding-top: 4px;
+  }
+
+  .step-content h3 {
+    font-weight: 800;
+    color: #0A2540;
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+
+  .step-content p {
+    font-size: 13px;
+    color: #8B8F97;
+    margin: 0;
+  }
+
+  /* Features Grid */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .feature-card {
+    background: #F8FAFC;
+    border: 1px solid #E1E4E8;
+    border-radius: 18px;
+    padding: 32px;
+  }
+
+  .feature-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .feature-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #E3F2FD;
+    border: 1px solid #90CAF9;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feature-icon svg {
+    width: 20px;
+    height: 20px;
+    color: #1E6FD9;
+  }
+
+  .feature-content {
+    flex: 1;
+  }
+
+  .feature-content h3 {
+    font-weight: 800;
+    color: #0A2540;
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+
+  .feature-content p {
+    font-size: 13px;
+    color: #8B8F97;
+    margin: 0;
+  }
+
+  /* Benefits Grid */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .benefit-card {
+    background: #F8FAFC;
+    border: 1px solid #E1E4E8;
+    border-radius: 18px;
+    padding: 32px;
+  }
+
+  .benefit-card h3 {
+    font-weight: 800;
+    color: #0A2540;
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+
+  .benefit-card p {
+    font-size: 13px;
+    color: #8B8F97;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Pricing Grid */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .plan-card {
+    border-radius: 22px;
+    padding: 32px;
+  }
+
+  .plan-card.standard {
+    background: #F8FAFC;
+    border: 1px solid #E1E4E8;
+  }
+
+  .plan-card.highlight {
+    background: #E3F2FD;
+    border: 1px solid #90CAF9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .plan-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .plan-header h3 {
+    font-weight: 800;
+    color: #0A2540;
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .plan-badge {
+    background: #1E6FD9;
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 6px 16px;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .plan-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 32px;
+  }
+
+  .plan-price .amount {
+    font-size: 34px;
+    font-weight: 800;
+    color: #0A2540;
+  }
+
+  .plan-price .period {
+    font-size: 14px;
+    font-weight: 600;
+    color: #8B8F97;
+  }
+
+  .plan-features {
+    margin-bottom: 32px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .plan-features li {
+    font-size: 13px;
+    color: #0A2540;
+    margin-bottom: 12px;
+  }
+
+  .plan-features li:last-child {
+    margin-bottom: 0;
+  }
+
+  .plan-button {
+    width: 100%;
+    padding: 12px 0;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 800;
+    transition: background-color 0.2s;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .plan-button.dark {
+    background: #0A2540;
+    color: white;
+  }
+
+  .plan-button.dark:hover {
+    background: #0B0B0D;
+  }
+
+  .plan-button.primary {
+    background: #1E6FD9;
+    color: white;
+  }
+
+  .plan-button.primary:hover {
+    background: #1557B0;
+  }
+
+  /* Final CTA */
+  .cta-container {
+    background: linear-gradient(to bottom right, #0A2540, #0B0B0D);
+    border-radius: 24px;
+    padding: 48px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .cta-content h2 {
+    font-size: 24px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  .cta-content p {
+    font-size: 14px;
+    color: #E5E7EB;
+    margin: 0;
+  }
+
+  .cta-button {
+    background: #1E6FD9;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 14px;
+    font-weight: 800;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .cta-button:hover {
+    background: #1557B0;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .hero-container {
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .hero-right {
+      width: 100%;
+    }
+
+    .steps-grid,
+    .pricing-grid,
+    .benefits-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-container {
+      flex-direction: column;
+      gap: 24px;
+      text-align: center;
+      padding: 40px 32px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .section {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .hero-container,
+    .white-container {
+      padding: 24px;
+    }
+
+    .hero-title {
+      font-size: 32px;
+    }
+  }
+</style>
+
+<div class="landing-page">
+
+  <!-- Hero Section -->
+  <section class="section">
+    <div class="hero-container">
+      <!-- Left side -->
+      <div class="hero-left">
+        <div class="hero-subtitle">
+          Your Plug-and-Play AI Booking Concierge
+        </div>
+
+        <h1 class="hero-title">
+          Turn Website Visitors<br>
+          Into Booked Clients<br>
+          — Automatically
+        </h1>
+
+        <p class="hero-description">
+          Answers FAQs instantly, qualifies leads, and routes visitors to your booking link<br>
+          — then sends you clean, structured leads.
+        </p>
+
+        <div>
+          <a href="#pricing" class="hero-button">Get Started</a>
+        </div>
+
+        <p class="hero-footnote">
+          Works with any website • No coding required • Cancel anytime
+        </p>
+      </div>
+
+      <!-- Right side - Chat Preview -->
+      <div class="hero-right">
+        <div class="chat-preview">
+          <!-- Chat Header -->
+          <div class="chat-header">
+            <div class="chat-status-dot"></div>
+            <div>
+              <div class="chat-title">PhotoBot AI</div>
+              <div class="chat-status">Online now</div>
+            </div>
+          </div>
+
+          <!-- Chat Messages -->
+          <div class="chat-messages">
+            <!-- Bot message -->
+            <div class="chat-message">
+              <div class="chat-avatar">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                </svg>
+              </div>
+              <div class="chat-bubble bot">
+                <p>Hi! What date is your event and what type of session?</p>
+              </div>
+            </div>
+
+            <!-- User message -->
+            <div class="chat-message user">
+              <div class="chat-bubble user">
+                <p>Wedding • June 14 • Annapolis</p>
+              </div>
+            </div>
+
+            <!-- Bot message with options -->
+            <div class="chat-message">
+              <div class="chat-avatar">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                </svg>
+              </div>
+              <div class="chat-bubble bot">
+                <p style="margin-bottom: 8px;">Great — I can check availability. What's your budget range?</p>
+                <div class="chat-options">
+                  <div class="chat-option">A) $1k–$2k</div>
+                  <div class="chat-option">B) $2k–$4k</div>
+                  <div class="chat-option">C) $4k+</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- User message -->
+            <div class="chat-message user">
+              <div class="chat-bubble user">
+                <p>C) $4k+</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="section">
+    <h2>How it works</h2>
+    <p class="subtitle">Simple setup. Less inbox noise. Better leads.</p>
+
+    <div class="white-container">
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-number">
+              <span>1</span>
+            </div>
+            <div class="step-content">
+              <h3>Visitor asks a question</h3>
+              <p>Pricing, availability, travel, turnaround, etc.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-number">
+              <span>2</span>
+            </div>
+            <div class="step-content">
+              <h3>Chatbot qualifies the lead</h3>
+              <p>Collects event type, date, location, budget.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-number">
+              <span>3</span>
+            </div>
+            <div class="step-content">
+              <h3>You get clean leads</h3>
+              <p>Sent to email/CRM + routed to booking link.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="section">
+    <h2>Features</h2>
+    <p class="subtitle">Everything you need to convert traffic into inquiries.</p>
+
+    <div class="white-container">
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-header">
+            <div class="feature-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            </div>
+            <div class="feature-content">
+              <h3>Instant FAQ Answers</h3>
+              <p>Handles common questions so you don't have to.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-header">
+            <div class="feature-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="feature-content">
+              <h3>Lead Qualification</h3>
+              <p>Captures event details with minimal friction.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-header">
+            <div class="feature-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+            </div>
+            <div class="feature-content">
+              <h3>Smart Booking Routing</h3>
+              <p>Send ready leads to Calendly/HoneyBook/forms.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-header">
+            <div class="feature-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
+            </div>
+            <div class="feature-content">
+              <h3>Custom Trained for You</h3>
+              <p>Uses your packages, policies, and brand voice.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-header">
+            <div class="feature-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="feature-content">
+              <h3>24/7 Availability</h3>
+              <p>Never miss leads while you're shooting.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-header">
+            <div class="feature-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+            </div>
+            <div class="feature-content">
+              <h3>Easy Website Embed</h3>
+              <p>One line of code. Works on any platform.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="section">
+    <h2>Benefits</h2>
+    <p class="subtitle">Why photographers love it.</p>
+
+    <div class="white-container">
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <h3>Book better clients</h3>
+          <p>
+            Qualifies budget + fit before<br>
+            they hit your inbox.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <h3>Save hours weekly</h3>
+          <p>
+            Stops repeated questions<br>
+            from eating your time.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <h3>Win on speed</h3>
+          <p>
+            Respond faster than<br>
+            competitors — 24/7.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="section">
+    <h2>Pricing</h2>
+    <p class="subtitle">Simple tiers that scale with you.</p>
+
+    <div class="white-container">
+      <div class="pricing-grid">
+        <!-- Starter Plan -->
+        <div class="plan-card standard">
+          <div class="plan-header">
+            <h3>Starter</h3>
+          </div>
+
+          <div class="plan-price">
+            <span class="amount">$99</span>
+            <span class="period">/mo</span>
+          </div>
+
+          <ul class="plan-features">
+            <li>• FAQ answering</li>
+            <li>• Basic lead capture</li>
+            <li>• Website embed</li>
+            <li>• Email notifications</li>
+          </ul>
+
+          <button class="plan-button dark">Get Started</button>
+        </div>
+
+        <!-- Pro Plan -->
+        <div class="plan-card highlight">
+          <div class="plan-header">
+            <h3>Pro</h3>
+            <div class="plan-badge">Most Popular</div>
+          </div>
+
+          <div class="plan-price">
+            <span class="amount">$149</span>
+            <span class="period">/mo</span>
+          </div>
+
+          <ul class="plan-features">
+            <li>• Everything in Starter</li>
+            <li>• Advanced lead qualification</li>
+            <li>• Booking link routing</li>
+            <li>• Custom training</li>
+            <li>• SSL encryption & data security</li>
+            <li>• Automatic bot updates</li>
+          </ul>
+
+          <button class="plan-button primary">Get Started</button>
+        </div>
+
+        <!-- Studio Plan -->
+        <div class="plan-card standard">
+          <div class="plan-header">
+            <h3>Studio</h3>
+          </div>
+
+          <div class="plan-price">
+            <span class="amount">$299</span>
+            <span class="period">/mo</span>
+          </div>
+
+          <ul class="plan-features">
+            <li>• Everything in Pro</li>
+            <li>• Priority support</li>
+            <li>• CRM integrations</li>
+            <li>• White-label option</li>
+            <li>• Dedicated account manager</li>
+            <li>• Custom API access</li>
+          </ul>
+
+          <button class="plan-button dark">Contact Us</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="section final-cta">
+    <div class="cta-container">
+      <div class="cta-content">
+        <h2>Let your website do the talking</h2>
+        <p>Install once. Book more clients automatically.</p>
+      </div>
+
+      <button class="cta-button">Get Started in Minutes</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+</script>

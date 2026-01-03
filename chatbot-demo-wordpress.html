@@ -1,0 +1,938 @@
+<!--
+  TechMayne Chatbot Demo Page
+  Professional, friendly, and engaging chatbot showcase
+
+  WORDPRESS INSTRUCTIONS:
+  1. Create new page in WordPress (title: "Demo" or "Try It Now")
+  2. Add "Custom HTML" block
+  3. Paste this entire file
+  4. Set template to "Full Width" or "Blank"
+  5. Publish
+-->
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* Reset and base */
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .demo-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #F5F7FA 0%, #E8EDF5 100%);
+    font-family: 'Inter', sans-serif;
+    padding: 60px 20px;
+    margin: 0 !important;
+  }
+
+  .demo-page * {
+    box-sizing: border-box;
+  }
+
+  /* Container */
+  .demo-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .demo-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .demo-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #1E6FD9, #1557B0);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(30, 111, 217, 0.3);
+  }
+
+  .demo-header h1 {
+    font-size: 48px;
+    font-weight: 800;
+    color: #0A2540;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.5px;
+  }
+
+  .demo-header p {
+    font-size: 18px;
+    color: #8B8F97;
+    margin: 0 0 32px 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  .demo-instruction {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: 1px solid #E1E4E8;
+    font-size: 14px;
+    color: #0A2540;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .demo-instruction svg {
+    width: 20px;
+    height: 20px;
+    color: #1E6FD9;
+  }
+
+  /* Main Layout */
+  .demo-layout {
+    display: grid;
+    grid-template-columns: 1fr 600px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  /* Chatbot Container */
+  .chatbot-container {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    border: 1px solid #E1E4E8;
+  }
+
+  /* Chat Header */
+  .chat-header {
+    background: linear-gradient(135deg, #1E6FD9 0%, #1557B0 100%);
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .chat-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: shimmer 3s infinite;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-20px, -20px); }
+  }
+
+  .chat-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+  }
+
+  .chat-avatar svg {
+    width: 28px;
+    height: 28px;
+    color: #1E6FD9;
+  }
+
+  .chat-header-info {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+  }
+
+  .chat-header-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: white;
+    margin: 0 0 4px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .verified-badge {
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .verified-badge svg {
+    width: 10px;
+    height: 10px;
+    color: #1E6FD9;
+  }
+
+  .chat-header-status {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    background: #4ADE80;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+  }
+
+  /* Chat Messages */
+  .chat-messages {
+    padding: 28px;
+    background: #F8FAFC;
+    min-height: 500px;
+    max-height: 500px;
+    overflow-y: auto;
+  }
+
+  .chat-messages::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .chat-messages::-webkit-scrollbar-track {
+    background: #F1F5F9;
+  }
+
+  .chat-messages::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 3px;
+  }
+
+  .message-group {
+    margin-bottom: 20px;
+  }
+
+  .message-wrapper {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .message-wrapper.user {
+    justify-content: flex-end;
+  }
+
+  .message-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .message-avatar.bot {
+    background: linear-gradient(135deg, #1E6FD9, #1557B0);
+    box-shadow: 0 2px 8px rgba(30, 111, 217, 0.3);
+  }
+
+  .message-avatar.bot svg {
+    width: 20px;
+    height: 20px;
+    color: white;
+  }
+
+  .message-bubble {
+    max-width: 75%;
+    padding: 14px 18px;
+    border-radius: 18px;
+    font-size: 15px;
+    line-height: 1.5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .message-bubble.bot {
+    background: white;
+    color: #0A2540;
+    border-top-left-radius: 6px;
+    border: 1px solid #E1E4E8;
+  }
+
+  .message-bubble.user {
+    background: linear-gradient(135deg, #1E6FD9, #1557B0);
+    color: white;
+    border-top-right-radius: 6px;
+    margin-left: auto;
+  }
+
+  .message-time {
+    font-size: 11px;
+    color: #94A3B8;
+    margin-top: 4px;
+    padding: 0 12px;
+  }
+
+  /* Quick Reply Buttons */
+  .quick-replies {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .quick-reply-btn {
+    background: white;
+    border: 1.5px solid #E1E4E8;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #0A2540;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .quick-reply-btn:hover {
+    background: #F8FAFC;
+    border-color: #1E6FD9;
+    transform: translateX(4px);
+  }
+
+  .quick-reply-btn svg {
+    width: 16px;
+    height: 16px;
+    color: #1E6FD9;
+    flex-shrink: 0;
+  }
+
+  /* Typing Indicator */
+  .typing-indicator {
+    display: flex;
+    gap: 12px;
+    padding: 20px 0;
+  }
+
+  .typing-indicator .message-avatar {
+    opacity: 0.6;
+  }
+
+  .typing-dots {
+    background: white;
+    padding: 14px 18px;
+    border-radius: 18px;
+    border-top-left-radius: 6px;
+    display: flex;
+    gap: 6px;
+    border: 1px solid #E1E4E8;
+  }
+
+  .typing-dot {
+    width: 8px;
+    height: 8px;
+    background: #94A3B8;
+    border-radius: 50%;
+    animation: typing 1.4s ease-in-out infinite;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes typing {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-10px); opacity: 1; }
+  }
+
+  /* Chat Input */
+  .chat-input-area {
+    padding: 20px 24px;
+    background: white;
+    border-top: 1px solid #E1E4E8;
+  }
+
+  .chat-input-wrapper {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .chat-input {
+    flex: 1;
+    padding: 14px 18px;
+    border: 1.5px solid #E1E4E8;
+    border-radius: 14px;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: all 0.2s ease;
+  }
+
+  .chat-input:focus {
+    border-color: #1E6FD9;
+    box-shadow: 0 0 0 3px rgba(30, 111, 217, 0.1);
+  }
+
+  .chat-input::placeholder {
+    color: #94A3B8;
+  }
+
+  .send-button {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #1E6FD9, #1557B0);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(30, 111, 217, 0.3);
+  }
+
+  .send-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(30, 111, 217, 0.4);
+  }
+
+  .send-button svg {
+    width: 20px;
+    height: 20px;
+    color: white;
+  }
+
+  /* Side Features */
+  .side-feature {
+    background: white;
+    padding: 24px;
+    border-radius: 18px;
+    border: 1px solid #E1E4E8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .side-feature h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0A2540;
+    margin: 0 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .side-feature h3 svg {
+    width: 20px;
+    height: 20px;
+    color: #1E6FD9;
+  }
+
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .feature-list li {
+    padding: 10px 0;
+    font-size: 14px;
+    color: #64748B;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #F1F5F9;
+  }
+
+  .feature-list li:last-child {
+    border-bottom: none;
+  }
+
+  .feature-list li svg {
+    width: 16px;
+    height: 16px;
+    color: #4ADE80;
+    flex-shrink: 0;
+  }
+
+  /* Stats */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .stat-card {
+    background: #F8FAFC;
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1E6FD9;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+
+  /* Responsive */
+  @media (max-width: 1200px) {
+    .demo-layout {
+      grid-template-columns: 1fr;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .side-feature {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .demo-page {
+      padding: 40px 16px;
+    }
+
+    .demo-header h1 {
+      font-size: 36px;
+    }
+
+    .demo-header p {
+      font-size: 16px;
+    }
+
+    .chatbot-container {
+      border-radius: 16px;
+    }
+
+    .chat-messages {
+      min-height: 400px;
+      max-height: 400px;
+    }
+
+    .message-bubble {
+      max-width: 85%;
+    }
+  }
+</style>
+
+<div class="demo-page">
+  <div class="demo-container">
+
+    <!-- Header -->
+    <div class="demo-header">
+      <div class="demo-badge">✨ Live Demo</div>
+      <h1>Try PhotoBot AI</h1>
+      <p>Experience how our AI chatbot qualifies leads and answers questions—just like it would on your photography website.</p>
+      <div class="demo-instruction">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Click on any quick reply or type your own message</span>
+      </div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="demo-layout">
+
+      <!-- Left Side Feature -->
+      <div class="side-feature">
+        <h3>
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          What It Does
+        </h3>
+        <ul class="feature-list">
+          <li>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            Answers FAQs instantly
+          </li>
+          <li>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            Collects event details
+          </li>
+          <li>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            Qualifies budget & fit
+          </li>
+          <li>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            Routes to booking link
+          </li>
+          <li>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            Sends you clean leads
+          </li>
+        </ul>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-value">2.5x</span>
+            <span class="stat-label">More Leads</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value">24/7</span>
+            <span class="stat-label">Available</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chatbot -->
+      <div class="chatbot-container">
+        <!-- Chat Header -->
+        <div class="chat-header">
+          <div class="chat-avatar">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+          </div>
+          <div class="chat-header-info">
+            <div class="chat-header-title">
+              PhotoBot AI
+              <div class="verified-badge">
+                <svg fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+            </div>
+            <div class="chat-header-status">
+              <div class="status-dot"></div>
+              Online now • Typically replies instantly
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="chat-messages" id="chatMessages">
+          <!-- Welcome Message -->
+          <div class="message-group">
+            <div class="message-wrapper">
+              <div class="message-avatar bot">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              </div>
+              <div>
+                <div class="message-bubble bot">
+                  <p style="margin: 0;">Hi there! 👋 I'm here to help answer your questions about photography services. What would you like to know?</p>
+                </div>
+                <div class="message-time">Just now</div>
+              </div>
+            </div>
+
+            <!-- Quick Replies -->
+            <div class="quick-replies">
+              <button class="quick-reply-btn" onclick="sendMessage('What are your packages and pricing?')">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                What are your packages and pricing?
+              </button>
+              <button class="quick-reply-btn" onclick="sendMessage('Do you travel for weddings?')">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Do you travel for weddings?
+              </button>
+              <button class="quick-reply-btn" onclick="sendMessage('How long until I get my photos?')">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                How long until I get my photos?
+              </button>
+              <button class="quick-reply-btn" onclick="sendMessage('I want to book a session')">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                I want to book a session
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Input -->
+        <div class="chat-input-area">
+          <div class="chat-input-wrapper">
+            <input
+              type="text"
+              class="chat-input"
+              placeholder="Type your message..."
+              id="chatInput"
+              onkeypress="handleKeyPress(event)"
+            >
+            <button class="send-button" onclick="sendMessageFromInput()">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side Feature -->
+      <div class="side-feature">
+        <h3>
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          Key Features
+        </h3>
+        <ul class="feature-list">
+          <li>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            Custom trained on your business
+          </li>
+          <li>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            Matches your brand voice
+          </li>
+          <li>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            SSL encrypted & secure
+          </li>
+          <li>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            One-line website embed
+          </li>
+          <li>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            Works on all platforms
+          </li>
+        </ul>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-value">&lt;1s</span>
+            <span class="stat-label">Response</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value">95%</span>
+            <span class="stat-label">Accuracy</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  const responses = {
+    'pricing': {
+      text: "Great question! Our wedding packages start at $2,500 and include:\n\n• Full-day coverage (8 hours)\n• Two professional photographers\n• 500+ edited high-resolution photos\n• Online gallery for easy sharing\n• Print release\n\nWould you like to see our complete pricing guide or check availability for your date?",
+      buttons: ['Check availability', 'See pricing guide', 'Tell me more']
+    },
+    'travel': {
+      text: "Absolutely! I love destination weddings. 🌍\n\nI travel anywhere in the US and internationally. Travel fees depend on location:\n\n• Local (50 miles): Included\n• Regional: Starting at $500\n• International: Custom quote\n\nWhere is your wedding taking place?",
+      buttons: ['Get a quote', 'See travel portfolio']
+    },
+    'timeline': {
+      text: "You'll receive your photos within 4-6 weeks after your event. Here's the process:\n\n✨ Sneak peeks: 48 hours\n📸 Full gallery: 4-6 weeks\n🎁 Print-ready files included\n\nNeed them faster? Rush editing is available for an additional fee.",
+      buttons: ['Request rush editing', 'View sample gallery']
+    },
+    'booking': {
+      text: "Wonderful! Let's get you booked. I just need a few quick details:\n\n1️⃣ What type of session? (Wedding, engagement, family, etc.)\n2️⃣ Preferred date\n3️⃣ Location\n4️⃣ Estimated guest count (for weddings)\n\nOr you can check my calendar and book directly!",
+      buttons: ['Check calendar', 'Continue here']
+    },
+    'default': {
+      text: "Thanks for your question! I can help you with:\n\n• Package pricing & what's included\n• Availability & booking\n• Travel for destination events\n• Gallery delivery timeline\n• Portfolio & past work\n\nWhat would you like to know more about?",
+      buttons: ['Pricing', 'Availability', 'View portfolio']
+    }
+  };
+
+  function getResponse(message) {
+    const lowerMsg = message.toLowerCase();
+
+    if (lowerMsg.includes('pric') || lowerMsg.includes('package') || lowerMsg.includes('cost')) {
+      return responses.pricing;
+    } else if (lowerMsg.includes('travel') || lowerMsg.includes('destination')) {
+      return responses.travel;
+    } else if (lowerMsg.includes('long') || lowerMsg.includes('timeline') || lowerMsg.includes('photo')) {
+      return responses.timeline;
+    } else if (lowerMsg.includes('book') || lowerMsg.includes('session') || lowerMsg.includes('appointment')) {
+      return responses.booking;
+    } else {
+      return responses.default;
+    }
+  }
+
+  window.sendMessage = function(message) {
+    const messagesContainer = document.getElementById('chatMessages');
+
+    // Hide quick replies
+    const quickReplies = document.querySelector('.quick-replies');
+    if (quickReplies) {
+      quickReplies.style.display = 'none';
+    }
+
+    // Add user message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'message-group';
+    userMsg.innerHTML = `
+      <div class="message-wrapper user">
+        <div>
+          <div class="message-bubble user">
+            <p style="margin: 0;">${message}</p>
+          </div>
+          <div class="message-time" style="text-align: right;">Just now</div>
+        </div>
+      </div>
+    `;
+    messagesContainer.appendChild(userMsg);
+
+    // Add typing indicator
+    const typingIndicator = document.createElement('div');
+    typingIndicator.className = 'typing-indicator';
+    typingIndicator.innerHTML = `
+      <div class="message-avatar bot">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+        </svg>
+      </div>
+      <div class="typing-dots">
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      </div>
+    `;
+    messagesContainer.appendChild(typingIndicator);
+
+    // Scroll to bottom
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    // Simulate response delay
+    setTimeout(() => {
+      typingIndicator.remove();
+
+      const response = getResponse(message);
+
+      const botMsg = document.createElement('div');
+      botMsg.className = 'message-group';
+
+      let buttonsHtml = '';
+      if (response.buttons) {
+        buttonsHtml = '<div class="quick-replies">';
+        response.buttons.forEach(btn => {
+          buttonsHtml += `
+            <button class="quick-reply-btn" onclick="sendMessage('${btn}')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              ${btn}
+            </button>
+          `;
+        });
+        buttonsHtml += '</div>';
+      }
+
+      botMsg.innerHTML = `
+        <div class="message-wrapper">
+          <div class="message-avatar bot">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+          </div>
+          <div>
+            <div class="message-bubble bot">
+              <p style="margin: 0; white-space: pre-line;">${response.text}</p>
+            </div>
+            <div class="message-time">Just now</div>
+          </div>
+        </div>
+        ${buttonsHtml}
+      `;
+      messagesContainer.appendChild(botMsg);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }, 1500);
+  };
+
+  window.sendMessageFromInput = function() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+
+    if (message) {
+      window.sendMessage(message);
+      input.value = '';
+    }
+  };
+
+  window.handleKeyPress = function(event) {
+    if (event.key === 'Enter') {
+      window.sendMessageFromInput();
+    }
+  };
+})();
+</script>

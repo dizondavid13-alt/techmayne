@@ -17,6 +17,7 @@ router.post('/create', async (req, res) => {
       serviceArea,
       startingPrice,
       galleryTimeline,
+      servicesOffered,
       accentColor,
       customFaqs,
       installation
@@ -42,6 +43,8 @@ router.post('/create', async (req, res) => {
       phone_number: phoneNumber,
       service_area: serviceArea || null,
       starting_price: startingPrice || null,
+      gallery_timeline: galleryTimeline || '4-6 weeks',
+      services_offered: servicesOffered || ['wedding', 'engagement', 'elopement'],
       accent_color: accentColor || '#6366f1'
     };
 

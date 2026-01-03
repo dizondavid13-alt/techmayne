@@ -30,6 +30,30 @@ class BotFlow {
     return collectedData && collectedData.name && collectedData.email;
   }
 
+  // Helper method to generate event type buttons based on client's services
+  getEventTypeButtons(servicesOffered) {
+    // Default to all services if not specified
+    const services = servicesOffered || ['wedding', 'engagement', 'elopement', 'portrait', 'corporate', 'family', 'maternity', 'other'];
+
+    // Map service keys to display text
+    const serviceLabels = {
+      'wedding': 'Wedding',
+      'engagement': 'Engagement',
+      'elopement': 'Elopement',
+      'portrait': 'Portrait Session',
+      'corporate': 'Corporate Event',
+      'family': 'Family Session',
+      'maternity': 'Maternity',
+      'other': 'Other Event'
+    };
+
+    // Generate buttons for each service the client offers
+    return services.map(service => ({
+      text: serviceLabels[service] || service,
+      action: service
+    }));
+  }
+
   async getResponse(userMessage, currentState, collectedData = {}) {
     // Get client details for personalization
     const { data: client } = await supabase
@@ -88,16 +112,7 @@ class BotFlow {
         if (userMessage === 'check_availability') {
           response = {
             message: "Great! Let me gather some details to check availability. What type of event are you planning?",
-            buttons: [
-              { text: 'Wedding', action: 'wedding' },
-              { text: 'Engagement', action: 'engagement' },
-              { text: 'Elopement', action: 'elopement' },
-              { text: 'Portrait Session', action: 'portrait' },
-              { text: 'Corporate Event', action: 'corporate' },
-              { text: 'Family Session', action: 'family' },
-              { text: 'Maternity', action: 'maternity' },
-              { text: 'Other Event', action: 'other' }
-            ],
+            buttons: this.getEventTypeButtons(client.services_offered),
             nextState: STATES.COLLECT_EVENT_TYPE
           };
         } else if (userMessage === 'view_packages') {
@@ -123,8 +138,8 @@ class BotFlow {
         break;
 
       case STATES.COLLECT_EVENT_TYPE:
-        // Check if it's a valid event type selection
-        const validEventTypes = ['wedding', 'engagement', 'elopement', 'portrait', 'corporate', 'family', 'maternity', 'other'];
+        // Check if it's a valid event type selection based on client's services
+        const validEventTypes = client.services_offered || ['wedding', 'engagement', 'elopement', 'portrait', 'corporate', 'family', 'maternity', 'other'];
         if (validEventTypes.includes(userMessage.toLowerCase())) {
           // Special handling for "other" - ask what type of event it is
           if (userMessage.toLowerCase() === 'other') {
@@ -147,16 +162,7 @@ class BotFlow {
           // User typed instead of clicking
           response = {
             message: "Please select your event type by clicking one of the buttons above.",
-            buttons: [
-              { text: 'Wedding', action: 'wedding' },
-              { text: 'Engagement', action: 'engagement' },
-              { text: 'Elopement', action: 'elopement' },
-              { text: 'Portrait Session', action: 'portrait' },
-              { text: 'Corporate Event', action: 'corporate' },
-              { text: 'Family Session', action: 'family' },
-              { text: 'Maternity', action: 'maternity' },
-              { text: 'Other Event', action: 'other' }
-            ],
+            buttons: this.getEventTypeButtons(client.services_offered),
             nextState: STATES.COLLECT_EVENT_TYPE
           };
         }
@@ -361,16 +367,7 @@ class BotFlow {
           // Allow checking availability again without re-asking for contact info
           response = {
             message: "I can help you check another date! What type of event are you interested in?",
-            buttons: [
-              { text: 'Wedding', action: 'wedding' },
-              { text: 'Engagement', action: 'engagement' },
-              { text: 'Elopement', action: 'elopement' },
-              { text: 'Portrait Session', action: 'portrait' },
-              { text: 'Corporate Event', action: 'corporate' },
-              { text: 'Family Session', action: 'family' },
-              { text: 'Maternity', action: 'maternity' },
-              { text: 'Other Event', action: 'other' }
-            ],
+            buttons: this.getEventTypeButtons(client.services_offered),
             nextState: STATES.COLLECT_EVENT_TYPE
           };
         } else if (userMessage === 'view_packages') {

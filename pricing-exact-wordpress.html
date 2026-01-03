@@ -1,0 +1,246 @@
+<!--
+  EXACT conversion from your Figma React component
+  NO style changes - just converted to plain HTML/CSS for WordPress
+-->
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* Exact conversion of your Tailwind classes */
+  .pricing-section {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-top: 48px;
+  }
+
+  .pricing-section h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .pricing-section > p {
+    font-size: 14px;
+    color: #6B7280;
+    margin-bottom: 32px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .pricing-container {
+    background: white;
+    border-radius: 24px;
+    border: 1px solid #E8EBF0;
+    padding: 40px;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .plan-card {
+    border-radius: 22px;
+    padding: 32px;
+  }
+
+  .plan-card.standard {
+    background: #F9FAFB;
+    border: 1px solid #E8EBF0;
+  }
+
+  .plan-card.highlight {
+    background: #EEF2FF;
+    border: 1px solid #DDE3FF;
+  }
+
+  .plan-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .plan-header h3 {
+    font-weight: 800;
+    color: #111827;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+  }
+
+  .plan-badge {
+    background: #4F46E5;
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 6px 16px;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .plan-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 32px;
+  }
+
+  .plan-price .amount {
+    font-size: 34px;
+    font-weight: 800;
+    color: #111827;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .plan-price .period {
+    font-size: 14px;
+    font-weight: 600;
+    color: #6B7280;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .plan-features {
+    margin-bottom: 32px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .plan-features li {
+    font-size: 13px;
+    color: #374151;
+    margin-bottom: 12px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .plan-features li:last-child {
+    margin-bottom: 0;
+  }
+
+  .plan-button {
+    width: 100%;
+    padding: 12px 0;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 800;
+    transition: background-color 0.2s;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .plan-button.dark {
+    background: #111827;
+    color: white;
+  }
+
+  .plan-button.dark:hover {
+    background: #1f2937;
+  }
+
+  .plan-button.primary {
+    background: #4F46E5;
+    color: white;
+  }
+
+  .plan-button.primary:hover {
+    background: #4338CA;
+  }
+
+  /* Responsive - stack on mobile */
+  @media (max-width: 768px) {
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .pricing-section {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+</style>
+
+<section id="pricing" class="pricing-section">
+  <h2>Pricing</h2>
+  <p>Simple tiers that scale with you.</p>
+
+  <div class="pricing-container">
+    <div class="pricing-grid">
+
+      <!-- Starter Plan -->
+      <div class="plan-card standard">
+        <div class="plan-header">
+          <h3>Starter</h3>
+        </div>
+
+        <div class="plan-price">
+          <span class="amount">$99</span>
+          <span class="period">/mo</span>
+        </div>
+
+        <ul class="plan-features">
+          <li>• FAQ answering</li>
+          <li>• Basic lead capture</li>
+          <li>• Website embed</li>
+          <li>• Email notifications</li>
+        </ul>
+
+        <button class="plan-button dark">Get Started</button>
+      </div>
+
+      <!-- Pro Plan -->
+      <div class="plan-card highlight">
+        <div class="plan-header">
+          <h3>Pro</h3>
+          <div class="plan-badge">Most Popular</div>
+        </div>
+
+        <div class="plan-price">
+          <span class="amount">$149</span>
+          <span class="period">/mo</span>
+        </div>
+
+        <ul class="plan-features">
+          <li>• Everything in Starter</li>
+          <li>• Advanced lead qualification</li>
+          <li>• Booking link routing</li>
+          <li>• Custom training</li>
+          <li>• SSL encryption & data security</li>
+          <li>• Automatic bot updates</li>
+        </ul>
+
+        <button class="plan-button primary">Get Started</button>
+      </div>
+
+      <!-- Studio Plan -->
+      <div class="plan-card standard">
+        <div class="plan-header">
+          <h3>Studio</h3>
+        </div>
+
+        <div class="plan-price">
+          <span class="amount">$299</span>
+          <span class="period">/mo</span>
+        </div>
+
+        <ul class="plan-features">
+          <li>• Everything in Pro</li>
+          <li>• Priority support</li>
+          <li>• CRM integrations</li>
+          <li>• White-label option</li>
+          <li>• Dedicated account manager</li>
+          <li>• Custom API access</li>
+        </ul>
+
+        <button class="plan-button dark">Contact Us</button>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,340 @@
+<!--
+  TechMayne Pricing Landing Page - WordPress Version
+
+  INSTRUCTIONS:
+  1. In WordPress, create a new page (Pages → Add New)
+  2. Switch to "Code Editor" or use an HTML block
+  3. Paste this entire file content
+  4. Set page template to "Full Width" or "Blank" for best results
+  5. Publish the page
+
+  OR for page builders (Elementor, etc):
+  1. Add an HTML widget/block
+  2. Paste this content
+  3. Save and publish
+-->
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* Scoped styles for WordPress */
+  .techmayne-pricing-wrapper {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #FFFFFF;
+    padding: 80px 20px;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .techmayne-pricing-wrapper * {
+    box-sizing: border-box;
+  }
+
+  .tm-pricing-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* Section Header */
+  .tm-pricing-header {
+    margin-bottom: 32px;
+  }
+
+  .tm-pricing-header h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+  }
+
+  .tm-pricing-header p {
+    font-size: 14px;
+    color: #6B7280;
+    margin: 0;
+  }
+
+  /* Pricing Card Container */
+  .tm-pricing-card-container {
+    background: #FFFFFF;
+    border-radius: 24px;
+    border: 1px solid #E8EBF0;
+    padding: 40px;
+  }
+
+  /* Grid */
+  .tm-pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  /* Individual Plan Card */
+  .tm-plan-card {
+    border-radius: 22px;
+    padding: 32px;
+    position: relative;
+  }
+
+  .tm-plan-card.standard {
+    background: #F9FAFB;
+    border: 1px solid #E8EBF0;
+  }
+
+  .tm-plan-card.highlighted {
+    background: #EEF2FF;
+    border: 1px solid #DDE3FF;
+  }
+
+  /* Plan Header */
+  .tm-plan-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .tm-plan-name {
+    font-weight: 800;
+    color: #111827;
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .tm-plan-badge {
+    background: #4F46E5;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 6px 16px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  /* Price */
+  .tm-plan-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 32px;
+  }
+
+  .tm-price-amount {
+    font-size: 34px;
+    font-weight: 800;
+    color: #111827;
+    line-height: 1;
+  }
+
+  .tm-price-period {
+    font-size: 14px;
+    font-weight: 600;
+    color: #6B7280;
+  }
+
+  /* Features List */
+  .tm-plan-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px 0;
+  }
+
+  .tm-plan-features li {
+    font-size: 13px;
+    color: #374151;
+    margin-bottom: 12px;
+    padding-left: 0;
+  }
+
+  .tm-plan-features li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Button */
+  .tm-plan-button {
+    width: 100%;
+    padding: 12px 24px;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .tm-plan-button.standard {
+    background: #111827;
+    color: #FFFFFF;
+  }
+
+  .tm-plan-button.standard:hover {
+    background: #1f2937;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(17, 24, 39, 0.2);
+  }
+
+  .tm-plan-button.highlighted {
+    background: #4F46E5;
+    color: #FFFFFF;
+  }
+
+  .tm-plan-button.highlighted:hover {
+    background: #4338CA;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .tm-pricing-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .tm-pricing-card-container {
+      padding: 24px;
+    }
+
+    .tm-pricing-container {
+      padding: 0 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .techmayne-pricing-wrapper {
+      padding: 40px 16px;
+    }
+
+    .tm-pricing-header h2 {
+      font-size: 22px;
+    }
+
+    .tm-plan-card {
+      padding: 24px;
+    }
+
+    .tm-price-amount {
+      font-size: 28px;
+    }
+  }
+</style>
+
+<div class="techmayne-pricing-wrapper">
+  <div class="tm-pricing-container">
+    <!-- Section Header -->
+    <div class="tm-pricing-header">
+      <h2>Pricing</h2>
+      <p>Simple tiers that scale with you.</p>
+    </div>
+
+    <!-- Pricing Cards Container -->
+    <div class="tm-pricing-card-container">
+      <div class="tm-pricing-grid">
+
+        <!-- Starter Plan -->
+        <div class="tm-plan-card standard">
+          <div class="tm-plan-header">
+            <h3 class="tm-plan-name">Starter</h3>
+          </div>
+
+          <div class="tm-plan-price">
+            <span class="tm-price-amount">$99</span>
+            <span class="tm-price-period">/mo</span>
+          </div>
+
+          <ul class="tm-plan-features">
+            <li>• FAQ answering</li>
+            <li>• Basic lead capture</li>
+            <li>• Website embed</li>
+            <li>• Email notifications</li>
+          </ul>
+
+          <button class="tm-plan-button standard" onclick="window.location.href='https://techmayne.com/onboarding'">
+            Get Started
+          </button>
+        </div>
+
+        <!-- Pro Plan (Highlighted) -->
+        <div class="tm-plan-card highlighted">
+          <div class="tm-plan-header">
+            <h3 class="tm-plan-name">Pro</h3>
+            <div class="tm-plan-badge">Most Popular</div>
+          </div>
+
+          <div class="tm-plan-price">
+            <span class="tm-price-amount">$149</span>
+            <span class="tm-price-period">/mo</span>
+          </div>
+
+          <ul class="tm-plan-features">
+            <li>• Everything in Starter</li>
+            <li>• Advanced lead qualification</li>
+            <li>• Booking link routing</li>
+            <li>• Custom training</li>
+            <li>• SSL encryption & data security</li>
+            <li>• Automatic bot updates</li>
+          </ul>
+
+          <button class="tm-plan-button highlighted" onclick="window.location.href='https://techmayne.com/onboarding'">
+            Get Started
+          </button>
+        </div>
+
+        <!-- Studio Plan -->
+        <div class="tm-plan-card standard">
+          <div class="tm-plan-header">
+            <h3 class="tm-plan-name">Studio</h3>
+          </div>
+
+          <div class="tm-plan-price">
+            <span class="tm-price-amount">$299</span>
+            <span class="tm-price-period">/mo</span>
+          </div>
+
+          <ul class="tm-plan-features">
+            <li>• Everything in Pro</li>
+            <li>• Priority support</li>
+            <li>• CRM integrations</li>
+            <li>• White-label option</li>
+            <li>• Dedicated account manager</li>
+            <li>• Custom API access</li>
+          </ul>
+
+          <button class="tm-plan-button standard" onclick="window.location.href='mailto:support@techmayne.com?subject=Studio Plan Inquiry'">
+            Contact Us
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Optional: Add smooth scroll or other interactions
+(function() {
+  'use strict';
+
+  // You can add custom JavaScript here if needed
+  // For example, analytics tracking when buttons are clicked
+
+  const buttons = document.querySelectorAll('.tm-plan-button');
+  buttons.forEach(button => {
+    button.addEventListener('click', function() {
+      // Track which plan was clicked
+      const planCard = this.closest('.tm-plan-card');
+      const planName = planCard.querySelector('.tm-plan-name').textContent;
+      console.log('Plan selected:', planName);
+
+      // You could send this to Google Analytics, etc.
+      // gtag('event', 'plan_selected', { plan: planName });
+    });
+  });
+})();
+</script>

@@ -1,16 +1,19 @@
--- Add services_offered column to clients table
--- This allows each photographer to select which services they offer
+-- Add customization columns to clients table
+-- This allows each photographer to customize their chatbot
 
 ALTER TABLE clients
 ADD COLUMN IF NOT EXISTS services_offered text[] DEFAULT ARRAY['wedding', 'engagement', 'elopement'];
 
--- Add gallery_timeline column if not exists (for FAQ customization)
 ALTER TABLE clients
 ADD COLUMN IF NOT EXISTS gallery_timeline text DEFAULT '4-6 weeks';
 
--- Comment
+ALTER TABLE clients
+ADD COLUMN IF NOT EXISTS chatbot_name text DEFAULT 'PhotoBot AI';
+
+-- Comments
 COMMENT ON COLUMN clients.services_offered IS 'Array of service types this photographer offers (wedding, engagement, portrait, corporate, family, maternity, elopement, other)';
 COMMENT ON COLUMN clients.gallery_timeline IS 'Client-specific gallery delivery timeline for FAQ answers';
+COMMENT ON COLUMN clients.chatbot_name IS 'Custom name for the chatbot (e.g., "Sarah''s Assistant", "BookingBot")';
 
 -- Example: Update demo client with all services
 UPDATE clients

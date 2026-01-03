@@ -10,6 +10,7 @@ router.post('/create', async (req, res) => {
   try {
     const {
       businessName,
+      chatbotName,
       websiteUrl,
       bookingLink,
       notificationEmail,
@@ -37,6 +38,7 @@ router.post('/create', async (req, res) => {
     const clientData = {
       client_token: clientToken,
       business_name: businessName,
+      chatbot_name: chatbotName || 'PhotoBot AI',
       website_url: websiteUrl,
       booking_link: bookingLink || null,
       notification_email: notificationEmail,

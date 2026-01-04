@@ -307,7 +307,11 @@ class BotFlow {
         break;
 
       case STATES.FAQ_QUESTION:
+        console.log('===== FAQ QUESTION STATE =====');
+        console.log('Client ID:', this.clientId);
+        console.log('User Message:', userMessage);
         const faqResponse = await matchFAQ(this.clientId, userMessage);
+        console.log('FAQ Response:', faqResponse);
 
         if (faqResponse.found) {
           let faqAnswer = faqResponse.answer;

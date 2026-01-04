@@ -48,43 +48,78 @@
         }
 
         #techmayne-button {
-          width: 64px;
-          height: 64px;
-          border-radius: 32px;
-          background: linear-gradient(135deg, var(--techmayne-accent-soft, rgba(30, 111, 217, 0.9)), var(--techmayne-accent-dark-soft, rgba(21, 87, 176, 0.9)));
-          border: none;
+          width: 70px;
+          height: 70px;
+          border-radius: 18px;
+          background: linear-gradient(145deg,
+            var(--techmayne-accent-very-soft, rgba(30, 111, 217, 0.15)),
+            var(--techmayne-accent-soft, rgba(30, 111, 217, 0.25)));
+          backdrop-filter: blur(10px);
+          border: 2px solid rgba(255, 255, 255, 0.8);
           cursor: pointer;
-          box-shadow: 0 8px 24px rgba(30, 111, 217, 0.3), 0 0 0 0 var(--techmayne-accent-soft, rgba(30, 111, 217, 0.5));
+          box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.1),
+            0 2px 8px var(--techmayne-accent-very-soft, rgba(30, 111, 217, 0.2)),
+            inset 0 1px 0 rgba(255, 255, 255, 0.5);
           display: flex;
           align-items: center;
           justify-content: center;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           position: relative;
-          animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+          animation: gentle-pulse 3s ease-in-out infinite;
         }
 
-        @keyframes pulse-ring {
-          0% {
-            box-shadow: 0 8px 24px rgba(30, 111, 217, 0.3), 0 0 0 0 var(--techmayne-accent-soft, rgba(30, 111, 217, 0.5));
+        @keyframes gentle-pulse {
+          0%, 100% {
+            transform: scale(1);
+            box-shadow:
+              0 8px 32px rgba(0, 0, 0, 0.1),
+              0 2px 8px var(--techmayne-accent-very-soft, rgba(30, 111, 217, 0.2)),
+              inset 0 1px 0 rgba(255, 255, 255, 0.5);
           }
           50% {
-            box-shadow: 0 8px 24px rgba(30, 111, 217, 0.3), 0 0 0 15px rgba(30, 111, 217, 0);
-          }
-          100% {
-            box-shadow: 0 8px 24px rgba(30, 111, 217, 0.3), 0 0 0 0 rgba(30, 111, 217, 0);
+            transform: scale(1.02);
+            box-shadow:
+              0 10px 36px rgba(0, 0, 0, 0.12),
+              0 4px 12px var(--techmayne-accent-soft, rgba(30, 111, 217, 0.3)),
+              inset 0 1px 0 rgba(255, 255, 255, 0.5);
           }
         }
 
         #techmayne-button:hover {
-          transform: translateY(-2px) scale(1.05);
-          box-shadow: 0 12px 32px rgba(30, 111, 217, 0.4), 0 0 0 0 var(--techmayne-accent-soft, rgba(30, 111, 217, 0.5));
+          transform: translateY(-3px) scale(1.05);
+          background: linear-gradient(145deg,
+            var(--techmayne-accent-soft, rgba(30, 111, 217, 0.25)),
+            var(--techmayne-accent-medium, rgba(30, 111, 217, 0.35)));
+          box-shadow:
+            0 12px 40px rgba(0, 0, 0, 0.15),
+            0 4px 16px var(--techmayne-accent-soft, rgba(30, 111, 217, 0.3)),
+            inset 0 1px 0 rgba(255, 255, 255, 0.6);
           animation: none;
         }
 
-        #techmayne-button svg {
-          width: 32px;
-          height: 32px;
-          fill: white;
+        .camera-icon {
+          position: relative;
+          width: 40px;
+          height: 40px;
+        }
+
+        .camera-body {
+          fill: var(--techmayne-accent, #1E6FD9);
+          opacity: 0.9;
+        }
+
+        .camera-lens {
+          fill: #374151;
+        }
+
+        .camera-flash {
+          fill: #FCD34D;
+          opacity: 0.8;
+        }
+
+        .camera-detail {
+          fill: #F3F4F6;
         }
 
         #techmayne-chat {
@@ -453,12 +488,14 @@
           #techmayne-widget {
             bottom: 16px;
             right: 16px;
+            left: auto;
           }
 
           #techmayne-chat {
+            position: fixed;
             width: calc(100vw - 32px);
-            left: 0;
-            right: 0;
+            left: 16px;
+            right: 16px;
             bottom: 88px;
             height: 65vh;
             max-height: 500px;
@@ -472,8 +509,19 @@
       </style>
 
       <button id="techmayne-button" aria-label="Open chat">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+        <svg class="camera-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <!-- Camera body -->
+          <rect class="camera-body" x="8" y="18" width="48" height="36" rx="6"/>
+          <!-- Lens -->
+          <circle class="camera-lens" cx="32" cy="36" r="12"/>
+          <circle class="camera-detail" cx="32" cy="36" r="8" opacity="0.3"/>
+          <circle class="camera-detail" cx="32" cy="36" r="4" opacity="0.5"/>
+          <!-- Flash -->
+          <circle class="camera-flash" cx="48" cy="24" r="3"/>
+          <!-- Viewfinder -->
+          <rect class="camera-detail" x="18" y="10" width="12" height="8" rx="2"/>
+          <!-- Top detail -->
+          <line class="camera-detail" x1="14" y1="24" x2="18" y2="24" stroke="#F3F4F6" stroke-width="2" opacity="0.6"/>
         </svg>
       </button>
 
@@ -524,10 +572,15 @@
         const darkerShade = shadeColor(config.accent_color, -20);
         document.documentElement.style.setProperty('--techmayne-accent-dark', darkerShade);
 
-        // Create softened versions with opacity overlay
-        const softAccent = hexToRgba(config.accent_color, 0.9);
+        // Create multiple softened versions with varying opacity
+        const verySoftAccent = hexToRgba(config.accent_color, 0.15);
+        const softAccent = hexToRgba(config.accent_color, 0.25);
+        const mediumAccent = hexToRgba(config.accent_color, 0.35);
         const softAccentDark = hexToRgba(darkerShade, 0.9);
+
+        document.documentElement.style.setProperty('--techmayne-accent-very-soft', verySoftAccent);
         document.documentElement.style.setProperty('--techmayne-accent-soft', softAccent);
+        document.documentElement.style.setProperty('--techmayne-accent-medium', mediumAccent);
         document.documentElement.style.setProperty('--techmayne-accent-dark-soft', softAccentDark);
       }
       if (config.business_name) {

@@ -257,18 +257,14 @@
         }
 
         .techmayne-message-bubble {
-          max-width: 75%;
+          max-width: 100%;
           padding: 14px 18px;
           border-radius: 18px;
           font-size: 15px;
           line-height: 1.5;
           animation: fadeIn 0.3s ease-out;
           word-wrap: break-word;
-          word-break: normal;
-          overflow-wrap: break-word;
-          hyphens: none;
           white-space: normal;
-          overflow: visible;
         }
 
         @keyframes fadeIn {
@@ -294,11 +290,6 @@
 
         .techmayne-message-bubble p {
           margin: 0;
-          white-space: pre-wrap;
-          word-wrap: break-word;
-          word-break: normal;
-          overflow-wrap: break-word;
-          hyphens: none;
         }
 
         .techmayne-message-time {

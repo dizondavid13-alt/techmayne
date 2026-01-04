@@ -452,7 +452,7 @@
         @media (max-width: 480px) {
           #techmayne-widget {
             bottom: 16px;
-            left: 16px;
+            right: 16px;
           }
 
           #techmayne-chat {

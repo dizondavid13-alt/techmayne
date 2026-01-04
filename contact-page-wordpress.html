@@ -1,0 +1,285 @@
+<!--
+  TechMayne Contact Page - WordPress Version
+  Professional contact information page
+
+  WORDPRESS INSTRUCTIONS:
+  1. Create new page in WordPress (title: "Contact" or "Contact Us")
+  2. Add "Custom HTML" block
+  3. Paste this entire file
+  4. Set template to "Full Width" or "Blank"
+  5. Publish
+-->
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* Reset WordPress defaults */
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Page wrapper */
+  .contact-page {
+    min-height: 100vh;
+    background: #F5F7FA;
+    padding: 60px 20px;
+    font-family: 'Inter', sans-serif;
+    margin: 0 !important;
+    width: 100vw;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+  }
+
+  .contact-page * {
+    box-sizing: border-box;
+  }
+
+  /* Container */
+  .contact-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .contact-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .contact-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #1E6FD9, #1557B0);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(30, 111, 217, 0.3);
+  }
+
+  .contact-header h1 {
+    font-size: 44px;
+    font-weight: 800;
+    color: #0A2540;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.5px;
+  }
+
+  .contact-header p {
+    font-size: 18px;
+    color: #8B8F97;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* Contact Cards */
+  .contact-cards {
+    display: grid;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .contact-card {
+    background: white;
+    border-radius: 20px;
+    border: 1px solid #E1E4E8;
+    padding: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .contact-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .contact-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .contact-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+    border: 1px solid #90CAF9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contact-icon svg {
+    width: 28px;
+    height: 28px;
+    color: #1E6FD9;
+  }
+
+  .contact-card-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0A2540;
+    margin: 0;
+  }
+
+  .contact-card-content {
+    color: #0A2540;
+    line-height: 1.8;
+  }
+
+  .contact-card-content a {
+    color: #1E6FD9;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .contact-card-content a:hover {
+    color: #1557B0;
+    text-decoration: underline;
+  }
+
+  .contact-card-content p {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+  }
+
+  .contact-card-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .address-label {
+    font-weight: 700;
+    color: #0A2540;
+    margin-bottom: 8px;
+  }
+
+  /* Footer Note */
+  .contact-footer {
+    background: white;
+    border-radius: 20px;
+    border: 1px solid #E1E4E8;
+    padding: 32px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .contact-footer p {
+    color: #8B8F97;
+    font-size: 15px;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .contact-footer strong {
+    color: #0A2540;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .contact-page {
+      padding: 40px 16px;
+    }
+
+    .contact-header h1 {
+      font-size: 36px;
+    }
+
+    .contact-header p {
+      font-size: 16px;
+    }
+
+    .contact-card {
+      padding: 28px 24px;
+    }
+
+    .contact-card-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .contact-card-title {
+      font-size: 20px;
+    }
+
+    .contact-card-content p {
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-header h1 {
+      font-size: 32px;
+    }
+
+    .contact-card {
+      padding: 24px 20px;
+    }
+  }
+</style>
+
+<div class="contact-page">
+  <div class="contact-container">
+
+    <!-- Header -->
+    <div class="contact-header">
+      <div class="contact-badge">Get in Touch</div>
+      <h1>Contact Us</h1>
+      <p>We're here to help! Reach out with any questions or support needs.</p>
+    </div>
+
+    <!-- Contact Cards -->
+    <div class="contact-cards">
+
+      <!-- Email Card -->
+      <div class="contact-card">
+        <div class="contact-card-header">
+          <div class="contact-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h2 class="contact-card-title">Email Support</h2>
+        </div>
+        <div class="contact-card-content">
+          <p>For general inquiries, technical support, or billing questions:</p>
+          <p><a href="mailto:support@techmayne.com">support@techmayne.com</a></p>
+          <p style="margin-top: 16px; font-size: 14px; color: #8B8F97;">We typically respond within 24 hours during business days.</p>
+        </div>
+      </div>
+
+      <!-- Mailing Address Card -->
+      <div class="contact-card">
+        <div class="contact-card-header">
+          <div class="contact-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h2 class="contact-card-title">Mailing Address</h2>
+        </div>
+        <div class="contact-card-content">
+          <p class="address-label">Five Sixteen & Co LLC</p>
+          <p>7901 4th St N STE 300</p>
+          <p>St. Petersburg, Florida 33702</p>
+          <p>United States</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer Note -->
+    <div class="contact-footer">
+      <p><strong>Need immediate assistance?</strong><br>
+      For urgent technical issues or account support, please email us at <a href="mailto:support@techmayne.com" style="color: #1E6FD9; text-decoration: none; font-weight: 600;">support@techmayne.com</a> with "URGENT" in the subject line.</p>
+    </div>
+
+  </div>
+</div>

@@ -96,6 +96,27 @@
     color: #1E6FD9;
   }
 
+  /* Get Started Button */
+  .get-started-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #1E6FD9, #1557B0);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 24px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 16px rgba(30, 111, 217, 0.3);
+  }
+
+  .get-started-btn:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
   /* Main Layout */
   .demo-layout {
     display: grid;
@@ -306,18 +327,14 @@
   }
 
   .message-bubble {
-    max-width: 75%;
+    max-width: 100%;
     padding: 14px 18px;
     border-radius: 18px;
     font-size: 15px;
     line-height: 1.5;
     animation: fadeIn 0.3s ease-out;
     word-wrap: break-word;
-    word-break: normal;
-    overflow-wrap: break-word;
-    hyphens: none;
     white-space: normal;
-    overflow: visible;
   }
 
   @keyframes fadeIn {
@@ -341,11 +358,6 @@
 
   .message-bubble p {
     margin: 0;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    word-break: normal;
-    overflow-wrap: break-word;
-    hyphens: none;
   }
 
   .message-time {
@@ -506,6 +518,14 @@
       font-size: 36px;
     }
 
+    .get-started-btn {
+      width: 100%;
+      max-width: 300px;
+      text-align: center;
+      padding: 14px 28px;
+      font-size: 15px;
+    }
+
     .chatbot-container {
       height: 600px;
     }
@@ -534,6 +554,7 @@
         </svg>
         Start by clicking "Check Availability" below
       </div>
+      <a href="https://buy.stripe.com/9B600j1gr7T807dgTm6sw0j" class="get-started-btn">Get Started</a>
     </div>
 
     <!-- Main Layout -->

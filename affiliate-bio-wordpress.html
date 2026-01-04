@@ -1,0 +1,508 @@
+<!--
+  TechMayne Affiliate Bio Page - David Dizon
+  Professional bio page for door to door sales and client connections
+
+  WORDPRESS INSTRUCTIONS:
+  1. Create new page in WordPress (title: "David Dizon - TechMayne Associate")
+  2. Add "Custom HTML" block
+  3. Paste this entire file
+  4. Set template to "Full Width" or "Blank"
+  5. Publish
+-->
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* Reset WordPress styles */
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Page wrapper */
+  .bio-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #F5F7FA 0%, #E8EDF5 100%);
+    font-family: 'Inter', sans-serif;
+    padding: 60px 20px;
+    margin: 0 !important;
+    width: 100vw;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+  }
+
+  .bio-page * {
+    box-sizing: border-box;
+  }
+
+  /* Container */
+  .bio-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    background: white;
+    border-radius: 24px;
+    border: 1px solid #E1E4E8;
+    padding: 48px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .profile-image-container {
+    margin-bottom: 32px;
+  }
+
+  .profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #1E6FD9;
+    box-shadow: 0 8px 24px rgba(30, 111, 217, 0.3);
+    margin: 0 auto;
+    display: block;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #1E6FD9, #1557B0);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(30, 111, 217, 0.3);
+  }
+
+  .hero-title {
+    font-size: 44px;
+    font-weight: 800;
+    color: #0A2540;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-subtitle {
+    font-size: 20px;
+    color: #1E6FD9;
+    font-weight: 600;
+    margin: 0 0 32px 0;
+  }
+
+  .hero-description {
+    font-size: 16px;
+    color: #0A2540;
+    line-height: 1.7;
+    max-width: 700px;
+    margin: 0 auto 32px auto;
+  }
+
+  /* About Section */
+  .about-section {
+    background: white;
+    border-radius: 24px;
+    border: 1px solid #E1E4E8;
+    padding: 48px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    margin-bottom: 32px;
+  }
+
+  .about-section h2 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #0A2540;
+    margin: 0 0 24px 0;
+  }
+
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .about-text {
+    font-size: 15px;
+    color: #0A2540;
+    line-height: 1.8;
+  }
+
+  .about-text p {
+    margin: 0 0 20px 0;
+  }
+
+  .about-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .about-image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-image {
+    width: 100%;
+    max-width: 400px;
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Stats Section */
+  .stats-wrapper {
+    margin-bottom: 32px;
+  }
+
+  .stats-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .stats-header h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0A2540;
+    margin: 0 0 8px 0;
+  }
+
+  .stats-header p {
+    font-size: 15px;
+    color: #8B8F97;
+    margin: 0;
+  }
+
+  .stats-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .stat-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid #E1E4E8;
+    padding: 32px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  }
+
+  .stat-value {
+    display: block;
+    font-size: 36px;
+    font-weight: 800;
+    color: #1E6FD9;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 14px;
+    color: #0A2540;
+    font-weight: 600;
+  }
+
+  /* Why Work With Me Section */
+  .why-section {
+    background: white;
+    border-radius: 24px;
+    border: 1px solid #E1E4E8;
+    padding: 48px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    margin-bottom: 32px;
+  }
+
+  .why-section h2 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #0A2540;
+    margin: 0 0 32px 0;
+    text-align: center;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .why-card {
+    padding: 24px;
+    background: linear-gradient(135deg, #F0F7FF 0%, #E0F2FE 100%);
+    border-radius: 16px;
+    border: 1px solid #BFDBFE;
+  }
+
+  .why-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0A2540;
+    margin: 0 0 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .why-icon {
+    font-size: 24px;
+  }
+
+  .why-card p {
+    margin: 0;
+    font-size: 14px;
+    color: #0A2540;
+    line-height: 1.6;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background: linear-gradient(135deg, #1E6FD9 0%, #1557B0 100%);
+    border-radius: 24px;
+    padding: 48px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(30, 111, 217, 0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shimmer 3s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-section h2 {
+    font-size: 36px;
+    font-weight: 800;
+    color: white;
+    margin: 0 0 16px 0;
+  }
+
+  .cta-section p {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0 0 32px 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: white;
+    color: #1E6FD9;
+    padding: 18px 40px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .cta-button:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .cta-footnote {
+    margin-top: 80px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .bio-page {
+      padding: 40px 16px;
+    }
+
+    .hero-section,
+    .about-section,
+    .why-section,
+    .cta-section {
+      padding: 32px 24px;
+    }
+
+    .hero-title {
+      font-size: 32px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+    }
+
+    .profile-image {
+      width: 160px;
+      height: 160px;
+    }
+
+    .about-content {
+      grid-template-columns: 1fr;
+    }
+
+    .about-image {
+      height: 300px;
+    }
+
+    .stats-section {
+      grid-template-columns: 1fr;
+    }
+
+    .why-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-section h2,
+    .why-section h2 {
+      font-size: 26px;
+    }
+
+    .cta-section h2 {
+      font-size: 28px;
+    }
+
+    .cta-section p {
+      font-size: 16px;
+    }
+  }
+</style>
+
+<div class="bio-page">
+  <div class="bio-container">
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <div class="profile-image-container">
+        <img src="https://techmayne.com/wp-content/uploads/2026/01/IMG_4095.png" alt="David Dizon" class="profile-image">
+      </div>
+      <div class="hero-badge">TechMayne Associate</div>
+      <h1 class="hero-title">David Dizon</h1>
+      <p class="hero-subtitle">Web Engineer & Client Success Associate</p>
+      <p class="hero-description">
+        Hi, I'm David! I help photography businesses transform their websites into 24/7 lead generating machines.
+        As a TechMayne associate, I specialize in implementing AI chatbot solutions that capture more leads,
+        answer client questions instantly, and help you book more clients all while you focus on what you do best: creating stunning photos.
+      </p>
+    </div>
+
+    <!-- About Section -->
+    <div class="about-section">
+      <h2>About Me</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            As a web engineer with a passion for helping creative businesses grow, I've seen firsthand
+            how technology can transform the way photographers connect with their clients.
+          </p>
+          <p>
+            I understand that you didn't become a photographer to spend hours answering the same questions
+            or worrying about missing leads while you're shooting. That's exactly why I partner with TechMayne to
+            bring you solutions that work automatically, so you can focus on your craft.
+          </p>
+          <p>
+            When I'm not helping photography businesses thrive, you'll find me enjoying the outdoors,
+            spending quality time with my family, and playing pickleball.
+          </p>
+        </div>
+        <div class="about-image-wrapper">
+          <img src="https://techmayne.com/wp-content/uploads/2026/01/IMG_4094.png" alt="David Dizon professional" class="about-image">
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="stats-wrapper">
+      <div class="stats-header">
+        <h2>PhotoBot AI Performance</h2>
+        <p>See how our chatbot delivers results for your photography business</p>
+      </div>
+      <div class="stats-section">
+        <div class="stat-card">
+          <span class="stat-value">4.5x</span>
+          <span class="stat-label">More Leads Captured by Chatbot</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">24/7</span>
+          <span class="stat-label">Chatbot Always Available</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">99%</span>
+          <span class="stat-label">Chatbot Response Accuracy</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why Work With Me Section -->
+    <div class="why-section">
+      <h2>Why Work With Me?</h2>
+      <div class="why-grid">
+        <div class="why-card">
+          <h3><span class="why-icon">🎯</span> Personalized Setup</h3>
+          <p>I personally ensure your chatbot is customized to your business, your style, and your clients. No cookie cutter solutions here.</p>
+        </div>
+        <div class="why-card">
+          <h3><span class="why-icon">🤝</span> Local Support</h3>
+          <p>As your local TechMayne associate, I'm here to support you every step of the way. Questions? Issues? I'm just a call or text away.</p>
+        </div>
+        <div class="why-card">
+          <h3><span class="why-icon">⚡</span> Fast Implementation</h3>
+          <p>Get up and running in minutes, not days. I'll handle the technical setup so you can start capturing leads immediately.</p>
+        </div>
+        <div class="why-card">
+          <h3><span class="why-icon">💡</span> Photography Industry Expert</h3>
+          <p>I specialize in working with photographers and understand the unique challenges you face in booking clients and managing inquiries.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="cta-section">
+      <div class="cta-content">
+        <h2>Ready to Capture More Leads?</h2>
+        <p>One-time setup. Instant results. Cancel anytime.</p>
+        <a href="https://buy.stripe.com/cNi6oH7EP6P42fl5aE6sw0l" class="cta-button">Get Started Today</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+</script>

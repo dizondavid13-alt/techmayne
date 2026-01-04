@@ -99,6 +99,12 @@ router.post('/create', async (req, res) => {
       }
     }
 
+    // Generate embed code
+    const embedCode = `<script
+  src="https://techmayne-production.up.railway.app/widget/widget.js"
+  data-client-token="${clientToken}"
+></script>`;
+
     // Save to Google Sheets (non-blocking)
     const sheetData = {
       businessName,
@@ -114,7 +120,8 @@ router.post('/create', async (req, res) => {
       accentColor,
       customFaqs,
       installation,
-      clientToken
+      clientToken,
+      embedCode
     };
 
     sheetsService.appendClientData(sheetData).catch(err => {
@@ -125,12 +132,6 @@ router.post('/create', async (req, res) => {
     resendService.sendAdminNotification(sheetData).catch(err => {
       console.error('Admin notification failed (non-critical):', err);
     });
-
-    // Generate embed code
-    const embedCode = `<script
-  src="https://techmayne-production.up.railway.app/widget/widget.js"
-  data-client-token="${clientToken}"
-></script>`;
 
     res.json({
       success: true,

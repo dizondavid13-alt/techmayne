@@ -90,13 +90,14 @@ class SheetsService {
         clientData.installation && clientData.installation.password ? clientData.installation.password : 'Not provided', // Q: Website Password
         clientData.installation && clientData.installation.twoFactorStatus ? clientData.installation.twoFactorStatus : 'Not provided', // R: 2FA Status
         clientData.installation && clientData.installation.instructions ? clientData.installation.instructions : 'Not provided', // S: Special Instructions
-        clientData.clientToken // T: Client Token
+        clientData.clientToken, // T: Client Token
+        clientData.embedCode || 'Not provided' // U: Embed Script
       ]];
 
       // Append to sheet
       const response = await this.sheets.spreadsheets.values.append({
         spreadsheetId: this.spreadsheetId,
-        range: `${this.sheetName}!A:T`, // Columns A through T (20 columns)
+        range: `${this.sheetName}!A:U`, // Columns A through U (21 columns)
         valueInputOption: 'USER_ENTERED',
         resource: { values }
       });
@@ -139,12 +140,13 @@ class SheetsService {
         'Website Password',
         '2FA Status',
         'Special Instructions',
-        'Client Token'
+        'Client Token',
+        'Embed Script'
       ]];
 
       await this.sheets.spreadsheets.values.update({
         spreadsheetId: this.spreadsheetId,
-        range: `${this.sheetName}!A1:T1`,
+        range: `${this.sheetName}!A1:U1`,
         valueInputOption: 'USER_ENTERED',
         resource: { values: headers }
       });

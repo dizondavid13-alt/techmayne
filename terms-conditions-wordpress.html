@@ -1,0 +1,590 @@
+<!--
+  TechMayne Terms and Conditions - WordPress Version
+  Comprehensive terms of service for legal protection
+
+  WORDPRESS INSTRUCTIONS:
+  1. Create new page in WordPress (title: "Terms and Conditions" or "Terms of Service")
+  2. Add "Custom HTML" block
+  3. Paste this entire file
+  4. Set template to "Full Width" or "Blank"
+  5. Publish
+-->
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* Reset WordPress defaults */
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Page wrapper */
+  .terms-page {
+    min-height: 100vh;
+    background: #F5F7FA;
+    padding: 60px 20px;
+    font-family: 'Inter', sans-serif;
+    margin: 0 !important;
+    width: 100vw;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+  }
+
+  .terms-page * {
+    box-sizing: border-box;
+  }
+
+  /* Container */
+  .terms-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .terms-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .terms-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #1E6FD9, #1557B0);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(30, 111, 217, 0.3);
+  }
+
+  .terms-header h1 {
+    font-size: 44px;
+    font-weight: 800;
+    color: #0A2540;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.5px;
+  }
+
+  .terms-header .last-updated {
+    font-size: 14px;
+    color: #8B8F97;
+    font-weight: 600;
+    margin: 8px 0 0 0;
+  }
+
+  /* Content Card */
+  .terms-content {
+    background: white;
+    border-radius: 24px;
+    border: 1px solid #E1E4E8;
+    padding: 48px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .terms-content h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #0A2540;
+    margin: 48px 0 20px 0;
+    padding-top: 24px;
+    border-top: 2px solid #F5F7FA;
+  }
+
+  .terms-content h2:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .terms-content h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0A2540;
+    margin: 32px 0 16px 0;
+  }
+
+  .terms-content p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #0A2540;
+    margin: 0 0 16px 0;
+  }
+
+  .terms-content ul,
+  .terms-content ol {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #0A2540;
+    margin: 0 0 16px 0;
+    padding-left: 24px;
+  }
+
+  .terms-content li {
+    margin-bottom: 8px;
+  }
+
+  .terms-content strong {
+    font-weight: 700;
+    color: #0A2540;
+  }
+
+  .terms-content a {
+    color: #1E6FD9;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .terms-content a:hover {
+    text-decoration: underline;
+  }
+
+  .highlight-box {
+    background: #FFF4E6;
+    border-left: 4px solid #FF9800;
+    padding: 20px 24px;
+    margin: 24px 0;
+    border-radius: 8px;
+  }
+
+  .highlight-box p {
+    margin: 0;
+    color: #0A2540;
+  }
+
+  .info-box {
+    background: #F0F7FF;
+    border-left: 4px solid #1E6FD9;
+    padding: 20px 24px;
+    margin: 24px 0;
+    border-radius: 8px;
+  }
+
+  .info-box p {
+    margin: 0;
+  }
+
+  /* Table of Contents */
+  .toc {
+    background: #F8FAFC;
+    border: 1px solid #E1E4E8;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+  }
+
+  .toc h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0A2540;
+    margin: 0 0 16px 0;
+  }
+
+  .toc ol {
+    padding-left: 20px;
+    margin: 0;
+  }
+
+  .toc li {
+    margin-bottom: 8px;
+  }
+
+  .toc a {
+    color: #1E6FD9;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .toc a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .terms-page {
+      padding: 40px 16px;
+    }
+
+    .terms-header h1 {
+      font-size: 36px;
+    }
+
+    .terms-content {
+      padding: 32px 24px;
+    }
+
+    .terms-content h2 {
+      font-size: 24px;
+    }
+
+    .terms-content h3 {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .terms-header h1 {
+      font-size: 32px;
+    }
+
+    .terms-content {
+      padding: 24px 20px;
+    }
+  }
+</style>
+
+<div class="terms-page">
+  <div class="terms-container">
+
+    <!-- Header -->
+    <div class="terms-header">
+      <div class="terms-badge">Legal Agreement</div>
+      <h1>Terms and Conditions</h1>
+    </div>
+
+    <!-- Content -->
+    <div class="terms-content">
+
+      <!-- Introduction -->
+      <div class="highlight-box">
+        <p>By accessing or using TechMayne's services, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, do not use our services.</p>
+      </div>
+
+      <!-- Table of Contents -->
+      <div class="toc">
+        <h3>Table of Contents</h3>
+        <ol>
+          <li><a href="#agreement">Agreement to Terms</a></li>
+          <li><a href="#services">Description of Services</a></li>
+          <li><a href="#accounts">User Accounts and Registration</a></li>
+          <li><a href="#subscription">Subscription and Payment Terms</a></li>
+          <li><a href="#acceptable-use">Acceptable Use Policy</a></li>
+          <li><a href="#intellectual-property">Intellectual Property Rights</a></li>
+          <li><a href="#user-content">User Content and Data</a></li>
+          <li><a href="#warranties">Warranties and Disclaimers</a></li>
+          <li><a href="#limitation">Limitation of Liability</a></li>
+          <li><a href="#indemnification">Indemnification</a></li>
+          <li><a href="#termination">Termination</a></li>
+          <li><a href="#modifications">Modifications to Services and Terms</a></li>
+          <li><a href="#privacy">Privacy and Data Protection</a></li>
+          <li><a href="#dispute">Dispute Resolution and Arbitration</a></li>
+          <li><a href="#general">General Provisions</a></li>
+          <li><a href="#contact-terms">Contact Information</a></li>
+        </ol>
+      </div>
+
+      <h2 id="agreement">1. Agreement to Terms</h2>
+
+      <p>These Terms and Conditions ("Terms") constitute a legally binding agreement between you ("User," "you," or "your") and Five Sixteen & Co LLC, doing business as TechMayne ("TechMayne," "Company," "we," "us," or "our").</p>
+
+      <p>By accessing, browsing, or using our website, chatbot services, software, or any related services (collectively, the "Services"), you acknowledge that you have read, understood, and agree to be bound by these Terms and our Privacy Policy.</p>
+
+      <div class="info-box">
+        <p><strong>Important:</strong> If you are using the Services on behalf of a business or organization, you represent that you have the authority to bind that entity to these Terms.</p>
+      </div>
+
+      <h2 id="services">2. Description of Services</h2>
+
+      <p>TechMayne provides AI-powered chatbot services designed for photographers and creative professionals, including:</p>
+
+      <ul>
+        <li><strong>Chatbot Platform:</strong> Automated lead capture, FAQ answering, and customer engagement tools</li>
+        <li><strong>Website Integration:</strong> Embeddable widgets for client websites</li>
+        <li><strong>Lead Management:</strong> Collection, qualification, and routing of potential client inquiries</li>
+        <li><strong>Customization:</strong> Training and personalization of chatbot responses</li>
+        <li><strong>Analytics:</strong> Usage statistics and performance metrics</li>
+        <li><strong>Support Services:</strong> Technical support and customer assistance</li>
+      </ul>
+
+      <p>We reserve the right to modify, suspend, or discontinue any aspect of the Services at any time, with or without notice, subject to the provisions in Section 12.</p>
+
+      <h2 id="accounts">3. User Accounts and Registration</h2>
+
+      <h3>3.1 Account Creation</h3>
+      <p>To access certain features of the Services, you must create an account. You agree to:</p>
+      <ul>
+        <li>Provide accurate, current, and complete information during registration</li>
+        <li>Maintain and promptly update your account information</li>
+        <li>Keep your account credentials secure and confidential</li>
+        <li>Notify us immediately of any unauthorized access or security breach</li>
+        <li>Accept responsibility for all activities under your account</li>
+      </ul>
+
+      <h3>3.2 Account Eligibility</h3>
+      <p>You must be at least 18 years old and have the legal capacity to enter into contracts. By creating an account, you represent and warrant that you meet these requirements.</p>
+
+      <h3>3.3 Account Termination</h3>
+      <p>We reserve the right to suspend or terminate your account at any time for violations of these Terms, fraudulent activity, or other reasons at our sole discretion.</p>
+
+      <h2 id="subscription">4. Subscription and Payment Terms</h2>
+
+      <h3>4.1 Subscription Plans</h3>
+      <p>TechMayne offers various subscription tiers (Starter, Pro, Studio) with different features and pricing. Plan details and pricing are available on our website and may be updated from time to time.</p>
+
+      <h3>4.2 Payment</h3>
+      <ul>
+        <li><strong>Billing:</strong> Subscription fees are billed monthly or annually based on your selected plan</li>
+        <li><strong>Payment Methods:</strong> We accept payment via credit card, debit card, or other methods processed through our payment provider (Stripe)</li>
+        <li><strong>Automatic Renewal:</strong> Subscriptions automatically renew unless cancelled before the renewal date</li>
+        <li><strong>Price Changes:</strong> We may change subscription prices with 30 days' notice</li>
+      </ul>
+
+      <h3>4.3 No Refunds</h3>
+      <p><strong>ALL SALES ARE FINAL AND NON-REFUNDABLE.</strong> Subscription fees, one-time payments, and any other charges are non-refundable under any circumstances, including but not limited to:</p>
+      <ul>
+        <li>Partial subscription periods</li>
+        <li>Unused services or features</li>
+        <li>Dissatisfaction with the Services</li>
+        <li>Account termination or suspension for Terms violations</li>
+        <li>Cancellation at any time during the subscription period</li>
+      </ul>
+
+      <p>If you believe you were charged in error, contact us within 30 days at <a href="mailto:support@techmayne.com">support@techmayne.com</a>. We will investigate billing errors but refunds will only be issued at our sole discretion.</p>
+
+      <h3>4.4 Failed Payments</h3>
+      <p>If payment fails or is declined, we may suspend your account until payment is received. We are not liable for any loss of data or service interruption due to payment issues.</p>
+
+      <h3>4.5 Cancellation</h3>
+      <p>You may cancel your subscription at any time. Cancellation will take effect at the end of your current billing cycle. You will retain access to paid features until that date.</p>
+
+      <h2 id="acceptable-use">5. Acceptable Use Policy</h2>
+
+      <p>You agree to use the Services only for lawful purposes and in accordance with these Terms. You agree NOT to:</p>
+
+      <h3>5.1 Prohibited Activities</h3>
+      <ul>
+        <li>Violate any applicable local, state, national, or international law or regulation</li>
+        <li>Infringe upon the intellectual property rights of others</li>
+        <li>Transmit harmful code, viruses, malware, or other malicious software</li>
+        <li>Attempt to gain unauthorized access to our systems or networks</li>
+        <li>Interfere with or disrupt the Services or servers</li>
+        <li>Use automated systems (bots, scrapers) to access the Services without permission</li>
+        <li>Impersonate any person or entity or misrepresent your affiliation</li>
+        <li>Harass, threaten, or harm others</li>
+        <li>Collect or store personal data about other users without consent</li>
+        <li>Use the Services for fraudulent, deceptive, or misleading purposes</li>
+        <li>Reverse engineer, decompile, or disassemble any part of the Services</li>
+        <li>Resell, redistribute, or sublicense the Services without authorization</li>
+      </ul>
+
+      <h3>5.2 Content Restrictions</h3>
+      <p>You agree not to upload, post, or transmit content that:</p>
+      <ul>
+        <li>Is illegal, harmful, threatening, abusive, defamatory, or obscene</li>
+        <li>Promotes discrimination, hatred, or violence</li>
+        <li>Violates privacy rights or publicity rights</li>
+        <li>Contains sexually explicit material</li>
+        <li>Infringes intellectual property rights</li>
+        <li>Contains false or misleading information</li>
+      </ul>
+
+      <h2 id="intellectual-property">6. Intellectual Property Rights</h2>
+
+      <h3>6.1 TechMayne Property</h3>
+      <p>The Services, including all content, features, functionality, software, code, designs, graphics, logos, and trademarks, are owned by TechMayne or our licensors and are protected by intellectual property laws.</p>
+
+      <p>You are granted a limited, non-exclusive, non-transferable, revocable license to access and use the Services for your business purposes in accordance with these Terms.</p>
+
+      <h3>6.2 Restrictions</h3>
+      <p>You may not:</p>
+      <ul>
+        <li>Copy, modify, distribute, or create derivative works</li>
+        <li>Remove or alter any proprietary notices</li>
+        <li>Use our trademarks without written permission</li>
+        <li>Frame or mirror any part of the Services</li>
+      </ul>
+
+      <h3>6.3 Feedback</h3>
+      <p>If you provide feedback, suggestions, or ideas about the Services, you grant us a worldwide, royalty-free, perpetual license to use, modify, and incorporate such feedback without compensation or attribution.</p>
+
+      <h2 id="user-content">7. User Content and Data</h2>
+
+      <h3>7.1 Your Content</h3>
+      <p>You retain ownership of all content, data, and information you provide to the Services ("User Content"), including:</p>
+      <ul>
+        <li>Business information and configurations</li>
+        <li>FAQ content and chatbot training data</li>
+        <li>Lead information and conversation logs</li>
+        <li>Customization settings</li>
+      </ul>
+
+      <h3>7.2 License to TechMayne</h3>
+      <p>By providing User Content, you grant us a worldwide, non-exclusive, royalty-free license to use, store, process, and display your content solely for the purpose of providing and improving the Services.</p>
+
+      <h3>7.3 Your Responsibilities</h3>
+      <p>You are solely responsible for your User Content and represent that:</p>
+      <ul>
+        <li>You own or have the necessary rights to the content</li>
+        <li>The content does not violate any laws or third-party rights</li>
+        <li>The content is accurate and not misleading</li>
+      </ul>
+
+      <h3>7.4 Data Backup</h3>
+      <p>While we implement reasonable backup procedures, you are responsible for maintaining backups of your User Content. We are not liable for any loss or corruption of data.</p>
+
+      <h2 id="warranties">8. Warranties and Disclaimers</h2>
+
+      <h3>8.1 Limited Warranty</h3>
+      <p>We warrant that the Services will perform substantially in accordance with the documentation for your subscription plan when used under normal conditions.</p>
+
+      <h3>8.2 DISCLAIMER OF WARRANTIES</h3>
+      <div class="highlight-box">
+        <p><strong>THE SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO:</strong></p>
+        <ul style="margin: 12px 0 0 0;">
+          <li>Warranties of merchantability, fitness for a particular purpose, or non-infringement</li>
+          <li>Warranties that the Services will be uninterrupted, error-free, or secure</li>
+          <li>Warranties regarding the accuracy, reliability, or quality of results</li>
+          <li>Warranties that defects will be corrected</li>
+        </ul>
+      </div>
+
+      <p>No advice or information obtained from us or through the Services creates any warranty not expressly stated herein.</p>
+
+      <h3>8.3 Third-Party Services</h3>
+      <p>The Services may integrate with third-party platforms. We are not responsible for the availability, accuracy, or performance of third-party services.</p>
+
+      <h2 id="limitation">9. Limitation of Liability</h2>
+
+      <div class="highlight-box">
+        <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW:</strong></p>
+        <p style="margin-top: 12px;"><strong>IN NO EVENT SHALL TECHMAYNE, ITS AFFILIATES, OFFICERS, DIRECTORS, EMPLOYEES, OR AGENTS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO:</strong></p>
+        <ul style="margin: 12px 0;">
+          <li>Loss of profits, revenue, data, or use</li>
+          <li>Business interruption</li>
+          <li>Loss of goodwill or reputation</li>
+          <li>Cost of substitute services</li>
+        </ul>
+        <p><strong>WHETHER BASED ON WARRANTY, CONTRACT, TORT (INCLUDING NEGLIGENCE), OR ANY OTHER LEGAL THEORY, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</strong></p>
+      </div>
+
+      <h3>9.1 Maximum Liability</h3>
+      <p>Our total liability for all claims arising from or related to the Services shall not exceed the amount you paid to us in the 12 months preceding the claim, or $100, whichever is greater.</p>
+
+      <h3>9.2 Exceptions</h3>
+      <p>Some jurisdictions do not allow the exclusion or limitation of certain damages. In such jurisdictions, our liability is limited to the maximum extent permitted by law.</p>
+
+      <h2 id="indemnification">10. Indemnification</h2>
+
+      <p>You agree to indemnify, defend, and hold harmless TechMayne and its affiliates, officers, directors, employees, agents, and licensors from and against any claims, liabilities, damages, losses, costs, and expenses (including reasonable attorneys' fees) arising out of or related to:</p>
+
+      <ul>
+        <li>Your use or misuse of the Services</li>
+        <li>Your violation of these Terms</li>
+        <li>Your violation of any laws or third-party rights</li>
+        <li>Your User Content</li>
+        <li>Any dispute between you and a third party</li>
+      </ul>
+
+      <p>We reserve the right to assume exclusive defense and control of any matter subject to indemnification, at your expense.</p>
+
+      <h2 id="termination">11. Termination</h2>
+
+      <h3>11.1 Termination by You</h3>
+      <p>You may terminate your account at any time by cancelling your subscription or contacting us at <a href="mailto:support@techmayne.com">support@techmayne.com</a>.</p>
+
+      <h3>11.2 Termination by TechMayne</h3>
+      <p>We may suspend or terminate your access to the Services immediately, without notice, for:</p>
+      <ul>
+        <li>Violation of these Terms</li>
+        <li>Non-payment of fees</li>
+        <li>Fraudulent or illegal activity</li>
+        <li>Threat to the security or integrity of the Services</li>
+        <li>Any other reason at our sole discretion</li>
+      </ul>
+
+      <h3>11.3 Effect of Termination</h3>
+      <p>Upon termination:</p>
+      <ul>
+        <li>Your right to use the Services immediately ceases</li>
+        <li>You remain liable for all fees incurred before termination</li>
+        <li>We may delete your account and User Content (subject to backup retention periods)</li>
+        <li>Provisions of these Terms that should survive termination will remain in effect</li>
+      </ul>
+
+      <h2 id="modifications">12. Modifications to Services and Terms</h2>
+
+      <h3>12.1 Service Changes</h3>
+      <p>We reserve the right to modify, suspend, or discontinue any aspect of the Services at any time. We will provide reasonable notice of material changes when practicable.</p>
+
+      <h3>12.2 Terms Updates</h3>
+      <p>We may update these Terms from time to time. Changes will be posted on this page with an updated "Last Updated" date. Material changes will be communicated via:</p>
+      <ul>
+        <li>Email notification to your account email</li>
+        <li>Prominent notice on our website</li>
+        <li>In-app notification</li>
+      </ul>
+
+      <p>Your continued use of the Services after changes take effect constitutes acceptance of the updated Terms.</p>
+
+      <h2 id="privacy">13. Privacy and Data Protection</h2>
+
+      <p>Our collection, use, and disclosure of your information is governed by our <a href="/privacy-policy">Privacy Policy</a>, which is incorporated into these Terms by reference.</p>
+
+      <p>By using the Services, you consent to our privacy practices as described in the Privacy Policy.</p>
+
+      <h2 id="dispute">14. Dispute Resolution and Arbitration</h2>
+
+      <h3>14.1 Informal Resolution</h3>
+      <p>Before filing a claim, you agree to contact us at <a href="mailto:support@techmayne.com">support@techmayne.com</a> to attempt to resolve the dispute informally. We will attempt to resolve disputes in good faith.</p>
+
+      <h3>14.2 Binding Arbitration</h3>
+      <div class="highlight-box">
+        <p><strong>PLEASE READ THIS SECTION CAREFULLY. IT AFFECTS YOUR LEGAL RIGHTS.</strong></p>
+        <p style="margin-top: 12px;">Any dispute, claim, or controversy arising out of or relating to these Terms or the Services shall be resolved by binding arbitration, rather than in court, except that you may assert claims in small claims court if your claims qualify.</p>
+      </div>
+
+      <p>The arbitration will be conducted by the American Arbitration Association (AAA) under its Commercial Arbitration Rules. The arbitration will take place in St. Petersburg, Florida, or another mutually agreed location.</p>
+
+      <h3>14.3 Class Action Waiver</h3>
+      <p><strong>YOU AND TECHMAYNE AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN AN INDIVIDUAL CAPACITY AND NOT AS A CLASS MEMBER IN ANY CLASS OR REPRESENTATIVE ACTION.</strong></p>
+
+      <h3>14.4 Exceptions to Arbitration</h3>
+      <p>Either party may seek equitable relief in court for infringement or misappropriation of intellectual property rights.</p>
+
+      <h3>14.5 Governing Law</h3>
+      <p>These Terms are governed by the laws of the State of Florida, United States, without regard to conflict of law principles.</p>
+
+      <h2 id="general">15. General Provisions</h2>
+
+      <h3>15.1 Entire Agreement</h3>
+      <p>These Terms, together with our Privacy Policy, constitute the entire agreement between you and TechMayne regarding the Services.</p>
+
+      <h3>15.2 Severability</h3>
+      <p>If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions will remain in full force and effect.</p>
+
+      <h3>15.3 Waiver</h3>
+      <p>Our failure to enforce any right or provision of these Terms does not constitute a waiver of that right or provision.</p>
+
+      <h3>15.4 Assignment</h3>
+      <p>You may not assign or transfer these Terms or your rights without our written consent. We may assign these Terms to any affiliate or successor without restriction.</p>
+
+      <h3>15.5 Force Majeure</h3>
+      <p>We are not liable for any failure or delay in performance due to circumstances beyond our reasonable control, including natural disasters, war, terrorism, labor disputes, or government actions.</p>
+
+      <h3>15.6 Electronic Communications</h3>
+      <p>You consent to receive electronic communications from us, including emails, notices, and agreements. Electronic communications satisfy any legal requirement for written communications.</p>
+
+      <h3>15.7 Survival</h3>
+      <p>Provisions that by their nature should survive termination will survive, including intellectual property rights, disclaimers, limitations of liability, indemnification, and dispute resolution.</p>
+
+      <h2 id="contact-terms">16. Contact Information</h2>
+
+      <p>If you have questions about these Terms and Conditions, please contact us:</p>
+
+      <div class="info-box">
+        <p><strong>Five Sixteen & Co LLC (TechMayne)</strong><br>
+        Email: <a href="mailto:support@techmayne.com">support@techmayne.com</a><br>
+        Mailing Address:<br>
+        7901 4th St N STE 300<br>
+        St. Petersburg, Florida 33702<br>
+        United States</p>
+      </div>
+
+      <p style="margin-top: 48px; padding-top: 32px; border-top: 2px solid #F5F7FA; color: #8B8F97; font-size: 14px; text-align: center;">By using TechMayne's services, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions.</p>
+
+    </div>
+
+  </div>
+</div>

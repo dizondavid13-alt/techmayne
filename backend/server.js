@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 require('dotenv').config();
 
 const app = express();
@@ -10,7 +11,13 @@ app.use(cors());
 app.use(express.json());
 
 // Serve widget files statically
-app.use('/widget', express.static(path.join(__dirname, '../widget/src')));
+const widgetPath = path.join(__dirname, '../widget/src');
+console.log('Widget path:', widgetPath);
+console.log('Widget path exists:', fs.existsSync(widgetPath));
+if (fs.existsSync(widgetPath)) {
+  console.log('Widget directory contents:', fs.readdirSync(widgetPath));
+}
+app.use('/widget', express.static(widgetPath));
 
 // Routes
 app.use('/api/chat', require('./routes/chat'));

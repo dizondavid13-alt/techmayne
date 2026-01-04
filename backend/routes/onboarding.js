@@ -81,6 +81,11 @@ router.post('/create', async (req, res) => {
     }
 
     // Create custom FAQs if provided
+    console.log('===== CUSTOM FAQ CREATION =====');
+    console.log('Custom FAQs received from form:', customFaqs);
+    console.log('Is array?', Array.isArray(customFaqs));
+    console.log('Length:', customFaqs?.length);
+
     if (customFaqs && Array.isArray(customFaqs) && customFaqs.length > 0) {
       const customFaqEntries = customFaqs.map(faq => ({
         client_id: client.id,
@@ -90,13 +95,22 @@ router.post('/create', async (req, res) => {
         is_custom: true
       }));
 
-      const { error: customFaqError } = await supabase
+      console.log('Custom FAQ entries to insert:', JSON.stringify(customFaqEntries, null, 2));
+
+      const { data: insertedFaqs, error: customFaqError } = await supabase
         .from('faq_entries')
-        .insert(customFaqEntries);
+        .insert(customFaqEntries)
+        .select();
 
       if (customFaqError) {
-        console.error('Error creating custom FAQs:', customFaqError);
+        console.error('❌ Error creating custom FAQs:', customFaqError);
+      } else {
+        console.log('✅ Successfully created custom FAQs:', insertedFaqs?.length);
+        console.log('Inserted FAQs:', JSON.stringify(insertedFaqs, null, 2));
       }
+    } else {
+      console.log('⚠️ NO CUSTOM FAQs PROVIDED - skipping custom FAQ creation');
+      console.log('Reason: customFaqs is', typeof customFaqs, 'with value:', customFaqs);
     }
 
     // Generate embed code

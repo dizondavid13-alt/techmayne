@@ -64,33 +64,39 @@ class SheetsService {
           ).join('\n')
         : 'None';
 
-      // Format installation info
-      const installationInfo = clientData.installation
-        ? `Platform: ${clientData.installation.platform} | 2FA: ${clientData.installation.twoFactorStatus} | Instructions: ${clientData.installation.instructions || 'None'}`
-        : 'DIY Installation';
+      // Format services offered
+      const servicesOffered = clientData.servicesOffered && clientData.servicesOffered.length > 0
+        ? clientData.servicesOffered.join(', ')
+        : 'Not specified';
 
-      // Prepare row data
+      // Prepare row data with separate columns for installation fields
       const values = [[
-        new Date().toISOString(), // Timestamp
-        clientData.businessName,
-        clientData.websiteUrl,
-        clientData.notificationEmail,
-        clientData.phoneNumber || 'Not provided',
-        clientData.bookingLink || 'Not provided',
-        clientData.serviceArea || 'Not provided',
-        clientData.startingPrice || 'Not provided',
-        clientData.galleryTimeline || 'Not provided',
-        clientData.accentColor,
-        customFaqs,
-        installationInfo,
-        clientData.installation ? 'YES' : 'NO',
-        clientData.clientToken
+        new Date().toISOString(), // A: Timestamp
+        clientData.businessName, // B: Business Name
+        clientData.chatbotName || 'Not provided', // C: Chatbot Name
+        clientData.websiteUrl, // D: Website URL
+        clientData.notificationEmail, // E: Notification Email
+        clientData.phoneNumber || 'Not provided', // F: Phone Number
+        clientData.bookingLink || 'Not provided', // G: Booking Link
+        clientData.serviceArea || 'Not provided', // H: Service Area
+        clientData.startingPrice || 'Not provided', // I: Starting Price
+        clientData.galleryTimeline || 'Not provided', // J: Gallery Timeline
+        servicesOffered, // K: Services Offered
+        clientData.accentColor, // L: Accent Color
+        customFaqs, // M: Custom FAQs
+        clientData.installation && clientData.installation.needsInstallation ? 'YES' : 'NO', // N: Needs Installation
+        clientData.installation && clientData.installation.platform ? clientData.installation.platform : 'Not provided', // O: Platform
+        clientData.installation && clientData.installation.username ? clientData.installation.username : 'Not provided', // P: Website Username
+        clientData.installation && clientData.installation.password ? clientData.installation.password : 'Not provided', // Q: Website Password
+        clientData.installation && clientData.installation.twoFactorStatus ? clientData.installation.twoFactorStatus : 'Not provided', // R: 2FA Status
+        clientData.installation && clientData.installation.instructions ? clientData.installation.instructions : 'Not provided', // S: Special Instructions
+        clientData.clientToken // T: Client Token
       ]];
 
       // Append to sheet
       const response = await this.sheets.spreadsheets.values.append({
         spreadsheetId: this.spreadsheetId,
-        range: `${this.sheetName}!A:N`, // Columns A through N
+        range: `${this.sheetName}!A:T`, // Columns A through T (20 columns)
         valueInputOption: 'USER_ENTERED',
         resource: { values }
       });
@@ -116,23 +122,29 @@ class SheetsService {
       const headers = [[
         'Timestamp',
         'Business Name',
+        'Chatbot Name',
         'Website URL',
-        'Email',
-        'Phone',
+        'Notification Email',
+        'Phone Number',
         'Booking Link',
         'Service Area',
         'Starting Price',
         'Gallery Timeline',
+        'Services Offered',
         'Accent Color',
         'Custom FAQs',
-        'Installation Details',
         'Needs Installation',
+        'Platform',
+        'Website Username',
+        'Website Password',
+        '2FA Status',
+        'Special Instructions',
         'Client Token'
       ]];
 
       await this.sheets.spreadsheets.values.update({
         spreadsheetId: this.spreadsheetId,
-        range: `${this.sheetName}!A1:N1`,
+        range: `${this.sheetName}!A1:T1`,
         valueInputOption: 'USER_ENTERED',
         resource: { values: headers }
       });

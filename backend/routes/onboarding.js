@@ -102,6 +102,7 @@ router.post('/create', async (req, res) => {
     // Save to Google Sheets (non-blocking)
     const sheetData = {
       businessName,
+      chatbotName,
       websiteUrl,
       notificationEmail,
       phoneNumber,
@@ -109,6 +110,7 @@ router.post('/create', async (req, res) => {
       serviceArea,
       startingPrice,
       galleryTimeline,
+      servicesOffered,
       accentColor,
       customFaqs,
       installation,

@@ -2,14 +2,24 @@ const supabase = require('../config/supabase');
 
 async function matchFAQ(clientId, question) {
   try {
+    console.log('FAQ Matcher - Searching for client ID:', clientId);
+
     // Get all FAQs for this client
     const { data: faqs, error } = await supabase
       .from('faq_entries')
       .select('*')
       .eq('client_id', clientId);
 
-    if (error) throw error;
+    console.log('FAQ Matcher - Database response:', { error, faqCount: faqs?.length });
+
+    if (error) {
+      console.error('FAQ Matcher - Database error:', error);
+      throw error;
+    }
+
     if (!faqs || faqs.length === 0) {
+      console.log('FAQ Matcher - NO FAQs FOUND for this client!');
+      console.log('FAQ Matcher - This means custom FAQs were not created during onboarding');
       return { found: false };
     }
 

@@ -50,7 +50,7 @@
         #techmayne-button {
           width: 70px;
           height: 70px;
-          border-radius: 35px;
+          border-radius: 50%;
           background: var(--techmayne-accent-medium, rgba(30, 111, 217, 0.4));
           border: 3px solid white;
           cursor: pointer;
@@ -63,20 +63,7 @@
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           position: relative;
           animation: gentle-pulse 3s ease-in-out infinite;
-        }
-
-        #techmayne-button::after {
-          content: '';
-          position: absolute;
-          bottom: -8px;
-          right: 8px;
-          width: 20px;
-          height: 20px;
-          background: var(--techmayne-accent-medium, rgba(30, 111, 217, 0.4));
-          border-right: 3px solid white;
-          border-bottom: 3px solid white;
-          border-radius: 0 0 20px 0;
-          transform: rotate(15deg) skewX(-15deg);
+          font-size: 36px;
         }
 
         @keyframes gentle-pulse {
@@ -101,32 +88,6 @@
             0 12px 40px rgba(0, 0, 0, 0.2),
             0 4px 16px rgba(0, 0, 0, 0.15);
           animation: none;
-        }
-
-        .camera-icon {
-          position: relative;
-          width: 36px;
-          height: 36px;
-        }
-
-        .camera-body {
-          fill: white;
-          opacity: 0.95;
-        }
-
-        .camera-lens {
-          fill: white;
-          opacity: 0.7;
-        }
-
-        .camera-flash {
-          fill: white;
-          opacity: 0.9;
-        }
-
-        .camera-detail {
-          fill: white;
-          opacity: 0.85;
         }
 
         #techmayne-chat {
@@ -516,20 +477,7 @@
       </style>
 
       <button id="techmayne-button" aria-label="Open chat">
-        <svg class="camera-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <!-- Camera body -->
-          <rect class="camera-body" x="8" y="18" width="48" height="36" rx="6"/>
-          <!-- Lens -->
-          <circle class="camera-lens" cx="32" cy="36" r="12"/>
-          <circle class="camera-detail" cx="32" cy="36" r="8" opacity="0.3"/>
-          <circle class="camera-detail" cx="32" cy="36" r="4" opacity="0.5"/>
-          <!-- Flash -->
-          <circle class="camera-flash" cx="48" cy="24" r="3"/>
-          <!-- Viewfinder -->
-          <rect class="camera-detail" x="18" y="10" width="12" height="8" rx="2"/>
-          <!-- Top detail -->
-          <line class="camera-detail" x1="14" y1="24" x2="18" y2="24" stroke="#F3F4F6" stroke-width="2" opacity="0.6"/>
-        </svg>
+        📸
       </button>
 
       <div id="techmayne-chat">

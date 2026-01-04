@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 // Serve widget files statically
-const widgetPath = path.join(__dirname, '../widget/src');
+const widgetPath = path.join(__dirname, 'widget/src');
 console.log('Widget path:', widgetPath);
 console.log('Widget path exists:', fs.existsSync(widgetPath));
 if (fs.existsSync(widgetPath)) {

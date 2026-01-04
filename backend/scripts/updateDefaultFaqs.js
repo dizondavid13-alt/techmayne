@@ -5,12 +5,12 @@ const DEFAULT_FAQS = [
   {
     question: 'What services do you offer?',
     answer: 'I offer a variety of photography services including weddings, engagement sessions, elopements, portrait sessions, corporate events, family sessions, and maternity photography. Each service can be customized to fit your specific needs and vision!',
-    keywords: ['services', 'types', 'what do you offer', 'what do you do', 'photography types', 'options', 'kinds']
+    keywords: ['services', 'service', 'types of photography', 'what do you offer', 'what do you do', 'photography types', 'event types', 'what type', 'kinds of sessions']
   },
   {
     question: 'What are your pricing and packages?',
     answer: 'My packages are customized based on your specific needs, event type, and coverage hours. Wedding packages typically start around the price shown above and include edited high-resolution images, an online gallery, and full usage rights. I\'d love to create a custom quote for you - just let me know your event details!',
-    keywords: ['pricing', 'price', 'cost', 'how much', 'packages', 'rates', 'fees', 'investment', 'budget']  },
+    keywords: ['pricing', 'price', 'cost', 'how much', 'packages', 'package', 'rates', 'fees', 'investment', 'budget']  },
   {
     question: 'When will I receive my photos?',
     answer: 'Your beautifully edited photos will be delivered within 4-6 weeks after your event in a private online gallery. You\'ll receive full resolution images with printing rights, and the gallery will be available for download and sharing with family and friends!',

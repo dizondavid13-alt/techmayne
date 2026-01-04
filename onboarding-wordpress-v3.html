@@ -261,6 +261,16 @@
     display: block;
   }
 
+  /* Other Platform Field */
+  .tm-other-platform-field {
+    display: none;
+    margin-top: 12px;
+  }
+
+  .tm-other-platform-field.active {
+    display: block;
+  }
+
   /* Radio Group */
   .tm-radio-group {
     display: flex;
@@ -651,45 +661,65 @@
         <button type="button" class="tm-btn tm-btn-secondary" onclick="addFaq()">Add FAQ</button>
       </div>
 
+      <!-- Platform Selection -->
+      <div class="tm-card">
+        <h2 class="tm-section-title">Website Platform</h2>
+
+        <div class="tm-form-group">
+          <label>Select Your Website Platform *</label>
+          <small style="margin-bottom: 12px; display: block;">This helps us provide the correct installation instructions</small>
+          <div class="tm-radio-group">
+            <div class="tm-radio-option">
+              <input type="radio" name="platform" value="WordPress" id="platformWordPress" required>
+              <label for="platformWordPress">WordPress</label>
+            </div>
+            <div class="tm-radio-option">
+              <input type="radio" name="platform" value="Squarespace" id="platformSquarespace">
+              <label for="platformSquarespace">Squarespace</label>
+            </div>
+            <div class="tm-radio-option">
+              <input type="radio" name="platform" value="Pixieset" id="platformPixieset">
+              <label for="platformPixieset">Pixieset</label>
+            </div>
+            <div class="tm-radio-option">
+              <input type="radio" name="platform" value="Wix" id="platformWix">
+              <label for="platformWix">Wix</label>
+            </div>
+            <div class="tm-radio-option">
+              <input type="radio" name="platform" value="Shopify" id="platformShopify">
+              <label for="platformShopify">Shopify</label>
+            </div>
+            <div class="tm-radio-option">
+              <input type="radio" name="platform" value="Other" id="platformOther">
+              <label for="platformOther">Other</label>
+            </div>
+          </div>
+
+          <div id="otherPlatformField" class="tm-other-platform-field">
+            <label for="otherPlatformName">Please specify your platform *</label>
+            <input type="text" id="otherPlatformName" name="otherPlatformName" placeholder="e.g., Webflow, Showit, etc.">
+            <small>Enter the name of your website platform</small>
+          </div>
+        </div>
+      </div>
+
       <!-- Installation Service -->
       <div class="tm-card">
-        <h2 class="tm-section-title">Installation</h2>
+        <h2 class="tm-section-title">Installation Assistance</h2>
+
+        <div class="tm-info-box">
+          <p>📦 <strong>DIY or We Do It For You:</strong> You can install the widget yourself using our step-by-step instructions, or we can handle the installation for you within 48 hours (complimentary!).</p>
+        </div>
 
         <label class="tm-checkbox-group" onclick="toggleInstallation()">
           <input type="checkbox" id="needsInstallation">
           <div class="tm-checkbox-content">
             <strong>I need help installing the widget</strong>
-            <span>We'll install it for you within 48 hours (complimentary!)</span>
+            <span>We'll install it for you within 48 hours (free!)</span>
           </div>
         </label>
 
         <div id="installationFields" class="tm-installation-fields">
-          <div class="tm-form-group">
-            <label>Website Platform</label>
-            <div class="tm-radio-group">
-              <div class="tm-radio-option">
-                <input type="radio" name="platform" value="WordPress" id="platformWordPress">
-                <label for="platformWordPress">WordPress</label>
-              </div>
-              <div class="tm-radio-option">
-                <input type="radio" name="platform" value="Squarespace" id="platformSquarespace">
-                <label for="platformSquarespace">Squarespace</label>
-              </div>
-              <div class="tm-radio-option">
-                <input type="radio" name="platform" value="Wix" id="platformWix">
-                <label for="platformWix">Wix</label>
-              </div>
-              <div class="tm-radio-option">
-                <input type="radio" name="platform" value="Shopify" id="platformShopify">
-                <label for="platformShopify">Shopify</label>
-              </div>
-              <div class="tm-radio-option">
-                <input type="radio" name="platform" value="Other" id="platformOther">
-                <label for="platformOther">Other</label>
-              </div>
-            </div>
-          </div>
-
           <div class="tm-form-group">
             <label for="username">Website Admin Username</label>
             <input type="text" id="username" name="username" placeholder="admin">
@@ -742,17 +772,16 @@
         <h2>Welcome to TechMayne!</h2>
         <p>Your chatbot is ready to capture leads</p>
 
+        <div id="installationAssurance" class="tm-info-box" style="margin-bottom: 24px; display: none;">
+          <p>🚀 <strong>Installation in Progress:</strong> Our team will install the chatbot on your website within 48 hours. If we need any additional information from you, we'll reach out via email. You'll receive a confirmation email once the installation is complete.</p>
+        </div>
+
         <h3 style="color: #0A2540; margin-bottom: 16px; font-size: 18px; font-weight: 700;">Your Embed Code:</h3>
         <div class="tm-embed-code" id="embedCode"></div>
 
-        <div class="tm-next-steps">
-          <h3>Next Steps:</h3>
-          <ol>
-            <li><strong>Copy the embed code above</strong></li>
-            <li>Go to your website's HTML editor or footer settings</li>
-            <li>Paste the code before the closing <code>&lt;/body&gt;</code> tag</li>
-            <li>Save and publish - the chat widget will appear on all pages!</li>
-          </ol>
+        <div class="tm-next-steps" id="installationInstructions">
+          <h3>Installation Instructions:</h3>
+          <div id="platformInstructions"></div>
           <p style="margin-top: 16px; color: #8B8F97;">
             <strong>Need help?</strong> Email support@techmayne.com or check your email for detailed instructions.
           </p>
@@ -778,6 +807,23 @@
       colorHex.value = this.value;
     });
   }
+
+  // Toggle "Other" platform field
+  const platformRadios = document.querySelectorAll('input[name="platform"]');
+  const otherPlatformField = document.getElementById('otherPlatformField');
+  const otherPlatformInput = document.getElementById('otherPlatformName');
+
+  platformRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      if (this.value === 'Other') {
+        otherPlatformField.classList.add('active');
+        otherPlatformInput.required = true;
+      } else {
+        otherPlatformField.classList.remove('active');
+        otherPlatformInput.required = false;
+      }
+    });
+  });
 
   // Toggle installation fields
   window.toggleInstallation = function() {
@@ -850,6 +896,77 @@
     });
   }
 
+  // Platform-specific installation instructions
+  function getPlatformInstructions(platform, embedCode) {
+    const instructions = {
+      'WordPress': `
+        <ol>
+          <li><strong>Log in to your WordPress admin dashboard</strong></li>
+          <li>Go to <strong>Appearance → Theme Editor</strong></li>
+          <li>Select your active theme and find the <code>footer.php</code> file</li>
+          <li>Paste the embed code above just before the closing <code>&lt;/body&gt;</code> tag</li>
+          <li>Click <strong>Update File</strong> to save changes</li>
+          <li>Visit your website - the chat widget should appear!</li>
+        </ol>
+        <p style="margin-top: 12px;"><strong>Alternative:</strong> Use a plugin like "Insert Headers and Footers" to add the code without editing theme files.</p>
+      `,
+      'Squarespace': `
+        <ol>
+          <li><strong>Log in to your Squarespace account</strong></li>
+          <li>Go to <strong>Settings → Advanced → Code Injection</strong></li>
+          <li>Paste the embed code in the <strong>Footer</strong> section</li>
+          <li>Click <strong>Save</strong></li>
+          <li>Visit your website - the chat widget should appear on all pages!</li>
+        </ol>
+        <p style="margin-top: 12px;"><strong>Note:</strong> Code Injection is available on Business plans and higher.</p>
+      `,
+      'Pixieset': `
+        <ol>
+          <li><strong>Log in to your Pixieset account</strong></li>
+          <li>Go to <strong>Settings → Website → Custom Code</strong></li>
+          <li>Paste the embed code in the <strong>Footer Code</strong> section</li>
+          <li>Click <strong>Save Changes</strong></li>
+          <li>Visit your website - the chat widget should appear!</li>
+        </ol>
+        <p style="margin-top: 12px;"><strong>Note:</strong> Custom code features are available on Pro plans and higher.</p>
+      `,
+      'Wix': `
+        <ol>
+          <li><strong>Log in to your Wix account</strong></li>
+          <li>Go to <strong>Settings → Custom Code</strong> in your site dashboard</li>
+          <li>Click <strong>+ Add Custom Code</strong></li>
+          <li>Paste the embed code, name it "TechMayne Chatbot"</li>
+          <li>Select <strong>"Body - end"</strong> as the placement</li>
+          <li>Apply to <strong>All Pages</strong> and click <strong>Apply</strong></li>
+          <li>Publish your site - the chat widget should appear!</li>
+        </ol>
+      `,
+      'Shopify': `
+        <ol>
+          <li><strong>Log in to your Shopify admin</strong></li>
+          <li>Go to <strong>Online Store → Themes</strong></li>
+          <li>Click <strong>Actions → Edit code</strong> on your active theme</li>
+          <li>Find and open the <code>theme.liquid</code> file</li>
+          <li>Paste the embed code just before the closing <code>&lt;/body&gt;</code> tag</li>
+          <li>Click <strong>Save</strong></li>
+          <li>Visit your store - the chat widget should appear!</li>
+        </ol>
+      `
+    };
+
+    return instructions[platform] || `
+      <ol>
+        <li><strong>Copy the embed code above</strong></li>
+        <li>Log in to your website's admin panel or page builder</li>
+        <li>Find the HTML/Custom Code section or footer settings</li>
+        <li>Paste the code before the closing <code>&lt;/body&gt;</code> tag</li>
+        <li>Save and publish your changes</li>
+        <li>Visit your website - the chat widget should appear!</li>
+      </ol>
+      <p style="margin-top: 12px;"><strong>Need help?</strong> Each platform is different - contact us at support@techmayne.com for platform-specific guidance.</p>
+    `;
+  }
+
   // Form submission
   const form = document.getElementById('onboardingForm');
   if (form) {
@@ -863,6 +980,23 @@
       if (selectedServices.length === 0) {
         alert('Please select at least one service you offer');
         return;
+      }
+
+      // Get platform selection
+      const platformRadio = document.querySelector('input[name="platform"]:checked');
+      if (!platformRadio) {
+        alert('Please select your website platform');
+        return;
+      }
+
+      let platformValue = platformRadio.value;
+      if (platformValue === 'Other') {
+        const otherPlatformName = document.getElementById('otherPlatformName').value.trim();
+        if (!otherPlatformName) {
+          alert('Please specify your website platform');
+          return;
+        }
+        platformValue = otherPlatformName;
       }
 
       // Show loading
@@ -886,17 +1020,23 @@
       };
 
       // Add installation data if requested
-      if (document.getElementById('needsInstallation').checked) {
-        const platform = document.querySelector('input[name="platform"]:checked');
+      const needsInstallation = document.getElementById('needsInstallation').checked;
+      if (needsInstallation) {
         const twoFactor = document.querySelector('input[name="twoFactorStatus"]:checked');
 
         formData.installation = {
           needsInstallation: true,
-          platform: platform ? platform.value : '',
+          platform: platformValue,
           username: document.getElementById('username').value,
           password: document.getElementById('password').value,
           twoFactorStatus: twoFactor ? twoFactor.value : 'disabled',
           instructions: document.getElementById('instructions').value || null
+        };
+      } else {
+        // Still save platform info even if not requesting installation
+        formData.installation = {
+          needsInstallation: false,
+          platform: platformValue
         };
       }
 
@@ -920,6 +1060,15 @@
         document.getElementById('loadingState').classList.remove('active');
         document.getElementById('successState').classList.add('active');
         document.getElementById('embedCode').textContent = result.embedCode;
+
+        // Show installation assurance if they requested installation
+        if (needsInstallation) {
+          document.getElementById('installationAssurance').style.display = 'block';
+        }
+
+        // Display platform-specific instructions
+        const platformInstructions = document.getElementById('platformInstructions');
+        platformInstructions.innerHTML = getPlatformInstructions(platformValue, result.embedCode);
 
         // Scroll to top
         window.scrollTo({ top: 0, behavior: 'smooth' });

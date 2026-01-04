@@ -54,6 +54,21 @@ class ResendService {
         throw new Error('Client not found');
       }
 
+      // SAFEGUARD: Skip email for demo/test clients
+      const DEMO_CLIENT_TOKEN = 'c8082d26-223f-4eee-af1b-001c197fa3d8';
+      if (client.client_token === DEMO_CLIENT_TOKEN) {
+        console.log('🚫 Demo client detected - skipping lead notification email to preserve Resend quota');
+        return { success: false, error: 'Demo client - email skipped' };
+      }
+
+      // Skip if notification email contains test/demo/example keywords
+      const testEmailPatterns = ['demo', 'test', 'example', 'noreply'];
+      const emailLower = (client.notification_email || '').toLowerCase();
+      if (testEmailPatterns.some(pattern => emailLower.includes(pattern))) {
+        console.log(`🚫 Test/demo email detected (${client.notification_email}) - skipping lead notification to preserve Resend quota`);
+        return { success: false, error: 'Test email - email skipped' };
+      }
+
       // Create email HTML
       const emailHtml = `
         <!DOCTYPE html>

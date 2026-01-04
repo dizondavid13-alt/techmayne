@@ -1,0 +1,12 @@
+{
+  "name": "techmayne",
+  "version": "1.0.0",
+  "description": "TechMayne AI chatbot platform for photographers",
+  "scripts": {
+    "start": "cd backend && npm install && node server.js",
+    "build": "cd backend && npm install"
+  },
+  "keywords": ["chatbot", "photographer", "ai"],
+  "author": "",
+  "license": "ISC"
+}

@@ -141,7 +141,7 @@ class BotFlow {
         } else {
           // User typed instead of clicking
           response = {
-            message: "Please choose one of the options above by clicking a button. How can I help you today?",
+            message: "Please choose one of the options below by clicking a button. How can I help you today?",
             buttons: [
               { text: 'Check Availability', action: 'check_availability' },
               { text: 'View Packages & Pricing', action: 'view_packages' },
@@ -177,7 +177,7 @@ class BotFlow {
         } else {
           // User typed instead of clicking
           response = {
-            message: "Please select your event type by clicking one of the buttons above.",
+            message: "Please select your event type by clicking one of the buttons below.",
             buttons: this.getEventTypeButtons(client.services_offered),
             nextState: STATES.COLLECT_EVENT_TYPE
           };
@@ -249,7 +249,7 @@ class BotFlow {
         } else {
           // User typed instead of clicking
           response = {
-            message: "Please select a coverage option by clicking one of the buttons above.",
+            message: "Please select a coverage option by clicking one of the buttons below.",
             buttons: [
               { text: '4-6 hours', action: '4-6 hours' },
               { text: '6-8 hours', action: '6-8 hours' },
@@ -420,7 +420,7 @@ class BotFlow {
         } else {
           // User typed something - remind them to click buttons
           response = {
-            message: "Please choose one of the options above. Is there anything else I can help with?",
+            message: "Please choose one of the options below. Is there anything else I can help with?",
             buttons: [
               { text: 'Check Availability', action: 'check_availability' },
               { text: 'Ask Another Question', action: 'ask_question' },
@@ -462,7 +462,7 @@ class BotFlow {
         } else {
           // User typed instead of clicking
           response = {
-            message: "Please choose one of the options above.",
+            message: "Please choose one of the options below.",
             buttons: [
               { text: 'Use Previous Info', action: 'use_previous_contact' },
               { text: 'Enter New Info', action: 'enter_new_contact' }

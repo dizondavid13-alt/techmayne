@@ -51,20 +51,34 @@
           width: 64px;
           height: 64px;
           border-radius: 32px;
-          background: linear-gradient(135deg, var(--techmayne-accent, #1E6FD9), var(--techmayne-accent-dark, #1557B0));
+          background: linear-gradient(135deg, var(--techmayne-accent-soft, rgba(30, 111, 217, 0.9)), var(--techmayne-accent-dark-soft, rgba(21, 87, 176, 0.9)));
           border: none;
           cursor: pointer;
-          box-shadow: 0 8px 24px rgba(30, 111, 217, 0.3);
+          box-shadow: 0 8px 24px rgba(30, 111, 217, 0.3), 0 0 0 0 var(--techmayne-accent-soft, rgba(30, 111, 217, 0.5));
           display: flex;
           align-items: center;
           justify-content: center;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           position: relative;
+          animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        }
+
+        @keyframes pulse-ring {
+          0% {
+            box-shadow: 0 8px 24px rgba(30, 111, 217, 0.3), 0 0 0 0 var(--techmayne-accent-soft, rgba(30, 111, 217, 0.5));
+          }
+          50% {
+            box-shadow: 0 8px 24px rgba(30, 111, 217, 0.3), 0 0 0 15px rgba(30, 111, 217, 0);
+          }
+          100% {
+            box-shadow: 0 8px 24px rgba(30, 111, 217, 0.3), 0 0 0 0 rgba(30, 111, 217, 0);
+          }
         }
 
         #techmayne-button:hover {
           transform: translateY(-2px) scale(1.05);
-          box-shadow: 0 12px 32px rgba(30, 111, 217, 0.4);
+          box-shadow: 0 12px 32px rgba(30, 111, 217, 0.4), 0 0 0 0 var(--techmayne-accent-soft, rgba(30, 111, 217, 0.5));
+          animation: none;
         }
 
         #techmayne-button svg {
@@ -438,17 +452,21 @@
         @media (max-width: 480px) {
           #techmayne-widget {
             bottom: 16px;
-            right: 16px;
             left: 16px;
           }
 
           #techmayne-chat {
-            width: 100%;
+            width: calc(100vw - 32px);
             left: 0;
             right: 0;
             bottom: 88px;
-            height: calc(100vh - 120px);
-            max-height: calc(100vh - 120px);
+            height: 65vh;
+            max-height: 500px;
+            border-radius: 20px 20px 0 0;
+          }
+
+          #techmayne-messages {
+            padding: 16px;
           }
         }
       </style>
@@ -505,6 +523,12 @@
         // Create darker shade for gradient
         const darkerShade = shadeColor(config.accent_color, -20);
         document.documentElement.style.setProperty('--techmayne-accent-dark', darkerShade);
+
+        // Create softened versions with opacity overlay
+        const softAccent = hexToRgba(config.accent_color, 0.9);
+        const softAccentDark = hexToRgba(darkerShade, 0.9);
+        document.documentElement.style.setProperty('--techmayne-accent-soft', softAccent);
+        document.documentElement.style.setProperty('--techmayne-accent-dark-soft', softAccentDark);
       }
       if (config.business_name) {
         document.getElementById('techmayne-title').textContent = config.business_name;
@@ -512,6 +536,14 @@
     } catch (error) {
       console.error('TechMayne: Failed to load config', error);
     }
+  }
+
+  // Convert hex color to rgba with opacity
+  function hexToRgba(hex, opacity) {
+    const r = parseInt(hex.substring(1, 3), 16);
+    const g = parseInt(hex.substring(3, 5), 16);
+    const b = parseInt(hex.substring(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
   }
 
   // Utility: Darken/lighten color
@@ -536,14 +568,39 @@
   }
 
   // Open chat
-  function openChat() {
+  async function openChat() {
     isOpen = true;
     document.getElementById('techmayne-chat').classList.add('open');
 
     // Send initial message if this is the first time
     const messagesContainer = document.getElementById('techmayne-messages');
     if (messagesContainer.children.length === 0) {
-      sendToAPI('__START__');
+      showTyping();
+      const response = await sendToAPI('__START__');
+      hideTyping();
+
+      // Add bot's greeting
+      if (response.message) {
+        addMessage(response.message, 'bot');
+      }
+
+      // Add buttons if any
+      if (response.buttons && response.buttons.length > 0) {
+        addQuickReplies(response.buttons);
+      }
+
+      // Handle input state
+      const input = document.getElementById('techmayne-input');
+      const sendBtn = document.getElementById('techmayne-send');
+      if (response.inputType === 'text' || response.inputType === 'email' || response.inputType === 'tel') {
+        input.disabled = false;
+        sendBtn.disabled = false;
+        input.type = response.inputType || 'text';
+        input.placeholder = response.placeholder || 'Type your message...';
+      } else {
+        input.disabled = true;
+        sendBtn.disabled = true;
+      }
     }
   }
 

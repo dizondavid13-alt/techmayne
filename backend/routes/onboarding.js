@@ -91,8 +91,7 @@ router.post('/create', async (req, res) => {
         client_id: client.id,
         question: faq.question,
         answer: faq.answer,
-        keywords: faq.keywords ? faq.keywords.split(',').map(k => k.trim()) : [],
-        is_custom: true
+        keywords: faq.keywords ? faq.keywords.split(',').map(k => k.trim()) : []
       }));
 
       console.log('Custom FAQ entries to insert:', JSON.stringify(customFaqEntries, null, 2));

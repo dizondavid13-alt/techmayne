@@ -98,7 +98,7 @@ Base Features:
 - Gallery timeline field (required)
 - Website color scheme
 - Full-screen dark background
-- Info box about 17+ default FAQs
+- Info box encouraging FAQ additions
 
 **WordPress Integration**:
 ```

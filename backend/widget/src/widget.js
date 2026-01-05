@@ -173,6 +173,7 @@
           margin: 0;
           font-size: 17px;
           font-weight: 700;
+          color: var(--techmayne-header-text, white);
         }
 
         .techmayne-header-subtitle {
@@ -182,6 +183,7 @@
           display: flex;
           align-items: center;
           gap: 6px;
+          color: var(--techmayne-header-text, white);
         }
 
         .techmayne-status-dot {

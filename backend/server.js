@@ -10,13 +10,24 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve widget files statically
+// Serve widget files statically with cache control
 const widgetPath = path.join(__dirname, 'widget/src');
 console.log('Widget path:', widgetPath);
 console.log('Widget path exists:', fs.existsSync(widgetPath));
 if (fs.existsSync(widgetPath)) {
   console.log('Widget directory contents:', fs.readdirSync(widgetPath));
 }
+
+// Disable caching for widget.js to ensure clients always get latest version
+app.use('/widget', (req, res, next) => {
+  if (req.path.endsWith('.js')) {
+    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
+  }
+  next();
+});
+
 app.use('/widget', express.static(widgetPath));
 
 // Routes

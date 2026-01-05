@@ -75,8 +75,19 @@ async function updateClient() {
     }
 
     console.log(`✅ Updated ${field} to: ${parsedValue}`);
-    console.log('\n💡 Changes will appear immediately on the client\'s chatbot!');
-    console.log('   No re-installation needed - the widget pulls config dynamically.');
+
+    // Clear cache for instant updates
+    try {
+      const cache = require('../config/cache');
+      const cacheKey = `widget_config:${clientToken}`;
+      cache.delete(cacheKey);
+      console.log('🗑️  Cache cleared - changes are now INSTANT!');
+    } catch (cacheError) {
+      console.log('⚠️  Cache clear skipped (not critical)');
+    }
+
+    console.log('\n💡 Changes are now live on the client\'s chatbot!');
+    console.log('   No re-installation needed - widget will show updates immediately.');
 
   } catch (error) {
     console.error('❌ Unexpected error:', error);

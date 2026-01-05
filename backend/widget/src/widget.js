@@ -123,7 +123,7 @@
 
         #techmayne-header {
           background: linear-gradient(135deg, var(--techmayne-accent, #1E6FD9), var(--techmayne-accent-dark, #1557B0));
-          color: white;
+          color: var(--techmayne-header-text, white);
           padding: 20px;
           display: flex;
           align-items: center;
@@ -198,9 +198,9 @@
         }
 
         #techmayne-close {
-          background: rgba(255,255,255,0.2);
+          background: rgba(0,0,0,0.1);
           border: none;
-          color: white;
+          color: var(--techmayne-header-text, white);
           font-size: 20px;
           cursor: pointer;
           padding: 8px;
@@ -214,7 +214,7 @@
         }
 
         #techmayne-close:hover {
-          background: rgba(255,255,255,0.3);
+          background: rgba(0,0,0,0.2);
         }
 
         #techmayne-messages {
@@ -307,19 +307,6 @@
 
         .techmayne-message-bubble p {
           margin: 0;
-        }
-
-        .techmayne-message-time {
-          font-size: 11px;
-          color: #8B8F97;
-          margin-top: 4px;
-          padding-left: 48px;
-        }
-
-        .techmayne-message-wrapper.user .techmayne-message-time {
-          text-align: right;
-          padding-left: 0;
-          padding-right: 0;
         }
 
         .techmayne-quick-replies {
@@ -539,6 +526,10 @@
         document.documentElement.style.setProperty('--techmayne-accent-medium', mediumAccent);
         document.documentElement.style.setProperty('--techmayne-accent-hover', hoverAccent);
         document.documentElement.style.setProperty('--techmayne-accent-dark-soft', softAccentDark);
+
+        // Set header text color based on accent color contrast
+        const headerTextColor = getContrastColor(config.accent_color);
+        document.documentElement.style.setProperty('--techmayne-header-text', headerTextColor);
       }
       if (config.business_name) {
         document.getElementById('techmayne-title').textContent = config.business_name;
@@ -575,6 +566,20 @@
     const BB = ((B.toString(16).length == 1) ? "0" + B.toString(16) : B.toString(16));
 
     return "#" + RR + GG + BB;
+  }
+
+  // Calculate luminance and return appropriate text color
+  function getContrastColor(hexColor) {
+    // Convert hex to RGB
+    const r = parseInt(hexColor.substring(1, 3), 16);
+    const g = parseInt(hexColor.substring(3, 5), 16);
+    const b = parseInt(hexColor.substring(5, 7), 16);
+
+    // Calculate relative luminance using WCAG formula
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+    // Return white for dark backgrounds, black for light backgrounds
+    return luminance > 0.5 ? '#000000' : '#FFFFFF';
   }
 
   // Open chat
@@ -811,7 +816,6 @@
           <div class="techmayne-message-bubble ${role}">
             <p>${text}</p>
           </div>
-          <div class="techmayne-message-time" style="${role === 'user' ? 'text-align: right;' : ''}">Just now</div>
         </div>
       </div>
     `;

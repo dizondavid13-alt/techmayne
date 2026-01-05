@@ -595,7 +595,15 @@
               <label for="serviceOther">Other</label>
             </div>
           </div>
-          <small style="margin-top: 12px;">The chatbot will only show services you select</small>
+
+          <!-- Other Service Text Field (shown when "Other" is checked) -->
+          <div id="otherServiceField" style="display: none; margin-top: 16px;">
+            <label for="otherServiceName" style="font-weight: 500; margin-bottom: 8px; display: block;">Please specify the other service(s)</label>
+            <input type="text" id="otherServiceName" placeholder="e.g., Real Estate, Product Photography, Headshots" style="width: 100%; padding: 10px; border: 2px solid #e1e4e8; border-radius: 8px; font-size: 15px;">
+            <small style="margin-top: 6px; display: block;">Separate multiple services with commas</small>
+          </div>
+
+          <small style="margin-top: 12px; display: block;">The chatbot will only show services you select</small>
         </div>
 
         <div class="tm-form-group">
@@ -825,6 +833,24 @@
     });
   });
 
+  // Toggle "Other" service field
+  const serviceOtherCheckbox = document.getElementById('serviceOther');
+  const otherServiceField = document.getElementById('otherServiceField');
+  const otherServiceInput = document.getElementById('otherServiceName');
+
+  if (serviceOtherCheckbox) {
+    serviceOtherCheckbox.addEventListener('change', function() {
+      if (this.checked) {
+        otherServiceField.style.display = 'block';
+        otherServiceInput.required = true;
+      } else {
+        otherServiceField.style.display = 'none';
+        otherServiceInput.required = false;
+        otherServiceInput.value = '';
+      }
+    });
+  }
+
   // Toggle installation fields
   window.toggleInstallation = function() {
     const checkbox = document.getElementById('needsInstallation');
@@ -975,7 +1001,21 @@
 
       // Collect selected services
       const servicesCheckboxes = document.querySelectorAll('.tm-services-grid input[type="checkbox"]:checked');
-      const selectedServices = Array.from(servicesCheckboxes).map(cb => cb.value);
+      let selectedServices = Array.from(servicesCheckboxes).map(cb => cb.value);
+
+      // Handle "Other" service
+      if (selectedServices.includes('other')) {
+        const otherServiceName = document.getElementById('otherServiceName').value.trim();
+        if (!otherServiceName) {
+          alert('Please specify the other service(s) you offer');
+          return;
+        }
+        // Remove 'other' and add the custom service(s)
+        selectedServices = selectedServices.filter(s => s !== 'other');
+        // Split by comma and trim, then add each service
+        const otherServices = otherServiceName.split(',').map(s => s.trim().toLowerCase());
+        selectedServices.push(...otherServices);
+      }
 
       if (selectedServices.length === 0) {
         alert('Please select at least one service you offer');

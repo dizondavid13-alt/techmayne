@@ -333,9 +333,10 @@
 
         .techmayne-quick-reply-btn:hover:not(:disabled) {
           border-color: var(--techmayne-accent, #1E6FD9);
-          background: linear-gradient(135deg, rgba(30, 111, 217, 0.05), rgba(21, 87, 176, 0.05));
+          background: linear-gradient(135deg, var(--techmayne-accent, #1E6FD9), var(--techmayne-accent-dark, #1557B0));
+          color: var(--techmayne-header-text, white);
           transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(30, 111, 217, 0.15);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .techmayne-quick-reply-btn:disabled {

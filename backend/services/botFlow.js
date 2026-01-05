@@ -166,9 +166,8 @@ class BotFlow {
             };
           } else {
             collectedData.event_type = userMessage;
-            const eventDisplayName = this.getEventDisplayName(userMessage);
             response = {
-              message: `Perfect! When is your ${eventDisplayName}?`,
+              message: "Perfect! What date did you have in mind for this event?",
               nextState: STATES.COLLECT_DATE,
               inputType: 'text',
               placeholder: 'e.g., June 15, 2026'
@@ -187,9 +186,9 @@ class BotFlow {
       case STATES.COLLECT_OTHER_EVENT_TYPE:
         // Store the custom event type and proceed to date collection
         collectedData.event_type = userMessage;
-        // For custom events, use exactly what the user typed
+        // Use consistent message for all event types
         response = {
-          message: `Perfect! When is your ${userMessage.toLowerCase()}?`,
+          message: "Perfect! What date did you have in mind for this event?",
           nextState: STATES.COLLECT_DATE,
           inputType: 'text',
           placeholder: 'e.g., June 15, 2026'

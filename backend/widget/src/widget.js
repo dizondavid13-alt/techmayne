@@ -299,10 +299,10 @@
 
         .techmayne-message-bubble.user {
           background: linear-gradient(135deg, var(--techmayne-accent, #1E6FD9), var(--techmayne-accent-dark, #1557B0));
-          color: white;
+          color: var(--techmayne-header-text, white);
           border-top-right-radius: 6px;
           margin-left: auto;
-          box-shadow: 0 2px 8px rgba(30, 111, 217, 0.2);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
         .techmayne-message-bubble p {
@@ -576,10 +576,19 @@
     const g = parseInt(hexColor.substring(3, 5), 16);
     const b = parseInt(hexColor.substring(5, 7), 16);
 
-    // Calculate relative luminance using WCAG formula
-    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    // Calculate relative luminance using WCAG formula with gamma correction
+    const rsRGB = r / 255;
+    const gsRGB = g / 255;
+    const bsRGB = b / 255;
+
+    const rLinear = rsRGB <= 0.03928 ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055) / 1.055, 2.4);
+    const gLinear = gsRGB <= 0.03928 ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055) / 1.055, 2.4);
+    const bLinear = bsRGB <= 0.03928 ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055) / 1.055, 2.4);
+
+    const luminance = 0.2126 * rLinear + 0.7152 * gLinear + 0.0722 * bLinear;
 
     // Return white for dark backgrounds, black for light backgrounds
+    // Using 0.5 threshold for better visual contrast
     return luminance > 0.5 ? '#000000' : '#FFFFFF';
   }
 

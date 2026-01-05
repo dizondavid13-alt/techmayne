@@ -110,7 +110,7 @@ async function updateClientFaqs(clientId) {
 }
 
 // Update for specific client (demo client)
-const DEMO_CLIENT_TOKEN = 'c8082d26-223f-4eee-af1b-001c197fa3d8';
+const DEMO_CLIENT_TOKEN = '6b29e56a-54ac-4ee6-bd86-5d191f2e5383';
 
 async function main() {
   // Get client ID from token

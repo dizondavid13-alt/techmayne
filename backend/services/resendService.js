@@ -112,19 +112,19 @@ class ResendService {
                 <h2 style="margin-top: 0; color: #667eea;">Event Details</h2>
                 <div class="info-row">
                   <span class="label">Event Type:</span>
-                  <strong>${lead.event_type}</strong>
+                  <strong>${lead.event_type || 'Not specified'}</strong>
                 </div>
                 <div class="info-row">
                   <span class="label">Date:</span>
-                  ${lead.event_date}
+                  ${lead.event_date || 'Not specified'}
                 </div>
                 <div class="info-row">
                   <span class="label">Location:</span>
-                  ${lead.event_location}
+                  ${lead.location || 'Not specified'}
                 </div>
                 <div class="info-row">
                   <span class="label">Coverage:</span>
-                  ${lead.coverage_type}
+                  ${lead.coverage_range || 'Not specified'}
                 </div>
               </div>
 

@@ -53,6 +53,7 @@ router.post('/create', async (req, res) => {
     // Add installation fields if requested
     if (installation && installation.needsInstallation) {
       clientData.installation_requested = true;
+      clientData.installation_admin_site_url = installation.adminSiteUrl;
       clientData.installation_platform = installation.platform;
       clientData.installation_username = installation.username;
       clientData.installation_password = installation.password;

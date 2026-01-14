@@ -85,19 +85,20 @@ class SheetsService {
         clientData.accentColor, // L: Accent Color
         customFaqs, // M: Custom FAQs
         clientData.installation && clientData.installation.needsInstallation ? 'YES' : 'NO', // N: Needs Installation
-        clientData.installation && clientData.installation.platform ? clientData.installation.platform : 'Not provided', // O: Platform
-        clientData.installation && clientData.installation.username ? clientData.installation.username : 'Not provided', // P: Website Username
-        clientData.installation && clientData.installation.password ? clientData.installation.password : 'Not provided', // Q: Website Password
-        clientData.installation && clientData.installation.twoFactorStatus ? clientData.installation.twoFactorStatus : 'Not provided', // R: 2FA Status
-        clientData.installation && clientData.installation.instructions ? clientData.installation.instructions : 'Not provided', // S: Special Instructions
-        clientData.clientToken, // T: Client Token
-        clientData.embedCode || 'Not provided' // U: Embed Script
+        clientData.installation && clientData.installation.adminSiteUrl ? clientData.installation.adminSiteUrl : 'Not provided', // O: Admin Site URL
+        clientData.installation && clientData.installation.platform ? clientData.installation.platform : 'Not provided', // P: Platform
+        clientData.installation && clientData.installation.username ? clientData.installation.username : 'Not provided', // Q: Website Username
+        clientData.installation && clientData.installation.password ? clientData.installation.password : 'Not provided', // R: Website Password
+        clientData.installation && clientData.installation.twoFactorStatus ? clientData.installation.twoFactorStatus : 'Not provided', // S: 2FA Status
+        clientData.installation && clientData.installation.instructions ? clientData.installation.instructions : 'Not provided', // T: Special Instructions
+        clientData.clientToken, // U: Client Token
+        clientData.embedCode || 'Not provided' // V: Embed Script
       ]];
 
       // Append to sheet
       const response = await this.sheets.spreadsheets.values.append({
         spreadsheetId: this.spreadsheetId,
-        range: `${this.sheetName}!A:U`, // Columns A through U (21 columns)
+        range: `${this.sheetName}!A:V`, // Columns A through V (22 columns)
         valueInputOption: 'USER_ENTERED',
         resource: { values }
       });
@@ -135,6 +136,7 @@ class SheetsService {
         'Accent Color',
         'Custom FAQs',
         'Needs Installation',
+        'Admin Site URL',
         'Platform',
         'Website Username',
         'Website Password',
@@ -146,7 +148,7 @@ class SheetsService {
 
       await this.sheets.spreadsheets.values.update({
         spreadsheetId: this.spreadsheetId,
-        range: `${this.sheetName}!A1:U1`,
+        range: `${this.sheetName}!A1:V1`,
         valueInputOption: 'USER_ENTERED',
         resource: { values: headers }
       });

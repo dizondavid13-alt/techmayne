@@ -729,6 +729,12 @@
 
         <div id="installationFields" class="tm-installation-fields">
           <div class="tm-form-group">
+            <label for="adminSiteUrl">Admin Login URL *</label>
+            <input type="url" id="adminSiteUrl" name="adminSiteUrl" placeholder="e.g., https://yoursite.com/wp-admin">
+            <small>📝 This is the URL where you log in to manage your website (e.g., yoursite.com/wp-admin for WordPress, yoursite.squarespace.com/config for Squarespace). We need this to access your site and install the widget code.</small>
+          </div>
+
+          <div class="tm-form-group">
             <label for="username">Website Admin Username</label>
             <input type="text" id="username" name="username" placeholder="admin">
           </div>
@@ -1066,6 +1072,7 @@
 
         formData.installation = {
           needsInstallation: true,
+          adminSiteUrl: document.getElementById('adminSiteUrl').value,
           platform: platformValue,
           username: document.getElementById('username').value,
           password: document.getElementById('password').value,
